@@ -1,0 +1,17 @@
+[package]
+name = "f1_management_simulator"
+version = "0.1.0"
+authors = ["Skippy <steelstone3@gmail.com>"]
+edition = "2018"
+homepage = "https://github.com/Steelstone3/F1-Management-Simulator"
+repository = "https://github.com/Steelstone3/F1-Management-Simulator"
+license = "GPLv3"
+readme = "README.md"
+include = [
+
+]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.5"
