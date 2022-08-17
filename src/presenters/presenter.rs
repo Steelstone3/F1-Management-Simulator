@@ -4,14 +4,14 @@ use std::string::String;
 pub struct UserInterface {}
 
 pub trait Presenter {
-    fn write(message: String);
+    fn write(message: &str);
     fn read_string(message: &str) -> String;
     fn read_numeric_u32(message: &str, lower_bound: u32, upper_bound: u32) -> u32;
 }
 
 impl Presenter for UserInterface {
-    fn write(message: String) {
-        println!("{}", message);
+    fn write(message: &str) {
+        println!("{}", String::from(message));
     }
 
     fn read_string(message: &str) -> String {

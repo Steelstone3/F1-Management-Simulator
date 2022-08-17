@@ -1,7 +1,10 @@
-use presenters::presenter::{Presenter, UserInterface};
+use controllers::game::start;
 
+
+mod models;
 mod presenters;
+mod controllers;
 
 fn main() {
-    UserInterface::write("hello world".to_string());
+    start();
 }
