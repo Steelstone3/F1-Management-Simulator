@@ -1,6 +1,7 @@
-use super::{driver::Driver, points::Points};
+use super::{driver::Driver, points::Points, race_name::RaceName};
 
 pub struct Race {
+    name: RaceName,
     race_results: [Driver; 20],
 }
 
@@ -57,6 +58,7 @@ mod race_should {
             race_chances_driver_test_fixture(17.710798),
         ];
         let mut race = Race {
+            name: RaceName::Donnington,
             race_results: [
                 overall_driver_test_fixture(10, 10),
                 overall_driver_test_fixture(20, 20),
@@ -116,6 +118,7 @@ mod race_should {
             race_chances_driver_test_fixture(60.594105),
         ];
         let mut race = Race {
+            name: RaceName::Donnington,
             race_results: [
                 race_chances_driver_test_fixture(188.85162),
                 race_chances_driver_test_fixture(194.81879),
@@ -153,6 +156,7 @@ mod race_should {
     #[test]
     fn assign_points_based_on_the_race_finish_order() {
         let mut race = Race {
+            name: RaceName::Donnington,
             race_results: [
                 race_chances_driver_test_fixture(Default::default()),
                 race_chances_driver_test_fixture(Default::default()),
