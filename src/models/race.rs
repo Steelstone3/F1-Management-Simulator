@@ -26,6 +26,8 @@ impl Race {
                     .add_points(self.points.points_allocation[index] as u16);
             }
             index += 1;
+
+            team.calculate_points();
         }
 
         self.race_results
@@ -121,6 +123,7 @@ mod race_should {
             );
         }
 
+        assert_ne!(0, race.teams[2].points);
         assert_ne!(0, race.teams[2].driver_1.points);
     }
 

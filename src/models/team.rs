@@ -34,7 +34,7 @@ impl Team {
             (self.driver_2.overall + self.car.overall) as f32 * race_factor_2;
     }
 
-    fn calculate_points(&mut self) {
+    pub fn calculate_points(&mut self) {
         self.points += self.driver_1.points + self.driver_2.points;
     }
 }
