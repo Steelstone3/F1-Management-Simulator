@@ -1,13 +1,14 @@
 use super::{car::Car, driver::Driver, team_name::TeamName};
 use rand::{rngs::StdRng, Rng, SeedableRng};
 
+#[derive(Clone, Copy)]
 #[derive(Debug, PartialEq)]
 pub struct Team {
-    team_name: TeamName,
-    car: Car,
-    driver_1: Driver,
-    driver_2: Driver,
-    points: u16,
+    pub team_name: TeamName,
+    pub car: Car,
+    pub driver_1: Driver,
+    pub driver_2: Driver,
+    pub points: u16,
 }
 
 impl Team {
@@ -21,7 +22,7 @@ impl Team {
         }
     }
 
-    fn calculate_race_chances(&mut self, seed: u64) {
+    pub fn calculate_race_chances(&mut self, seed: u64) {
         let mut rng = StdRng::seed_from_u64(seed);
         let race_factor_1 = rng.gen_range(0.8..1.2);
         let race_factor_2 = rng.gen_range(0.8..1.2);

@@ -1,5 +1,6 @@
 use crate::controllers::random_generator::get_seeded_random_max_range;
 
+#[derive(Clone, Copy)]
 #[derive(Debug, PartialEq)]
 pub struct Car {
     pub aero: u8,
@@ -10,7 +11,7 @@ pub struct Car {
 }
 
 impl Car {
-    fn new_random(seeds: [u64; 4]) -> Self {
+    pub fn new_random(seeds: [u64; 4]) -> Self {
         const MAX_RANGE: u8 = 99;
 
         let mut car = Self {

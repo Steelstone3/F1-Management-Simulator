@@ -1,5 +1,6 @@
 use std::fmt::{Display, Formatter};
 
+#[derive(Clone, Copy)]
 #[derive(Debug, PartialEq)]
 pub enum TeamName {
     Ferrari,

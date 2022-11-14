@@ -3,6 +3,7 @@ use crate::controllers::random_generator::get_seeded_random_max_range;
 use rand::random;
 use rand_derive2::RandGen;
 
+#[derive(Clone, Copy)]
 #[derive(RandGen, Debug, PartialEq)]
 pub struct Driver {
     pub driver_name: DriverName,
@@ -39,7 +40,7 @@ impl Driver {
         driver
     }
 
-    fn new_random(seeds: [u64; 4]) -> Self {
+    pub fn new_random(seeds: [u64; 4]) -> Self {
         const MAX_EXPIERENCE: u8 = 25;
         const MAX_RANGE: u8 = 99;
 
@@ -59,6 +60,10 @@ impl Driver {
         driver
     }
 
+    pub fn add_points(&mut self, points: u16) {
+        self.points += points;
+    }
+
     fn calculate_overall(&mut self) {
         // calculate the average of the stats
         self.overall = ((self.expierence as u32 * 6)
@@ -66,10 +71,6 @@ impl Driver {
             + self.awareness as u32
             + self.pace as u32)
             / 4;
-    }
-
-    fn add_points(&mut self, points: u16) {
-        self.points += points;
     }
 }
 
