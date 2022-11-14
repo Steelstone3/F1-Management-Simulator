@@ -1,5 +1,7 @@
 use super::{team_name::TeamName, driver::Driver};
 
+const BUDGET: u64 = 150000000;
+
 #[derive(Debug, PartialEq)]
 pub struct Team {
     team_name: TeamName,
@@ -21,7 +23,7 @@ impl Team {
             driver_1,
             driver_2,
             reserve_driver,
-            budget: 150000000,
+            budget: BUDGET,
         }
     }
 }
@@ -38,7 +40,7 @@ mod team_name_should {
             driver_1: Driver{ driver_name: DriverName::CharlesLeclerc, expierence: 4, race_craft: 75, awareness: 60, pace: 99, overall: 99 },
             driver_2: Driver{ driver_name: DriverName::CarlosSainz, expierence: 3, race_craft: 67, awareness: 80, pace: 85, overall: 99 },
             reserve_driver: Driver{ driver_name: DriverName::LewisHamilton, expierence: 15, race_craft: 90, awareness: 98, pace: 97, overall: 99 },
-            budget: 150000000,
+            budget: BUDGET,
         };
 
         let team = Team::new(
