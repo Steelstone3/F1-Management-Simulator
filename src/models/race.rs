@@ -2,28 +2,25 @@ use super::{driver::Driver, points::Points};
 
 pub struct Race {
     race_results: [Driver; 20],
-    points: Points,
 }
 
 impl Race {
-    pub fn calculate_race_result(&mut self, seed: u64) {
+    pub fn calculate_race_chances(&mut self, seed: u64) {
         for mut driver in self.race_results {
-            driver.calculate_race_chances(seed);
+            driver.calculate_race_chance(seed);
         }
+    }
 
+    pub fn sort_racing_result_order(&mut self) {
         self.race_results
             .sort_by(|d1, d2| d1.race_chances.partial_cmp(&d2.race_chances).unwrap());
 
         self.race_results.reverse();
-
-        for index in 0..10 {
-            self.race_results[index].add_points(self.points.points_allocation[index] as u16);
-        }
     }
 
-    fn assign_points(&mut self) {
+    pub fn assign_points(&mut self, points: Points) {
         for index in 0..10 {
-            self.race_results[index].points = self.points.points_allocation[index] as u16;
+            self.race_results[index].add_points(points.points_allocation[index] as u16);
         }
     }
 }
@@ -34,8 +31,66 @@ mod race_should {
     use crate::models::{car::Car, driver_name::DriverName, team_name::TeamName, team::Team};
 
     #[test]
-    #[ignore = "race_chances is 0 when it should be 209.2088 despite running driver.calculate_race_chances(seed)"]
-    fn calculate_the_race_results() {
+    fn calculate_race_chances() {
+        let expected_race_results: [Driver; 20] = [
+            race_chances_driver_test_fixture(209.2088),
+            race_chances_driver_test_fixture(203.67418),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(194.81879),
+        ];
+        let mut race = Race {
+            race_results: [
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(56,56),
+            ],
+        };
+
+        race.calculate_race_chances(2022);
+
+        for index in 0..20 {
+            assert_eq!(
+                expected_race_results[index].race_chances,
+                race.race_results[index].race_chances
+            );
+        }
+    }
+
+    #[test]
+    fn sort_racing_result_order() {
         let expected_race_results: [Driver; 20] = [
             race_chances_driver_test_fixture(209.2088),
             race_chances_driver_test_fixture(203.67418),
@@ -60,31 +115,30 @@ mod race_should {
         ];
         let mut race = Race {
             race_results: [
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
-                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(188.85162),
+                race_chances_driver_test_fixture(194.81879),
+                race_chances_driver_test_fixture(151.64871),
+                race_chances_driver_test_fixture(183.74953),
+                race_chances_driver_test_fixture(176.7328),
+                race_chances_driver_test_fixture(136.15176),
+                race_chances_driver_test_fixture(209.2088),
+                race_chances_driver_test_fixture(188.85162),
+                race_chances_driver_test_fixture(171.6833),
+                race_chances_driver_test_fixture(161.58429),
+                race_chances_driver_test_fixture(174.89413),
+                race_chances_driver_test_fixture(203.67418),
+                race_chances_driver_test_fixture(83.01936),
+                race_chances_driver_test_fixture(143.40605),
+                race_chances_driver_test_fixture(134.31694),
+                race_chances_driver_test_fixture(60.594105),
+                race_chances_driver_test_fixture(110.69249),
+                race_chances_driver_test_fixture(138.36562),
+                race_chances_driver_test_fixture(133.30704),
+                race_chances_driver_test_fixture(82.81194),
             ],
-            points: Points::default(),
         };
 
-        race.calculate_race_result(2022);
+        race.sort_racing_result_order();
 
         for index in 0..20 {
             assert_eq!(
@@ -119,10 +173,9 @@ mod race_should {
                 race_chances_driver_test_fixture(Default::default()),
                 race_chances_driver_test_fixture(Default::default()),
             ],
-            points: Points::default(),
         };
 
-        race.assign_points();
+        race.assign_points(Points::default());
 
         assert_eq!(25, race.race_results[0].points);
         assert_eq!(18, race.race_results[1].points);
