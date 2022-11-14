@@ -87,48 +87,16 @@ impl Driver {
 
 #[cfg(test)]
 mod driver_should {
-    use crate::models::{car::Car, team_name::TeamName};
-
     use super::*;
+    use crate::models::{car::Car, team_name::TeamName};
     use rstest::rstest;
 
     #[rstest]
-    #[case(
-        DriverName::CharlesLeclerc,
-        team_test_fixture(),
-        4,
-        75,
-        60,
-        99,
-        64,
-        0.0,
-        0
-    )]
-    #[case(
-        DriverName::LewisHamilton,
-        team_test_fixture(),
-        15,
-        99,
-        95,
-        97,
-        95,
-        0.0,
-        0
-    )]
-    #[case(
-        DriverName::MaxVerstappen,
-        team_test_fixture(),
-        7,
-        80,
-        75,
-        99,
-        74,
-        0.0,
-        0
-    )]
+    #[case(DriverName::CharlesLeclerc, 4, 75, 60, 99, 64, 0.0, 0)]
+    #[case(DriverName::LewisHamilton, 15, 99, 95, 97, 95, 0.0, 0)]
+    #[case(DriverName::MaxVerstappen, 7, 80, 75, 99, 74, 0.0, 0)]
     fn create_a_driver(
         #[case] name: DriverName,
-        #[case] team: Team,
         #[case] expierence: u8,
         #[case] race_craft: u8,
         #[case] awareness: u8,
@@ -139,7 +107,7 @@ mod driver_should {
     ) {
         let expected_driver = Driver {
             name,
-            team,
+            team: team_test_fixture(),
             experience: expierence,
             race_craft,
             awareness,
@@ -211,6 +179,8 @@ mod driver_should {
 
     #[rstest]
     #[case(7, 80, 75, 84.21585)]
+    #[case(65, 78, 45, 153.01982)]
+    #[case(90, 90, 60, 177.34935)]
     fn calculate_race_chances_based_on_driver_and_car(
         #[case] driver_overall: u32,
         #[case] car_overall: u32,
@@ -224,7 +194,7 @@ mod driver_should {
             race_craft: Default::default(),
             awareness: Default::default(),
             pace: Default::default(),
-            overall:  Default::default(),
+            overall: Default::default(),
             race_chances: Default::default(),
             points: Default::default(),
         };
