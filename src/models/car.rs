@@ -43,7 +43,7 @@ mod driver_should {
     use rstest::rstest;
 
     #[test]
-    fn create_a_car() {
+    fn create_a_random_car() {
         let expected_car = Car {
             aero: 81,
             engine: 8,

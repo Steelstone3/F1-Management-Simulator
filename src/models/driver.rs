@@ -154,29 +154,6 @@ mod driver_should {
         assert_eq!(expected_driver.points, driver.points);
     }
 
-    #[test]
-    fn add_team_and_driver_points() {
-        let expected_points = 2000;
-        let points = 1000;
-        let mut driver = Driver {
-            name: DriverName::LewisHamilton,
-            team: team_test_fixture(),
-            experience: Default::default(),
-            race_craft: Default::default(),
-            awareness: Default::default(),
-            pace: Default::default(),
-            overall: Default::default(),
-            race_chances: Default::default(),
-            points: Default::default(),
-        };
-
-        driver.add_points(points);
-        driver.add_points(points);
-
-        assert_eq!(expected_points, driver.points);
-        assert_eq!(expected_points, driver.team.points);
-    }
-
     #[rstest]
     #[case(7, 80, 75, 84.21585)]
     #[case(65, 78, 45, 153.01982)]
@@ -204,6 +181,57 @@ mod driver_should {
         driver.calculate_race_chance(seed);
 
         assert_eq!(race_chances, driver.race_chances);
+    }
+
+    #[test]
+    fn add_team_and_driver_points() {
+        let expected_points = 2000;
+        let points = 1000;
+        let mut driver = Driver {
+            name: DriverName::LewisHamilton,
+            team: team_test_fixture(),
+            experience: Default::default(),
+            race_craft: Default::default(),
+            awareness: Default::default(),
+            pace: Default::default(),
+            overall: Default::default(),
+            race_chances: Default::default(),
+            points: Default::default(),
+        };
+
+        driver.add_points(points);
+        driver.add_points(points);
+
+        assert_eq!(expected_points, driver.points);
+        assert_eq!(expected_points, driver.team.points);
+    }
+
+    #[rstest]
+    #[case(1, 1, 1, 1, 2)]
+    #[case(10, 20, 30, 40, 37)]
+    #[case(50, 90, 20, 70, 120)]
+    fn calculate_overall_stat(
+        #[case] experience: u8,
+        #[case] race_craft: u8,
+        #[case] awareness: u8,
+        #[case] pace: u8,
+        #[case] overall: u32,
+    ) {
+        let mut driver = Driver {
+            name: DriverName::CarlosSainz,
+            team: random(),
+            experience,
+            race_craft,
+            awareness,
+            pace,
+            overall: Default::default(),
+            race_chances: Default::default(),
+            points: Default::default(),
+        };
+
+        driver.calculate_overall();
+
+        assert_eq!(overall, driver.overall);
     }
 
     fn team_test_fixture() -> Team {
