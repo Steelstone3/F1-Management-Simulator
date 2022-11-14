@@ -199,7 +199,27 @@ mod race_should {
         assert_eq!(0, race.race_results[17].points);
         assert_eq!(0, race.race_results[18].points);
         assert_eq!(0, race.race_results[19].points);
-        // assert_eq!(25, race.race_results[0].team.points);
+        // TODO need to sort out different drivers being part of the same team instance
+        assert_eq!(25, race.race_results[0].team.points);
+        assert_eq!(18, race.race_results[1].team.points);
+        assert_eq!(15, race.race_results[2].team.points);
+        assert_eq!(12, race.race_results[3].team.points);
+        assert_eq!(10, race.race_results[4].team.points);
+        assert_eq!(8, race.race_results[5].team.points);
+        assert_eq!(6, race.race_results[6].team.points);
+        assert_eq!(4, race.race_results[7].team.points);
+        assert_eq!(2, race.race_results[8].team.points);
+        assert_eq!(1, race.race_results[9].team.points);
+        assert_eq!(0, race.race_results[10].team.points);
+        assert_eq!(0, race.race_results[11].team.points);
+        assert_eq!(0, race.race_results[12].team.points);
+        assert_eq!(0, race.race_results[13].team.points);
+        assert_eq!(0, race.race_results[14].team.points);
+        assert_eq!(0, race.race_results[15].team.points);
+        assert_eq!(0, race.race_results[16].team.points);
+        assert_eq!(0, race.race_results[17].team.points);
+        assert_eq!(0, race.race_results[18].team.points);
+        assert_eq!(0, race.race_results[19].team.points);
     }
 
     fn overall_driver_test_fixture(driver_overall: u32, car_overall: u32) -> Driver {
