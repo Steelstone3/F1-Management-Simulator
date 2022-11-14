@@ -28,7 +28,7 @@ impl Driver {
         let mut driver = Self {
             name,
             team,
-            experience: experience,
+            experience,
             race_craft,
             awareness,
             pace,
@@ -63,11 +63,12 @@ impl Driver {
         driver
     }
 
-    pub fn calculate_race_chances(&mut self, seed: u64) {
+    pub fn calculate_race_chance(&mut self, seed: u64) {
         let mut rng = StdRng::seed_from_u64(seed);
         let race_factor = rng.gen_range(0.8..1.2);
 
         self.race_chances = (self.overall + self.team.car.overall) as f32 * race_factor;
+        println!("{:#?}", self);
     }
 
     pub fn add_points(&mut self, points: u16) {
@@ -231,7 +232,7 @@ mod driver_should {
         driver.overall = driver_overall;
         driver.team.car.overall = car_overall;
 
-        driver.calculate_race_chances(seed);
+        driver.calculate_race_chance(seed);
 
         assert_eq!(race_chances, driver.race_chances);
     }
