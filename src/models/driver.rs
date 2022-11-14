@@ -20,7 +20,7 @@ impl Driver {
     pub fn new(
         name: DriverName,
         team: Team,
-        expierence: u8,
+        experience: u8,
         race_craft: u8,
         awareness: u8,
         pace: u8,
@@ -28,7 +28,7 @@ impl Driver {
         let mut driver = Self {
             name,
             team,
-            expierence,
+            expierence: experience,
             race_craft,
             awareness,
             pace,
