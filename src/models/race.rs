@@ -1,5 +1,3 @@
-use crate::controllers::random_generator::generate_seed;
-
 use super::{driver::Driver, points::Points, team::Team};
 
 pub struct Race {
@@ -27,7 +25,11 @@ impl Race {
         self.race_results.reverse()
     }
 
-    fn assign_points(self) {}
+    fn assign_points(&mut self) {
+        for index in 0..10 {
+            self.race_results[index].points = self.points.points_allocation[index] as u16;
+        }
+    }
 }
 
 #[cfg(test)]
@@ -112,7 +114,70 @@ mod race_should {
     }
 
     #[test]
-    fn assign_points_based_on_the_race_finish_order() {}
+    fn assign_points_based_on_the_race_finish_order() {
+        let mut race = Race {
+            teams: [
+                team_test_fixture(99, 80, 90),
+                team_test_fixture(60, 20, 40),
+                team_test_fixture(67, 72, 70),
+                team_test_fixture(78, 80, 80),
+                team_test_fixture(89, 92, 95),
+                team_test_fixture(25, 32, 50),
+                team_test_fixture(69, 77, 56),
+                team_test_fixture(84, 95, 92),
+                team_test_fixture(45, 54, 78),
+                team_test_fixture(78, 87, 88),
+            ],
+            race_results: [
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+            ],
+            points: Points::default(),
+        };
+
+        race.assign_points();
+
+        assert_eq!(25, race.race_results[0].points);
+        assert_eq!(18, race.race_results[1].points);
+        assert_eq!(15, race.race_results[2].points);
+        assert_eq!(12, race.race_results[3].points);
+        assert_eq!(10, race.race_results[4].points);
+        assert_eq!(8, race.race_results[5].points);
+        assert_eq!(6, race.race_results[6].points);
+        assert_eq!(4, race.race_results[7].points);
+        assert_eq!(2, race.race_results[8].points);
+        assert_eq!(1, race.race_results[9].points);
+        assert_eq!(0, race.race_results[10].points);
+        assert_eq!(0, race.race_results[11].points);
+        assert_eq!(0, race.race_results[12].points);
+        assert_eq!(0, race.race_results[13].points);
+        assert_eq!(0, race.race_results[14].points);
+        assert_eq!(0, race.race_results[15].points);
+        assert_eq!(0, race.race_results[16].points);
+        assert_eq!(0, race.race_results[17].points);
+        assert_eq!(0, race.race_results[18].points);
+        assert_eq!(0, race.race_results[19].points);
+
+        // assert_eq!(25, race.teams[0].driver_1.points);
+    }
 
     fn team_test_fixture(
         overall_stat_for_driver_1: u32,
