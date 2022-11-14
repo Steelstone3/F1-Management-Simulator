@@ -10,6 +10,7 @@ pub struct Team {
     driver_2: Driver,
     reserve_driver: Driver,
     budget: u64,
+    points: u16,
 }
 
 impl Team {
@@ -27,7 +28,12 @@ impl Team {
             driver_2,
             reserve_driver,
             budget: BUDGET,
+            points: Default::default()
         }
+    }
+
+    fn calculate_points(&mut self) {
+        self.points = self.driver_1.points + self.driver_2.points + self.reserve_driver.points;
     }
 }
 
@@ -54,6 +60,7 @@ mod team_name_should {
                 awareness: 60,
                 pace: 99,
                 overall: 99,
+                points: 10,
             },
             driver_2: Driver {
                 driver_name: DriverName::CarlosSainz,
@@ -62,6 +69,7 @@ mod team_name_should {
                 awareness: 80,
                 pace: 85,
                 overall: 99,
+                points: 20,
             },
             reserve_driver: Driver {
                 driver_name: DriverName::LewisHamilton,
@@ -70,8 +78,10 @@ mod team_name_should {
                 awareness: 98,
                 pace: 97,
                 overall: 99,
+                points: 30,
             },
             budget: BUDGET,
+            points: Default::default()
         };
 
         let team = Team::new(
@@ -90,6 +100,7 @@ mod team_name_should {
                 awareness: 60,
                 pace: 99,
                 overall: 99,
+                points: 10,
             },
             Driver {
                 driver_name: DriverName::CarlosSainz,
@@ -98,6 +109,7 @@ mod team_name_should {
                 awareness: 80,
                 pace: 85,
                 overall: 99,
+                points: 20,
             },
             Driver {
                 driver_name: DriverName::LewisHamilton,
@@ -106,6 +118,7 @@ mod team_name_should {
                 awareness: 98,
                 pace: 97,
                 overall: 99,
+                points: 30,
             },
         );
 
