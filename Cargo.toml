@@ -17,3 +17,4 @@ include = [
 inquire = "0.5.2"
 rand="0.8.5"
 rand_derive2 ="0.1.17"
+rstest="0.15.0"
