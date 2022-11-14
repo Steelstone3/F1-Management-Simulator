@@ -7,7 +7,7 @@ use rand_derive2::RandGen;
 pub struct Driver {
     pub name: DriverName,
     pub team: Team,
-    pub expierence: u8,
+    pub experience: u8,
     pub race_craft: u8,
     pub awareness: u8,
     pub pace: u8,
@@ -28,7 +28,7 @@ impl Driver {
         let mut driver = Self {
             name,
             team,
-            expierence: experience,
+            experience: experience,
             race_craft,
             awareness,
             pace,
@@ -43,13 +43,13 @@ impl Driver {
     }
 
     pub fn new_random(seeds: [u64; 4]) -> Self {
-        const MAX_EXPIERENCE: u8 = 25;
+        const MAX_EXPERIENCE: u8 = 25;
         const MAX_RANGE: u8 = 99;
 
         let mut driver = Self {
             name: random(),
             team: random(),
-            expierence: get_seeded_random_max_range(seeds[0], MAX_EXPIERENCE),
+            experience: get_seeded_random_max_range(seeds[0], MAX_EXPERIENCE),
             race_craft: get_seeded_random_max_range(seeds[1], MAX_RANGE),
             awareness: get_seeded_random_max_range(seeds[2], MAX_RANGE),
             pace: get_seeded_random_max_range(seeds[3], MAX_RANGE),
@@ -77,7 +77,7 @@ impl Driver {
 
     fn calculate_overall(&mut self) {
         // calculate the average of the stats
-        self.overall = ((self.expierence as u32 * 6)
+        self.overall = ((self.experience as u32 * 6)
             + self.race_craft as u32
             + self.awareness as u32
             + self.pace as u32)
@@ -140,7 +140,7 @@ mod driver_should {
         let expected_driver = Driver {
             name,
             team,
-            expierence,
+            experience: expierence,
             race_craft,
             awareness,
             pace,
@@ -166,7 +166,7 @@ mod driver_should {
         let expected_driver = Driver {
             name: DriverName::LewisHamilton,
             team: team_test_fixture(),
-            expierence: 20,
+            experience: 20,
             race_craft: 8,
             awareness: 64,
             pace: 69,
@@ -177,7 +177,7 @@ mod driver_should {
 
         let driver = Driver::new_random([1, 2, 3, 4]);
 
-        assert_eq!(expected_driver.expierence, driver.expierence);
+        assert_eq!(expected_driver.experience, driver.experience);
         assert_eq!(expected_driver.race_craft, driver.race_craft);
         assert_eq!(expected_driver.awareness, driver.awareness);
         assert_eq!(expected_driver.pace, driver.pace);
@@ -193,7 +193,7 @@ mod driver_should {
         let mut driver = Driver {
             name: DriverName::LewisHamilton,
             team: team_test_fixture(),
-            expierence: Default::default(),
+            experience: Default::default(),
             race_craft: Default::default(),
             awareness: Default::default(),
             pace: Default::default(),
@@ -220,7 +220,7 @@ mod driver_should {
         let mut driver = Driver {
             name: DriverName::LewisHamilton,
             team: team_test_fixture(),
-            expierence: Default::default(),
+            experience: Default::default(),
             race_craft: Default::default(),
             awareness: Default::default(),
             pace: Default::default(),

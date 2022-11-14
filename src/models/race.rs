@@ -151,7 +151,7 @@ mod race_should {
         Driver {
             name: DriverName::LewisHamilton,
             team: team_test_fixture(car_overall),
-            expierence: Default::default(),
+            experience: Default::default(),
             race_craft: Default::default(),
             awareness: Default::default(),
             pace: Default::default(),
@@ -181,7 +181,7 @@ mod race_should {
         Driver {
             name: DriverName::LewisHamilton,
             team: team_test_fixture(Default::default()),
-            expierence: Default::default(),
+            experience: Default::default(),
             race_craft: Default::default(),
             awareness: Default::default(),
             pace: Default::default(),
