@@ -14,7 +14,11 @@ impl Race {
         self.race_results
             .sort_by(|d1, d2| d1.race_chances.partial_cmp(&d2.race_chances).unwrap());
 
-        self.race_results.reverse()
+        self.race_results.reverse();
+
+        for index in 0..10 {
+            self.race_results[index].add_points(self.points.points_allocation[index] as u16);
+        }
     }
 
     fn assign_points(&mut self) {
@@ -140,6 +144,7 @@ mod race_should {
         assert_eq!(0, race.race_results[17].points);
         assert_eq!(0, race.race_results[18].points);
         assert_eq!(0, race.race_results[19].points);
+        // assert_eq!(25, race.race_results[0].team.points);
     }
 
     fn overall_driver_test_fixture(driver_overall: u32, car_overall: u32) -> Driver {
