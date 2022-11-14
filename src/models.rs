@@ -6,3 +6,4 @@ pub mod race;
 pub mod car;
 pub mod season;
 pub mod standings;
+pub mod points;
