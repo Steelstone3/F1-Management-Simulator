@@ -14,8 +14,6 @@ pub enum TeamName {
     Williams,
 }
 
-
-
 impl Display for TeamName {
     fn fmt(&self, formatter: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -65,7 +63,7 @@ impl Display for TeamName {
 #[cfg(test)]
 mod team_name_should {
     use rstest::rstest;
-    use crate::models::team_name::TeamName;
+    use super::*;
 
     #[rstest]
     #[case("Ferrari", TeamName::Ferrari.to_string())]

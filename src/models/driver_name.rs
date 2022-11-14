@@ -1,6 +1,8 @@
 use std::fmt::{Display, Formatter};
+use rand_derive2::RandGen;
 
-#[derive(Debug, PartialEq)]
+#[derive(RandGen)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum DriverName {
     LewisHamilton,
     GeorgeRussell,
@@ -42,8 +44,8 @@ impl Display for DriverName {
 
 #[cfg(test)]
 mod driver_name_should {
-    use crate::models::driver_name::DriverName;
     use rstest::rstest;
+    use super::*;
 
     #[rstest]
     #[case("Lewis Hamilton", DriverName::LewisHamilton.to_string())]
