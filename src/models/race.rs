@@ -6,9 +6,16 @@ pub struct Race {
 
 impl Race {
     pub fn calculate_race_chances(&mut self, seed: u64) {
-        for mut driver in self.race_results {
+        for index in 0..20 {
+            let mut driver = self.race_results[index];
             driver.calculate_race_chance(seed);
+            self.race_results[index] = driver;
         }
+
+        // Surely this must work some how
+        // for mut driver in self.race_results {
+        //     driver.calculate_race_chance(seed);
+        // }
     }
 
     pub fn sort_racing_result_order(&mut self) {
@@ -33,49 +40,49 @@ mod race_should {
     #[test]
     fn calculate_race_chances() {
         let expected_race_results: [Driver; 20] = [
-            race_chances_driver_test_fixture(209.2088),
-            race_chances_driver_test_fixture(203.67418),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
-            race_chances_driver_test_fixture(194.81879),
+            race_chances_driver_test_fixture(22.138498),
+            race_chances_driver_test_fixture(44.276997),
+            race_chances_driver_test_fixture(66.4155),
+            race_chances_driver_test_fixture(110.69249),
+            race_chances_driver_test_fixture(110.69249),
+            race_chances_driver_test_fixture(88.55399),
+            race_chances_driver_test_fixture(110.69249),
+            race_chances_driver_test_fixture(132.831),
+            race_chances_driver_test_fixture(154.96948),
+            race_chances_driver_test_fixture(177.10799),
+            race_chances_driver_test_fixture(199.24648),
+            race_chances_driver_test_fixture(219.17113),
+            race_chances_driver_test_fixture(2.2138498),
+            race_chances_driver_test_fixture(4.4276996),
+            race_chances_driver_test_fixture(6.641549),
+            race_chances_driver_test_fixture(8.855399),
+            race_chances_driver_test_fixture(11.069249),
+            race_chances_driver_test_fixture(13.283098),
+            race_chances_driver_test_fixture(15.496948),
+            race_chances_driver_test_fixture(17.710798),
         ];
         let mut race = Race {
             race_results: [
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
-                overall_driver_test_fixture(56,56),
+                overall_driver_test_fixture(10, 10),
+                overall_driver_test_fixture(20, 20),
+                overall_driver_test_fixture(30, 30),
+                overall_driver_test_fixture(90, 10),
+                overall_driver_test_fixture(10, 90),
+                overall_driver_test_fixture(40, 40),
+                overall_driver_test_fixture(50, 50),
+                overall_driver_test_fixture(60, 60),
+                overall_driver_test_fixture(70, 70),
+                overall_driver_test_fixture(80, 80),
+                overall_driver_test_fixture(90, 90),
+                overall_driver_test_fixture(99, 99),
+                overall_driver_test_fixture(1, 1),
+                overall_driver_test_fixture(2, 2),
+                overall_driver_test_fixture(3, 3),
+                overall_driver_test_fixture(4, 4),
+                overall_driver_test_fixture(5, 5),
+                overall_driver_test_fixture(6, 6),
+                overall_driver_test_fixture(7, 7),
+                overall_driver_test_fixture(8, 8),
             ],
         };
 

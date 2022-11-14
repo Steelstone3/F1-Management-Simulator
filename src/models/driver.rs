@@ -68,7 +68,6 @@ impl Driver {
         let race_factor = rng.gen_range(0.8..1.2);
 
         self.race_chances = (self.overall + self.team.car.overall) as f32 * race_factor;
-        println!("{:#?}", self);
     }
 
     pub fn add_points(&mut self, points: u16) {
