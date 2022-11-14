@@ -1,12 +1,12 @@
-use super::driver_name::DriverName;
+use super::{driver_name::DriverName, team::Team};
 use crate::controllers::random_generator::get_seeded_random_max_range;
-use rand::random;
+use rand::{random, rngs::StdRng, Rng, SeedableRng};
 use rand_derive2::RandGen;
 
-#[derive(Clone, Copy)]
-#[derive(RandGen, Debug, PartialEq)]
+#[derive(Clone, Copy, RandGen, Debug, PartialEq)]
 pub struct Driver {
-    pub driver_name: DriverName,
+    pub name: DriverName,
+    pub team: Team,
     pub expierence: u8,
     pub race_craft: u8,
     pub awareness: u8,
@@ -18,14 +18,16 @@ pub struct Driver {
 
 impl Driver {
     pub fn new(
-        driver_name: DriverName,
+        name: DriverName,
+        team: Team,
         expierence: u8,
         race_craft: u8,
         awareness: u8,
         pace: u8,
     ) -> Self {
         let mut driver = Self {
-            driver_name,
+            name,
+            team,
             expierence,
             race_craft,
             awareness,
@@ -45,7 +47,8 @@ impl Driver {
         const MAX_RANGE: u8 = 99;
 
         let mut driver = Self {
-            driver_name: random(),
+            name: random(),
+            team: random(),
             expierence: get_seeded_random_max_range(seeds[0], MAX_EXPIERENCE),
             race_craft: get_seeded_random_max_range(seeds[1], MAX_RANGE),
             awareness: get_seeded_random_max_range(seeds[2], MAX_RANGE),
@@ -60,8 +63,16 @@ impl Driver {
         driver
     }
 
+    pub fn calculate_race_chances(&mut self, seed: u64) {
+        let mut rng = StdRng::seed_from_u64(seed);
+        let race_factor = rng.gen_range(0.8..1.2);
+
+        self.race_chances = (self.overall + self.team.car.overall) as f32 * race_factor;
+    }
+
     pub fn add_points(&mut self, points: u16) {
         self.points += points;
+        self.team.points += points;
     }
 
     fn calculate_overall(&mut self) {
@@ -76,15 +87,48 @@ impl Driver {
 
 #[cfg(test)]
 mod driver_should {
+    use crate::models::{car::Car, team_name::TeamName};
+
     use super::*;
     use rstest::rstest;
 
     #[rstest]
-    #[case(DriverName::CharlesLeclerc, 4, 75, 60, 99, 64, 0.0, 0)]
-    #[case(DriverName::LewisHamilton, 15, 99, 95, 97, 95, 0.0, 0)]
-    #[case(DriverName::MaxVerstappen, 7, 80, 75, 99, 74, 0.0, 0)]
+    #[case(
+        DriverName::CharlesLeclerc,
+        team_test_fixture(),
+        4,
+        75,
+        60,
+        99,
+        64,
+        0.0,
+        0
+    )]
+    #[case(
+        DriverName::LewisHamilton,
+        team_test_fixture(),
+        15,
+        99,
+        95,
+        97,
+        95,
+        0.0,
+        0
+    )]
+    #[case(
+        DriverName::MaxVerstappen,
+        team_test_fixture(),
+        7,
+        80,
+        75,
+        99,
+        74,
+        0.0,
+        0
+    )]
     fn create_a_driver(
-        #[case] driver_name: DriverName,
+        #[case] name: DriverName,
+        #[case] team: Team,
         #[case] expierence: u8,
         #[case] race_craft: u8,
         #[case] awareness: u8,
@@ -94,7 +138,8 @@ mod driver_should {
         #[case] points: u16,
     ) {
         let expected_driver = Driver {
-            driver_name,
+            name,
+            team,
             expierence,
             race_craft,
             awareness,
@@ -104,7 +149,14 @@ mod driver_should {
             points,
         };
 
-        let driver = Driver::new(driver_name, expierence, race_craft, awareness, pace);
+        let driver = Driver::new(
+            name,
+            team_test_fixture(),
+            expierence,
+            race_craft,
+            awareness,
+            pace,
+        );
 
         assert_eq!(expected_driver, driver);
     }
@@ -112,7 +164,8 @@ mod driver_should {
     #[test]
     fn create_a_random_driver() {
         let expected_driver = Driver {
-            driver_name: DriverName::LewisHamilton,
+            name: DriverName::LewisHamilton,
+            team: team_test_fixture(),
             expierence: 20,
             race_craft: 8,
             awareness: 64,
@@ -134,11 +187,12 @@ mod driver_should {
     }
 
     #[test]
-    fn add_driver_points() {
+    fn add_team_and_driver_points() {
         let expected_points = 2000;
         let points = 1000;
         let mut driver = Driver {
-            driver_name: DriverName::LewisHamilton,
+            name: DriverName::LewisHamilton,
+            team: team_test_fixture(),
             expierence: Default::default(),
             race_craft: Default::default(),
             awareness: Default::default(),
@@ -151,6 +205,42 @@ mod driver_should {
         driver.add_points(points);
         driver.add_points(points);
 
-        assert_eq!(expected_points, driver.points)
+        assert_eq!(expected_points, driver.points);
+        assert_eq!(expected_points, driver.team.points);
+    }
+
+    #[rstest]
+    #[case(7, 80, 75, 84.21585)]
+    fn calculate_race_chances_based_on_driver_and_car(
+        #[case] driver_overall: u32,
+        #[case] car_overall: u32,
+        #[case] seed: u64,
+        #[case] race_chances: f32,
+    ) {
+        let mut driver = Driver {
+            name: DriverName::LewisHamilton,
+            team: team_test_fixture(),
+            expierence: Default::default(),
+            race_craft: Default::default(),
+            awareness: Default::default(),
+            pace: Default::default(),
+            overall:  Default::default(),
+            race_chances: Default::default(),
+            points: Default::default(),
+        };
+        driver.overall = driver_overall;
+        driver.team.car.overall = car_overall;
+
+        driver.calculate_race_chances(seed);
+
+        assert_eq!(race_chances, driver.race_chances);
+    }
+
+    fn team_test_fixture() -> Team {
+        Team {
+            team_name: TeamName::Haas,
+            car: Car::new_random([1, 2, 3, 4]),
+            points: Default::default(),
+        }
     }
 }

@@ -1,7 +1,7 @@
+use rand_derive2::RandGen;
 use std::fmt::{Display, Formatter};
 
-#[derive(Clone, Copy)]
-#[derive(Debug, PartialEq)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq)]
 pub enum TeamName {
     Ferrari,
     Mercedes,
@@ -20,51 +20,51 @@ impl Display for TeamName {
         match self {
             TeamName::Ferrari => {
                 write!(formatter, "Ferrari",)
-            },
+            }
 
             TeamName::Mercedes => {
                 write!(formatter, "Mercedes",)
-            },
+            }
 
             TeamName::RedBull => {
                 write!(formatter, "Red Bull",)
-            },
+            }
 
             TeamName::Alpine => {
                 write!(formatter, "Alpine",)
-            },
+            }
 
             TeamName::Mclaren => {
                 write!(formatter, "Mclaren",)
-            },
+            }
 
             TeamName::Haas => {
                 write!(formatter, "Haas",)
-            },
+            }
 
             TeamName::AlphaRomeo => {
                 write!(formatter, "Alpha Romeo",)
-            },
-            
+            }
+
             TeamName::AlphaTauri => {
                 write!(formatter, "Alpha Tauri",)
-            },
+            }
 
             TeamName::AstonMartin => {
                 write!(formatter, "Aston Martin",)
-            },
+            }
 
             TeamName::Williams => {
                 write!(formatter, "Williams",)
-            },
+            }
         }
     }
 }
 
 #[cfg(test)]
 mod team_name_should {
-    use rstest::rstest;
     use super::*;
+    use rstest::rstest;
 
     #[rstest]
     #[case("Ferrari", TeamName::Ferrari.to_string())]

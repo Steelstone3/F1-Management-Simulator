@@ -1,7 +1,7 @@
 use crate::controllers::random_generator::get_seeded_random_max_range;
+use rand_derive2::RandGen;
 
-#[derive(Clone, Copy)]
-#[derive(Debug, PartialEq)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq)]
 pub struct Car {
     pub aero: u8,
     pub engine: u8,
