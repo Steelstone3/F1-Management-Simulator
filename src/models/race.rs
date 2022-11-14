@@ -14,8 +14,17 @@ impl Race {
             team.calculate_race_chances(seed);
 
             self.race_results[index] = team.driver_1;
+            if index <= 9 {
+                team.driver_1
+                    .add_points(self.points.points_allocation[index] as u16);
+            }
             index += 1;
+
             self.race_results[index] = team.driver_2;
+            if index <= 9 {
+                team.driver_2
+                    .add_points(self.points.points_allocation[index] as u16);
+            }
             index += 1;
         }
 
@@ -111,6 +120,8 @@ mod race_should {
                 race.race_results[index].race_chances
             );
         }
+
+        assert_ne!(0, race.teams[2].driver_1.points);
     }
 
     #[test]
@@ -175,8 +186,6 @@ mod race_should {
         assert_eq!(0, race.race_results[17].points);
         assert_eq!(0, race.race_results[18].points);
         assert_eq!(0, race.race_results[19].points);
-
-        // assert_eq!(25, race.teams[0].driver_1.points);
     }
 
     fn team_test_fixture(
