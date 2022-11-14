@@ -238,7 +238,7 @@ mod driver_should {
 
     fn team_test_fixture() -> Team {
         Team {
-            team_name: TeamName::Haas,
+            name: TeamName::Haas,
             car: Car::new_random([1, 2, 3, 4]),
             points: Default::default(),
         }

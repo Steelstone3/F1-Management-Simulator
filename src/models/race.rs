@@ -7,8 +7,6 @@ pub struct Race {
 
 impl Race {
     pub fn calculate_race_result(&mut self, seed: u64) {
-        // let mut index = 0;
-
         for mut driver in self.race_results {
             driver.calculate_race_chances(seed);
         }
@@ -34,11 +32,7 @@ mod race_should {
     #[test]
     #[ignore = "race_chances is 0 when it should be 209.2088 despite running driver.calculate_race_chances(seed)"]
     fn calculate_the_race_results() {
-        // created a test to show that the race result
-        // is based on the race chance order for each
-        // driver in each team and will place based on their overall
-        // package as driver and car
-        let race_results: [Driver; 20] = [
+        let expected_race_results: [Driver; 20] = [
             race_chances_driver_test_fixture(209.2088),
             race_chances_driver_test_fixture(203.67418),
             race_chances_driver_test_fixture(194.81879),
@@ -90,7 +84,7 @@ mod race_should {
 
         for index in 0..20 {
             assert_eq!(
-                race_results[index].race_chances,
+                expected_race_results[index].race_chances,
                 race.race_results[index].race_chances
             );
         }
@@ -166,7 +160,7 @@ mod race_should {
         car_overall: u32,
     ) -> Team {
         Team {
-            team_name: TeamName::Haas,
+            name: TeamName::Haas,
             car: Car {
                 aero: Default::default(),
                 engine: Default::default(),
