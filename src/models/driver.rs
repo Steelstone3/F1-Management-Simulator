@@ -1,5 +1,7 @@
-use rand::{random, Rng};
+use rand::random;
 use rand_derive2::RandGen;
+
+use crate::controllers::random_generator::assign_random_range;
 
 use super::driver_name::DriverName;
 
@@ -35,30 +37,6 @@ impl Driver {
         driver
     }
 
-    pub fn new_random() -> Self {
-        const MAX_EXPIERENCE: u8 = 25;
-        const MAX_RANGE: u8 = 25;
-
-        let mut driver = Self {
-            driver_name: random(),
-            expierence: Self::assign_random_range(MAX_EXPIERENCE),
-            race_craft: Self::assign_random_range(MAX_RANGE),
-            awareness: Self::assign_random_range(MAX_RANGE),
-            pace: Self::assign_random_range(MAX_RANGE),
-            overall: 0,
-        };
-
-        driver.calculate_overall();
-
-        driver
-    }
-
-    fn assign_random_range(max: u8) -> u8 {
-        let mut rng = rand::thread_rng();
-
-        rng.gen_range(1..max)
-    }
-
     fn calculate_overall(&mut self) {
         // calculate the average of the stats
         self.overall = ((self.expierence as u32 * 6)
@@ -66,6 +44,26 @@ impl Driver {
             + self.awareness as u32
             + self.pace as u32)
             / 4;
+    }
+}
+
+impl Default for Driver {
+    fn default() -> Self {
+        const MAX_EXPIERENCE: u8 = 25;
+        const MAX_RANGE: u8 = 99;
+
+        let mut driver = Self {
+            driver_name: random(),
+            expierence: assign_random_range(MAX_EXPIERENCE),
+            race_craft: assign_random_range(MAX_RANGE),
+            awareness: assign_random_range(MAX_RANGE),
+            pace: assign_random_range(MAX_RANGE),
+            overall: Default::default(),
+        };
+
+        driver.calculate_overall();
+
+        driver
     }
 }
 
@@ -102,7 +100,7 @@ mod driver_should {
 
     #[test]
     fn create_a_random_driver() {
-        let random_driver = Driver::new_random();
+        let random_driver = Driver::default();
 
         assert!(!random_driver.expierence > 25);
         assert!(!random_driver.race_craft > 99);
