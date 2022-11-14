@@ -11,11 +11,6 @@ impl Race {
             driver.calculate_race_chance(seed);
             self.race_results[index] = driver;
         }
-
-        // Surely this must work some how
-        // for mut driver in self.race_results {
-        //     driver.calculate_race_chance(seed);
-        // }
     }
 
     pub fn sort_racing_result_order(&mut self) {
