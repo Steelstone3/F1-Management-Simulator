@@ -1,19 +1,20 @@
-use super::{driver_name::DriverName, team_name::TeamName};
+use super::{team_name::TeamName, driver::Driver};
 
+#[derive(Debug, PartialEq)]
 pub struct Team {
     team_name: TeamName,
-    driver_1: DriverName,
-    driver_2: DriverName,
-    reserve_driver: DriverName,
+    driver_1: Driver,
+    driver_2: Driver,
+    reserve_driver: Driver,
     budget: u64,
 }
 
 impl Team {
     fn new(
         team_name: TeamName,
-        driver_1: DriverName,
-        driver_2: DriverName,
-        reserve_driver: DriverName,
+        driver_1: Driver,
+        driver_2: Driver,
+        reserve_driver: Driver,
     ) -> Self {
         Self {
             team_name,
@@ -27,7 +28,7 @@ impl Team {
 
 #[cfg(test)]
 mod team_name_should {
-    use crate::models::{driver_name::DriverName, team_name::TeamName};
+    use crate::models::{driver_name::DriverName, team_name::TeamName, driver::Driver};
 
     use super::Team;
 
@@ -35,35 +36,19 @@ mod team_name_should {
     fn create_a_team() {
         let expected_team = Team {
             team_name: TeamName::Haas,
-            driver_1: DriverName::CharlesLeclerc,
-            driver_2: DriverName::CarlosSainz,
-            reserve_driver: DriverName::LewisHamilton,
+            driver_1: Driver{ driver_name: DriverName::CharlesLeclerc, expierence: 4, race_craft: 75, awareness: 60, pace: 99 },
+            driver_2: Driver{ driver_name: DriverName::CarlosSainz, expierence: 3, race_craft: 67, awareness: 80, pace: 85 },
+            reserve_driver: Driver{ driver_name: DriverName::LewisHamilton, expierence: 15, race_craft: 90, awareness: 98, pace: 97 },
             budget: 150000000,
         };
 
         let team = Team::new(
             TeamName::Haas,
-            DriverName::CharlesLeclerc,
-            DriverName::CarlosSainz,
-            DriverName::LewisHamilton,
+            Driver{ driver_name: DriverName::CharlesLeclerc, expierence: 4, race_craft: 75, awareness: 60, pace: 99 },
+            Driver{ driver_name: DriverName::CarlosSainz, expierence: 3, race_craft: 67, awareness: 80, pace: 85 },
+            Driver{ driver_name: DriverName::LewisHamilton, expierence: 15, race_craft: 90, awareness: 98, pace: 97 },
         );
 
-        assert_eq!(
-            expected_team.team_name.to_string(),
-            team.team_name.to_string()
-        );
-        assert_eq!(
-            expected_team.driver_1.to_string(),
-            team.driver_1.to_string()
-        );
-        assert_eq!(
-            expected_team.driver_2.to_string(),
-            team.driver_2.to_string()
-        );
-        assert_eq!(
-            expected_team.reserve_driver.to_string(),
-            team.reserve_driver.to_string()
-        );
-        assert_eq!(expected_team.budget, team.budget);
+        assert_eq!(expected_team, team);
     }
 }

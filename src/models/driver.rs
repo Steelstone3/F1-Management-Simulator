@@ -1,9 +1,10 @@
 use super::driver_name::DriverName;
 
+#[derive(Debug, PartialEq)]
 pub struct Driver {
-    driver_name: DriverName,
-    expierence: u8,
-    race_craft: u8,
-    awareness: u8,
-    pace: u8
+    pub driver_name: DriverName,
+    pub expierence: u8,
+    pub race_craft: u8,
+    pub awareness: u8,
+    pub pace: u8
 }
