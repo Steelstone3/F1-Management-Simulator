@@ -11,7 +11,7 @@ pub struct Car {
 }
 
 impl Car {
-    pub fn new_random(seeds: [u64; 4]) -> Self {
+    pub fn new(seeds: [u64; 4]) -> Self {
         const MAX_RANGE: u8 = 99;
 
         let mut car = Self {
@@ -52,7 +52,7 @@ mod driver_should {
             overall: 55,
         };
 
-        let car = Car::new_random([1, 2, 3, 4]);
+        let car = Car::new([1, 2, 3, 4]);
 
         assert_eq!(expected_car, car);
     }

@@ -9,10 +9,10 @@ pub struct Team {
 }
 
 impl Team {
-    fn new(team_name: TeamName, car: Car) -> Self {
+    fn new(team_name: TeamName, seeds: [u64; 4]) -> Self {
         Self {
             name: team_name,
-            car,
+            car: Car::new(seeds),
             points: Default::default(),
         }
     }
@@ -27,24 +27,18 @@ mod team_should {
         let expected_team = Team {
             name: TeamName::Haas,
             car: Car {
-                aero: 40,
-                engine: 78,
-                reliability: 67,
-                tire_management: 34,
-                overall: 76,
+                aero: 8,
+                engine: 81,
+                reliability: 18,
+                tire_management: 8,
+                overall: 28,
             },
             points: Default::default(),
         };
 
         let team = Team::new(
             TeamName::Haas,
-            Car {
-                aero: 40,
-                engine: 78,
-                reliability: 67,
-                tire_management: 34,
-                overall: 76,
-            },
+            [2,1,5,2],
         );
 
         assert_eq!(expected_team, team);
