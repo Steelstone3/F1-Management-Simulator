@@ -1,20 +1,16 @@
 use crate::models::{driver_name::DriverName, team_name::TeamName, driver::Driver};
 use inquire::Select;
 
-pub fn display_the_grid(driver_grid: [Driver; 20]) {
-    for index in 0..20 {
+pub fn display_the_grid(driver_grid: [Driver; 22]) {
+    for index in 0..22 {
         println!("Driver: {} Team: {}", driver_grid[index].name, driver_grid[index].team.name);
     }
 }
 
 pub fn select_driver_name() -> DriverName {
     let options: Vec<DriverName> = vec![
-        DriverName::LewisHamilton,
-        DriverName::GeorgeRussell,
-        DriverName::CharlesLeclerc,
-        DriverName::CarlosSainz,
-        DriverName::MaxVerstappen,
-        DriverName::SergioPerez,
+        DriverName::NyckDeVries,
+        DriverName::NicoHulkenberg,
     ];
 
     Select::new("Select Driver:", options).prompt().unwrap()
