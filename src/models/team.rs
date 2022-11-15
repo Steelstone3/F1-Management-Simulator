@@ -1,7 +1,7 @@
 use super::{car::Car, team_name::TeamName};
 use rand_derive2::RandGen;
 
-#[derive(RandGen, Clone, Copy, Debug, PartialEq)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Team {
     pub name: TeamName,
     pub car: Car,
