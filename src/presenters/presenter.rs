@@ -3,30 +3,36 @@ use crate::{
     models::{driver::Driver, driver_name::DriverName, team::Team, team_name::TeamName},
 };
 use inquire::Select;
-use rand::random;
 
 pub fn print(message: &str) {
     println!("{}", message);
 }
 
-pub fn select_driver() -> Driver {
-    Driver::new_ai([
-        generate_seed(),
-        generate_seed(),
-        generate_seed(),
-        generate_seed(),
-    ])
+pub fn select_driver_and_team() -> Driver {
+    Driver::new_player(
+        select_driver_name(),
+        select_team(),
+        [
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+        ],
+    )
 }
 
-pub fn select_team() -> Team {
-    Team {
-        name: select_team_name(),
-        car: random(),
-        points: Default::default(),
-    }
+fn select_team() -> Team {
+    Team::new(
+        select_team_name(),
+        [
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+        ],
+    )
 }
 
-// TODO use this
 fn select_driver_name() -> DriverName {
     let options: Vec<DriverName> = vec![
         DriverName::LewisHamilton,

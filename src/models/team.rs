@@ -9,7 +9,7 @@ pub struct Team {
 }
 
 impl Team {
-    fn new(team_name: TeamName, seeds: [u64; 4]) -> Self {
+    pub fn new(team_name: TeamName, seeds: [u64; 4]) -> Self {
         Self {
             name: team_name,
             car: Car::new(seeds),
