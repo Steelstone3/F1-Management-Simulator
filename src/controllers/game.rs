@@ -1,10 +1,8 @@
-use crate::{presenters::presenter::select_driver_and_team, models::driver::Driver};
+use super::driver_factory::create_grid;
+use crate::models::driver::Driver;
 
-pub fn setup() -> Driver {
-    select_driver_and_team()
-    
+pub fn setup() -> [Driver; 20] {
+    create_grid()
 }
 
-pub fn run_race() {
-
-}
+pub fn run_race() {}
