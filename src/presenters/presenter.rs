@@ -18,16 +18,8 @@ pub fn select_driver_name() -> DriverName {
 
 pub fn select_team_name() -> TeamName {
     let options: Vec<TeamName> = vec![
-        TeamName::Mercedes,
-        TeamName::Mclaren,
-        TeamName::Haas,
-        TeamName::Ferrari,
-        TeamName::RedBull,
-        TeamName::AstonMartin,
-        TeamName::Alpine,
-        TeamName::AlphaRomeo,
-        TeamName::AlphaTauri,
-        TeamName::Williams,
+        TeamName::Minardi,
+        TeamName::ToroRosso
     ];
 
     Select::new("Select Team:", options).prompt().unwrap()

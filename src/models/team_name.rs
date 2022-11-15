@@ -13,6 +13,9 @@ pub enum TeamName {
     AlphaTauri,
     AstonMartin,
     Williams,
+    // historic f1 teams
+    Minardi,
+    ToroRosso,
 }
 
 impl Display for TeamName {
@@ -57,6 +60,13 @@ impl Display for TeamName {
             TeamName::Williams => {
                 write!(formatter, "Williams",)
             }
+            // historic f1 teams
+            TeamName::Minardi => {
+                write!(formatter, "Minardi",)
+            }
+            TeamName::ToroRosso => {
+                write!(formatter, "Toro Rosso",)
+            }
         }
     }
 }
@@ -77,6 +87,9 @@ mod team_name_should {
     #[case("Alpha Tauri", TeamName::AlphaTauri.to_string())]
     #[case("Aston Martin", TeamName::AstonMartin.to_string())]
     #[case("Williams", TeamName::Williams.to_string())]
+    // historic f1 teams
+    #[case("Minardi", TeamName::Minardi.to_string())]
+    #[case("Toro Rosso", TeamName::ToroRosso.to_string())]
     fn display_a_team_name(#[case] expected_name: String, #[case] actual_name: String) {
         assert_eq!(expected_name, actual_name);
     }

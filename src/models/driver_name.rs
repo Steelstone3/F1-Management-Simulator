@@ -23,6 +23,7 @@ pub enum DriverName {
     YukiTsunoda,
     AlexanderAlbon,
     NicholasLatifi,
+    // reserve drivers
     NyckDeVries,
     NicoHulkenberg,
 }
