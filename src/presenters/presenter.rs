@@ -1,8 +1,10 @@
-use crate::models::{driver_name::DriverName, team_name::TeamName};
+use crate::models::{driver_name::DriverName, team_name::TeamName, driver::Driver};
 use inquire::Select;
 
-pub fn print(message: &str) {
-    println!("{}", message);
+pub fn display_the_grid(driver_grid: [Driver; 20]) {
+    for index in 0..20 {
+        println!("Driver: {} Team: {}", driver_grid[index].name, driver_grid[index].team.name);
+    }
 }
 
 pub fn select_driver_name() -> DriverName {
