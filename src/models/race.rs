@@ -8,6 +8,7 @@ pub struct Race {
 }
 
 impl Race {
+    //TODO FIRSTLY Make this take [u64; 22] seeds for each driver on the grid
     pub fn calculate_race_chances(&mut self, seed: u64) {
         for index in 0..22 {
             let mut driver = self.race_results[index];

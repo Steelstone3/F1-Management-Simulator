@@ -19,6 +19,8 @@ pub struct Driver {
     pub points: u16,
 }
 
+//TODO SECOND May want to change the stats to go from 50 to 99 (for all stats) with the expierence not being weighted (*6)
+//TODO Alternatively you may want to weight expierence * 4
 impl Driver {
     pub fn new(name: DriverName, team: Team, seeds: [u64; 4]) -> Self {
         let mut driver = Self {
