@@ -1,5 +1,3 @@
-use rand::random;
-
 use super::{driver::Driver, points::Points, race_name::RaceName};
 
 pub struct Race {
@@ -8,11 +6,9 @@ pub struct Race {
 }
 
 impl Race {
-    //TODO FIRSTLY Make this take [u64; 22] seeds for each driver on the grid
     pub fn calculate_race_chances(&mut self, seeds: [u64; 22]) {
         for index in 0..22 {
             let mut driver = self.race_results[index];
-            // TODO This will generate the same chance for each driver
             driver.calculate_race_chance(seeds[index]);
             self.race_results[index] = driver;
         }

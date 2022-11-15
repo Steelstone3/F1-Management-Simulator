@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter};
 use rand_derive2::RandGen;
 
 #[derive(RandGen)]
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RaceName {
     Monza,
     Silverstone,

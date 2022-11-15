@@ -18,8 +18,6 @@ pub struct Driver {
     pub points: u16,
 }
 
-//TODO SECOND May want to change the stats to go from 50 to 99 (for all stats) with the expierence not being weighted (*6)
-//TODO Alternatively you may want to weight expierence * 4
 impl Driver {
     pub fn new(name: DriverName, team: Team, seeds: [u64; 4]) -> Self {
         let mut driver = Self {
@@ -74,11 +72,11 @@ mod driver_should {
         let expected_driver = Driver {
             name: DriverName::CharlesLeclerc,
             team,
-            experience: 2,
+            experience: 8,
             race_craft: 81,
             awareness: 18,
             pace: 8,
-            overall: 29,
+            overall: 28,
             race_chance: Default::default(),
             points: Default::default(),
         };
@@ -141,9 +139,9 @@ mod driver_should {
     }
 
     #[rstest]
-    #[case(1, 1, 1, 1, 2)]
-    #[case(10, 20, 30, 40, 37)]
-    #[case(50, 90, 20, 70, 120)]
+    #[case(1, 1, 1, 1, 1)]
+    #[case(10, 20, 30, 40, 25)]
+    #[case(50, 90, 20, 70, 57)]
     fn calculate_overall_stat(
         #[case] experience: u8,
         #[case] race_craft: u8,
