@@ -3,7 +3,6 @@ use crate::controllers::random_generator::get_seeded_random_max_range;
 use rand::{rngs::StdRng, Rng, SeedableRng};
 use rand_derive2::RandGen;
 
-const MAX_EXPERIENCE: u8 = 25;
 const MAX_RANGE: u8 = 99;
 
 #[derive(Clone, Copy, RandGen, Debug, PartialEq)]
@@ -26,7 +25,7 @@ impl Driver {
         let mut driver = Self {
             name,
             team,
-            experience: get_seeded_random_max_range(seeds[0], MAX_EXPERIENCE),
+            experience: get_seeded_random_max_range(seeds[0], MAX_RANGE),
             race_craft: get_seeded_random_max_range(seeds[1], MAX_RANGE),
             awareness: get_seeded_random_max_range(seeds[2], MAX_RANGE),
             pace: get_seeded_random_max_range(seeds[3], MAX_RANGE),
@@ -54,7 +53,7 @@ impl Driver {
 
     fn calculate_overall(&mut self) {
         // calculate the average of the stats
-        self.overall = ((self.experience as u32 * 6)
+        self.overall = (self.experience as u32
             + self.race_craft as u32
             + self.awareness as u32
             + self.pace as u32)
