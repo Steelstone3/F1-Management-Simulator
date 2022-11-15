@@ -10,7 +10,7 @@ pub fn print(message: &str) {
 }
 
 pub fn select_driver() -> Driver {
-    Driver::new_random([
+    Driver::new_ai([
         generate_seed(),
         generate_seed(),
         generate_seed(),

@@ -16,7 +16,7 @@ impl Race {
 
     pub fn sort_racing_result_order(&mut self) {
         self.race_results
-            .sort_by(|d1, d2| d1.race_chances.partial_cmp(&d2.race_chances).unwrap());
+            .sort_by(|d1, d2| d1.race_chance.partial_cmp(&d2.race_chance).unwrap());
 
         self.race_results.reverse();
     }
@@ -87,8 +87,8 @@ mod race_should {
 
         for index in 0..20 {
             assert_eq!(
-                expected_race_results[index].race_chances,
-                race.race_results[index].race_chances
+                expected_race_results[index].race_chance,
+                race.race_results[index].race_chance
             );
         }
     }
@@ -147,8 +147,8 @@ mod race_should {
 
         for index in 0..20 {
             assert_eq!(
-                expected_race_results[index].race_chances,
-                race.race_results[index].race_chances
+                expected_race_results[index].race_chance,
+                race.race_results[index].race_chance
             );
         }
     }
@@ -235,7 +235,7 @@ mod race_should {
             awareness: Default::default(),
             pace: Default::default(),
             overall: driver_overall,
-            race_chances: Default::default(),
+            race_chance: Default::default(),
             points: Default::default(),
         }
     }
@@ -265,7 +265,7 @@ mod race_should {
             awareness: Default::default(),
             pace: Default::default(),
             overall: Default::default(),
-            race_chances,
+            race_chance: race_chances,
             points: Default::default(),
         }
     }
