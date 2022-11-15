@@ -32,7 +32,7 @@ pub fn create_grid() -> [Driver; 22] {
 }
 
 fn create_driver(driver_name: DriverName, team_name: TeamName) -> Driver{
-    Driver::new_player(
+    Driver::new(
         driver_name,
         Team::new(
             team_name,

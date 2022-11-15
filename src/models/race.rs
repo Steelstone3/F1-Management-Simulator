@@ -1,13 +1,15 @@
+use rand::random;
+
 use super::{driver::Driver, points::Points, race_name::RaceName};
 
 pub struct Race {
-    name: RaceName,
-    race_results: [Driver; 20],
+    pub name: RaceName,
+    pub race_results: [Driver; 22],
 }
 
 impl Race {
     pub fn calculate_race_chances(&mut self, seed: u64) {
-        for index in 0..20 {
+        for index in 0..22 {
             let mut driver = self.race_results[index];
             driver.calculate_race_chance(seed);
             self.race_results[index] = driver;
@@ -21,7 +23,9 @@ impl Race {
         self.race_results.reverse();
     }
 
-    pub fn assign_points(&mut self, points: Points) {
+    pub fn assign_points(&mut self) {
+        let points = Points::default();
+
         for index in 0..10 {
             self.race_results[index].add_points(points.points_allocation[index] as u16);
         }
@@ -31,11 +35,11 @@ impl Race {
 #[cfg(test)]
 mod race_should {
     use super::*;
-    use crate::models::{car::Car, driver_name::DriverName, team_name::TeamName, team::Team};
+    use crate::models::{car::Car, driver_name::DriverName, team::Team, team_name::TeamName};
 
     #[test]
     fn calculate_race_chances() {
-        let expected_race_results: [Driver; 20] = [
+        let expected_race_results: [Driver; 22] = [
             race_chances_driver_test_fixture(22.138498),
             race_chances_driver_test_fixture(44.276997),
             race_chances_driver_test_fixture(66.4155),
@@ -55,6 +59,8 @@ mod race_should {
             race_chances_driver_test_fixture(11.069249),
             race_chances_driver_test_fixture(13.283098),
             race_chances_driver_test_fixture(15.496948),
+            race_chances_driver_test_fixture(17.710798),
+            race_chances_driver_test_fixture(17.710798),
             race_chances_driver_test_fixture(17.710798),
         ];
         let mut race = Race {
@@ -80,12 +86,14 @@ mod race_should {
                 overall_driver_test_fixture(6, 6),
                 overall_driver_test_fixture(7, 7),
                 overall_driver_test_fixture(8, 8),
+                overall_driver_test_fixture(8, 8),
+                overall_driver_test_fixture(8, 8),
             ],
         };
 
         race.calculate_race_chances(2022);
 
-        for index in 0..20 {
+        for index in 0..22 {
             assert_eq!(
                 expected_race_results[index].race_chance,
                 race.race_results[index].race_chance
@@ -95,7 +103,7 @@ mod race_should {
 
     #[test]
     fn sort_racing_result_order() {
-        let expected_race_results: [Driver; 20] = [
+        let expected_race_results: [Driver; 22] = [
             race_chances_driver_test_fixture(209.2088),
             race_chances_driver_test_fixture(203.67418),
             race_chances_driver_test_fixture(194.81879),
@@ -115,6 +123,8 @@ mod race_should {
             race_chances_driver_test_fixture(110.69249),
             race_chances_driver_test_fixture(83.01936),
             race_chances_driver_test_fixture(82.81194),
+            race_chances_driver_test_fixture(60.594105),
+            race_chances_driver_test_fixture(60.594105),
             race_chances_driver_test_fixture(60.594105),
         ];
         let mut race = Race {
@@ -140,12 +150,14 @@ mod race_should {
                 race_chances_driver_test_fixture(138.36562),
                 race_chances_driver_test_fixture(133.30704),
                 race_chances_driver_test_fixture(82.81194),
+                race_chances_driver_test_fixture(60.594105),
+                race_chances_driver_test_fixture(60.594105),
             ],
         };
 
         race.sort_racing_result_order();
 
-        for index in 0..20 {
+        for index in 0..22 {
             assert_eq!(
                 expected_race_results[index].race_chance,
                 race.race_results[index].race_chance
@@ -178,10 +190,12 @@ mod race_should {
                 race_chances_driver_test_fixture(Default::default()),
                 race_chances_driver_test_fixture(Default::default()),
                 race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
+                race_chances_driver_test_fixture(Default::default()),
             ],
         };
 
-        race.assign_points(Points::default());
+        race.assign_points();
 
         assert_eq!(25, race.race_results[0].points);
         assert_eq!(18, race.race_results[1].points);
@@ -203,6 +217,8 @@ mod race_should {
         assert_eq!(0, race.race_results[17].points);
         assert_eq!(0, race.race_results[18].points);
         assert_eq!(0, race.race_results[19].points);
+        assert_eq!(0, race.race_results[20].points);
+        assert_eq!(0, race.race_results[21].points);
         // TODO need to sort out different drivers being part of the same team instance
         assert_eq!(25, race.race_results[0].team.points);
         assert_eq!(18, race.race_results[1].team.points);
@@ -224,6 +240,8 @@ mod race_should {
         assert_eq!(0, race.race_results[17].team.points);
         assert_eq!(0, race.race_results[18].team.points);
         assert_eq!(0, race.race_results[19].team.points);
+        assert_eq!(0, race.race_results[20].team.points);
+        assert_eq!(0, race.race_results[21].team.points);
     }
 
     fn overall_driver_test_fixture(driver_overall: u32, car_overall: u32) -> Driver {
@@ -240,9 +258,7 @@ mod race_should {
         }
     }
 
-    fn team_test_fixture(
-        car_overall: u32,
-    ) -> Team {
+    fn team_test_fixture(car_overall: u32) -> Team {
         Team {
             name: TeamName::Haas,
             car: Car {
