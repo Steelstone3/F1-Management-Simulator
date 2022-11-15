@@ -2,7 +2,7 @@ use rand::random;
 
 use super::{driver_factory::create_grid, random_generator::generate_seed};
 use crate::{
-    models::{driver::Driver, points::Points, race::Race},
+    models::{driver::Driver, race::Race},
     presenters::presenter::display_the_race_result,
 };
 
@@ -16,7 +16,30 @@ pub fn run_race(driver_grid: [Driver; 22]) {
         race_results: driver_grid,
     };
 
-    race.calculate_race_chances(generate_seed());
+    race.calculate_race_chances([
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+    ]);
     race.sort_racing_result_order();
     race.assign_points();
 

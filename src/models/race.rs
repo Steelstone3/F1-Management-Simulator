@@ -9,11 +9,11 @@ pub struct Race {
 
 impl Race {
     //TODO FIRSTLY Make this take [u64; 22] seeds for each driver on the grid
-    pub fn calculate_race_chances(&mut self, seed: u64) {
+    pub fn calculate_race_chances(&mut self, seeds: [u64; 22]) {
         for index in 0..22 {
             let mut driver = self.race_results[index];
             // TODO This will generate the same chance for each driver
-            driver.calculate_race_chance(seed);
+            driver.calculate_race_chance(seeds[index]);
             self.race_results[index] = driver;
         }
     }
@@ -93,7 +93,10 @@ mod race_should {
             ],
         };
 
-        race.calculate_race_chances(2022);
+        race.calculate_race_chances([
+            2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022,
+            2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022,
+        ]);
 
         for index in 0..22 {
             assert_eq!(
