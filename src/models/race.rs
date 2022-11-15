@@ -11,6 +11,7 @@ impl Race {
     pub fn calculate_race_chances(&mut self, seed: u64) {
         for index in 0..22 {
             let mut driver = self.race_results[index];
+            // TODO This will generate the same chance for each driver
             driver.calculate_race_chance(seed);
             self.race_results[index] = driver;
         }
