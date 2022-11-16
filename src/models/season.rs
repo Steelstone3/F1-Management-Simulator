@@ -1,5 +1,6 @@
-use super::{driver::Driver, race::Race};
+use super::{driver::Driver, race::Race, team::Team};
 
+#[derive(Clone, Copy)]
 pub struct Season {
     races: [Race; 22],
 }
@@ -13,6 +14,7 @@ impl Season {
         for race in 0..self.races.len() {
             for driver in 0..self.races.len() {
                 self.races[race].race_results[driver].season_points = 0;
+                // self.races[race].race_results[driver].team.season_points = 0;
             }
         }
     }
@@ -40,6 +42,14 @@ impl Season {
         ordered_driver_standings.reverse();
 
         ordered_driver_standings
+    }
+
+    pub fn calculate_constructor_season_points(&self) {
+        todo!()
+    }
+
+    pub fn order_constructor_standings(&self) -> [Team; 22] {
+        todo!()
     }
 }
 

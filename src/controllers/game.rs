@@ -3,7 +3,7 @@ use rand::random;
 use super::{driver_factory::create_grid, random_generator::generate_seed};
 use crate::{
     models::{driver::Driver, race::Race, season::Season},
-    presenters::presenter::{display_the_race_result, display_the_drivers_season},
+    presenters::presenter::{display_the_race_result, display_the_drivers_season, display_the_constructors_season},
 };
 
 pub fn setup() -> [Driver; 22] {
@@ -78,6 +78,13 @@ pub fn run_season(driver_grid: [Driver; 22]) -> Season {
 pub fn display_the_drivers_season_standings(mut season: Season) {
     season.reset_season_points();
     season.calculate_driver_season_points();
-    let drivers_season_result = season.order_driver_standings();
-    display_the_drivers_season(drivers_season_result);
+    let drivers_championship_results = season.order_driver_standings();
+    display_the_drivers_season(drivers_championship_results);
+}
+
+pub fn display_the_teams_season_standings(mut season: Season) {
+    season.reset_season_points();
+    season.calculate_constructor_season_points();
+    let constructors_championship_results = season.order_constructor_standings();
+    display_the_constructors_season(constructors_championship_results);
 }
