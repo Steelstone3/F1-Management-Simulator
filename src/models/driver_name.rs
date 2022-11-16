@@ -102,6 +102,12 @@ impl Display for DriverName {
     }
 }
 
+impl Default for DriverName {
+    fn default() -> Self {
+        DriverName::LewisHamilton
+    }
+}
+
 #[cfg(test)]
 mod driver_name_should {
     use super::*;

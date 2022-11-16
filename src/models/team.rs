@@ -20,6 +20,12 @@ impl Team {
     }
 }
 
+impl Default for Team {
+    fn default() -> Self {
+        Self { name: Default::default(), car: Default::default(), race_points: Default::default(), season_points: Default::default() }
+    }
+}
+
 #[cfg(test)]
 mod team_should {
     use super::*;

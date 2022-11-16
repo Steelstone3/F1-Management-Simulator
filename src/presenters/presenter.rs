@@ -25,7 +25,7 @@ pub fn display_the_drivers_season(season_results: [Driver; 22]) {
     }
 }
 
-pub fn display_the_constructors_season(season_results: [Team; 22]) {
+pub fn display_the_constructors_season(season_results: [Team; 11]) {
     let mut index = 1;
 
     println!("\n\n\nConstructors Season Results:\n");
