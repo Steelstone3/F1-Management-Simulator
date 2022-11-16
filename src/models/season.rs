@@ -14,7 +14,7 @@ impl Season {
         for race in 0..self.races.len() {
             for driver in 0..self.races.len() {
                 self.races[race].race_results[driver].season_points = 0;
-                // self.races[race].race_results[driver].team.season_points = 0;
+                self.races[race].race_results[driver].team.season_points = 0;
             }
         }
     }
@@ -37,7 +37,8 @@ impl Season {
     pub fn order_driver_standings(&mut self) -> [Driver; 22] {
         let mut ordered_driver_standings = self.races[21].race_results;
 
-        ordered_driver_standings.sort_by(|d1, d2| d1.season_points.partial_cmp(&d2.season_points).unwrap());
+        ordered_driver_standings
+            .sort_by(|d1, d2| d1.season_points.partial_cmp(&d2.season_points).unwrap());
 
         ordered_driver_standings.reverse();
 
@@ -71,6 +72,10 @@ mod season_should {
         for race in 0..season.races.len() {
             for driver in 0..season.races.len() {
                 assert_eq!(0, season.races[race].race_results[driver].season_points);
+                assert_eq!(
+                    0,
+                    season.races[race].race_results[driver].team.season_points
+                );
             }
         }
     }
@@ -107,8 +112,7 @@ mod season_should {
         season.races[last_race].race_results[1].season_points = 300;
         season.races[last_race].race_results[0].season_points = 200;
 
-        let ordered_driver_standing =
-            season.order_driver_standings();
+        let ordered_driver_standing = season.order_driver_standings();
 
         assert_eq!(600, ordered_driver_standing[0].season_points);
         assert_eq!(400, ordered_driver_standing[1].season_points);
@@ -177,11 +181,13 @@ mod season_should {
 
     fn driver_test_fixture() -> Driver {
         let mut driver = Driver::new(DriverName::MaxVerstappen, team_test_fixture(), [1, 2, 3, 4]);
-        driver.add_points(10);
+        driver.season_points = 10;
         driver
     }
 
     fn team_test_fixture() -> Team {
-        Team::new(TeamName::Ferrari, [1, 2, 3, 4])
+        let mut team = Team::new(TeamName::Ferrari, [1, 2, 3, 4]);
+        team.season_points = 10;
+        team
     }
 }
