@@ -33,8 +33,13 @@ impl Season {
     }
 
     pub fn order_driver_standings(&mut self) -> [Driver; 22] {
-        //TODO something here!
-        let ordered_driver_standings = self.races[21].race_results;
+        let mut ordered_driver_standings = self.races[21].race_results;
+
+        ordered_driver_standings
+            .sort_by(|d1, d2| d1.season_points.partial_cmp(&d2.season_points).unwrap());
+
+        ordered_driver_standings.reverse();
+
         ordered_driver_standings
     }
 }
@@ -85,7 +90,6 @@ mod season_should {
     }
 
     #[test]
-    #[ignore = "Not implemented"]
     fn be_able_to_order_driver_standings() {
         let mut season = Season::new(season_test_fixture().races);
         season.races[21].race_results[6].season_points = 600;
