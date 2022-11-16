@@ -7,9 +7,9 @@ pub struct Race {
 
 impl Race {
     pub fn calculate_race_chances(&mut self, seeds: [u64; 22]) {
-        for index in 0..22 {
+        for (index, seed) in seeds.iter().enumerate() {
             let mut driver = self.race_results[index];
-            driver.calculate_race_chance(seeds[index]);
+            driver.calculate_race_chance(*seed);
             self.race_results[index] = driver;
         }
     }
