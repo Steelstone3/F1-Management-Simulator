@@ -1,5 +1,6 @@
 use super::{driver::Driver, points::Points, race_name::RaceName};
 
+#[derive(Clone, Copy)]
 pub struct Race {
     pub name: RaceName,
     pub race_results: [Driver; 22],
