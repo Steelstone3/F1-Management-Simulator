@@ -75,6 +75,8 @@ impl Season {
 
     pub fn calculate_constructor_season_points(&mut self) {
         self.calculate_driver_season_points();
+
+        //self.drivers_championship
     }
 
     pub fn order_constructor_standings(&mut self) {
@@ -117,7 +119,7 @@ mod season_should {
     #[case(10, 0, 2)]
     #[case(10, 0, 3)]
     #[case(40, 3, 3)]
-    fn be_able_to_calculate_season_points(
+    fn be_able_to_calculate_driver_season_points(
         #[case] expected_points: u16,
         #[case] race: usize,
         #[case] driver: usize,
@@ -151,15 +153,39 @@ mod season_should {
     }
 
     #[test]
-    fn be_able_to_order_constructor_standings() {
+    #[ignore = "Need to get the implementation working"]
+    fn be_able_to_calculate_constructor_season_points() {
         let mut season = Season::new(season_test_fixture().races);
         // 2 Ferrari Drivers
+        season.drivers_championship[0].season_points = 200;
+        season.drivers_championship[1].season_points = 300;
+        // 2 Mercedes Drivers
+        season.drivers_championship[18].season_points = 450;
+        season.drivers_championship[19].season_points = 250;
+        // 2 Red Bull Drivers
+        season.drivers_championship[20].season_points = 400;
+        season.drivers_championship[21].season_points = 600;
+
+        season.calculate_constructor_season_points();
+
+        assert_eq!(TeamName::RedBull, season.constructors_championship[0].name);
+        assert_eq!(1000, season.constructors_championship[0].season_points);
+        assert_eq!(TeamName::Mercedes, season.constructors_championship[1].name);
+        assert_eq!(700, season.constructors_championship[1].season_points);
+        assert_eq!(TeamName::Ferrari, season.constructors_championship[2].name);
+        assert_eq!(500, season.constructors_championship[2].season_points);
+    }
+
+    #[test]
+    fn be_able_to_order_constructor_standings() {
+        let mut season = Season::new(season_test_fixture().races);
+        // Ferrari
         season.constructors_championship[0].name = TeamName::Ferrari;
         season.constructors_championship[0].season_points = 1000;
-        // 2 Redbull Drivers
+        // Redbull
         season.constructors_championship[10].name = TeamName::RedBull;
         season.constructors_championship[10].season_points = 500;
-        // 2 Mercedes Drivers
+        // Mercedes
         season.constructors_championship[9].name = TeamName::Mercedes;
         season.constructors_championship[9].season_points = 850;
 
