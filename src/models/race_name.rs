@@ -1,8 +1,7 @@
-use std::fmt::{Display, Formatter};
 use rand_derive2::RandGen;
+use std::fmt::{Display, Formatter};
 
-#[derive(RandGen)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(RandGen, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RaceName {
     Monza,
     Silverstone,
@@ -38,7 +37,7 @@ impl Display for RaceName {
             RaceName::HockenheimRing => {
                 write!(formatter, "Hockenheim Ring - German Grand Prix",)
             }
-            RaceName::Nürburgring =>  {
+            RaceName::Nürburgring => {
                 write!(formatter, "Nürburgring - German Grand Prix",)
             }
         }
@@ -47,8 +46,8 @@ impl Display for RaceName {
 
 #[cfg(test)]
 mod race_name_should {
-    use rstest::rstest;
     use super::*;
+    use rstest::rstest;
 
     #[rstest]
     #[case("Monza - Italian Grand Prix", RaceName::Monza.to_string())]

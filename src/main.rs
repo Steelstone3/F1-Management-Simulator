@@ -1,9 +1,9 @@
-use controllers::game::{setup, run_season};
+use controllers::game::{run_season, setup};
 use presenters::presenter::display_the_grid;
 
+mod controllers;
 mod models;
 mod presenters;
-mod controllers;
 
 fn main() {
     let driver_grid = setup();

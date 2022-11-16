@@ -36,10 +36,7 @@ mod team_should {
             points: Default::default(),
         };
 
-        let team = Team::new(
-            TeamName::Haas,
-            [2,1,5,2],
-        );
+        let team = Team::new(TeamName::Haas, [2, 1, 5, 2]);
 
         assert_eq!(expected_team, team);
     }
