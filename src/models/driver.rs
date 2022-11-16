@@ -45,8 +45,8 @@ impl Driver {
     }
 
     pub fn add_points(&mut self, points: u16) {
-        self.points += points;
-        self.team.points += points;
+        self.points = points;
+        self.team.points = points;
     }
 
     fn calculate_overall(&mut self) {
@@ -117,7 +117,6 @@ mod driver_should {
 
     #[test]
     fn add_team_and_driver_points() {
-        let expected_points = 2000;
         let points = 1000;
         let mut driver = Driver {
             name: DriverName::LewisHamilton,
@@ -134,8 +133,8 @@ mod driver_should {
         driver.add_points(points);
         driver.add_points(points);
 
-        assert_eq!(expected_points, driver.points);
-        assert_eq!(expected_points, driver.team.points);
+        assert_eq!(points, driver.points);
+        assert_eq!(points, driver.team.points);
     }
 
     #[rstest]
