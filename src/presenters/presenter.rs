@@ -1,4 +1,4 @@
-use crate::models::{driver::Driver, driver_name::DriverName, race::Race, team_name::TeamName};
+use crate::models::{driver::Driver, driver_name::DriverName, race::Race, team_name::TeamName, team::Team};
 use inquire::Select;
 
 pub fn display_the_grid(driver_grid: [Driver; 22]) {
@@ -19,6 +19,23 @@ pub fn display_the_drivers_season(season_results: [Driver; 22]) {
             driver.name,
             driver.team.name,
             driver.season_points
+        );
+
+        index += 1;
+    }
+}
+
+pub fn display_the_constructors_season(season_results: [Team; 22]) {
+    let mut index = 1;
+
+    println!("\n\n\nConstructors Season Results:\n");
+
+    for team in season_results {
+        println!(
+            "| {} | Team: {} | Season Points: {} |",
+            index,
+            team.name,
+            team.season_points
         );
 
         index += 1;
