@@ -17,7 +17,7 @@ impl Season {
         }
     }
 
-    pub fn calculate_season_points(&mut self) {
+    pub fn calculate_driver_season_points(&mut self) {
         for race in 0..self.races.len() {
             for driver in 0..self.races.len() {
                 if race == 0 {
@@ -81,7 +81,7 @@ mod season_should {
     ) {
         let mut season = Season::new(season_test_fixture().races);
 
-        season.calculate_season_points();
+        season.calculate_driver_season_points();
 
         assert_eq!(
             expected_points,
