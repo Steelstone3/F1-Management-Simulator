@@ -17,7 +17,7 @@ impl Season {
         }
     }
 
-    pub fn calculate_driver_season_points(&mut self) {
+    pub fn calculate_driver_season_points(&mut self) -> [Driver; 22] {
         for race in 0..self.races.len() {
             for driver in 0..self.races.len() {
                 if race == 0 {
@@ -30,17 +30,18 @@ impl Season {
                 }
             }
         }
+
+        self.races[self.races.len() - 1].race_results
     }
 
-    pub fn order_driver_standings(&mut self) -> [Driver; 22] {
-        let mut ordered_driver_standings = self.races[21].race_results;
+    pub fn order_driver_standings(&mut self, mut season_result: [Driver; 22]) -> [Driver; 22] {
+        // let mut ordered_driver_standings = self.races[21].race_results;
 
-        ordered_driver_standings
-            .sort_by(|d1, d2| d1.season_points.partial_cmp(&d2.season_points).unwrap());
+        season_result.sort_by(|d1, d2| d1.season_points.partial_cmp(&d2.season_points).unwrap());
 
-        ordered_driver_standings.reverse();
+        season_result.reverse();
 
-        ordered_driver_standings
+        season_result
     }
 }
 
@@ -81,23 +82,26 @@ mod season_should {
     ) {
         let mut season = Season::new(season_test_fixture().races);
 
-        season.calculate_driver_season_points();
+        let last_result = season.calculate_driver_season_points();
 
         assert_eq!(
             expected_points,
             season.races[race].race_results[driver].season_points
         );
+        assert_eq!(220, last_result[0].season_points);
     }
 
     #[test]
     fn be_able_to_order_driver_standings() {
         let mut season = Season::new(season_test_fixture().races);
-        season.races[21].race_results[6].season_points = 600;
-        season.races[21].race_results[9].season_points = 400;
-        season.races[21].race_results[1].season_points = 300;
-        season.races[21].race_results[0].season_points = 200;
+        let last_race = season.races.len() - 1;
+        season.races[last_race].race_results[6].season_points = 600;
+        season.races[last_race].race_results[9].season_points = 400;
+        season.races[last_race].race_results[1].season_points = 300;
+        season.races[last_race].race_results[0].season_points = 200;
 
-        let ordered_driver_standing = season.order_driver_standings();
+        let ordered_driver_standing =
+            season.order_driver_standings(season.races[last_race].race_results);
 
         assert_eq!(600, ordered_driver_standing[0].season_points);
         assert_eq!(400, ordered_driver_standing[1].season_points);

@@ -7,10 +7,28 @@ pub fn display_the_grid(driver_grid: [Driver; 22]) {
     }
 }
 
+pub fn display_the_drivers_season(season_results: [Driver; 22]) {
+    let mut index = 1;
+
+    println!("\n\n\nDriver Season Results:\n");
+
+    for driver in season_results {
+        println!(
+            "| {} | Driver: {} | Team: {} | Season Points: {} |",
+            index,
+            driver.name,
+            driver.team.name,
+            driver.season_points
+        );
+
+        index += 1;
+    }
+}
+
 pub fn display_the_race_result(race: Race) {
     println!("\n\n\nRace: {}\n", race.name);
 
-    for index in 0..22 {
+    for index in 0..race.race_results.len() {
         println!(
             "| {} | Driver: {} | Team: {} | Points: {} |",
             index + 1,
