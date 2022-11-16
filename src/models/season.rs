@@ -49,6 +49,7 @@ impl Season {
     }
 
     pub fn calculate_driver_season_points(&mut self) {
+        //TODO I believe there is a bug in here whereby driver results get lost and are not added up for the driver standings
         for race in 0..self.races.len() {
             for driver in 0..self.races.len() {
                 if race == 0 {
