@@ -1,4 +1,4 @@
-use super::race::Race;
+use super::{driver::Driver, race::Race};
 
 pub struct Season {
     races: [Race; 22],
@@ -17,17 +17,32 @@ impl Season {
         }
     }
 
-    // pub fn calculate_season_points(mut races: [Race; 22]) {
-    //     for race in 0..races.len() {
-    // overall_points += races[race].race_results[race].race_points;
-    // races[race].race_results[driver].season_points = overall_points;
-    //     }
-    // }
+    pub fn calculate_season_points(&mut self) {
+        for race in 0..self.races.len() {
+            for driver in 0..self.races.len() {
+                if race == 0 {
+                    self.races[race].race_results[driver].season_points +=
+                        self.races[race].race_results[driver].race_points;
+                } else {
+                    self.races[race].race_results[driver].season_points +=
+                        self.races[race].race_results[driver].race_points
+                            + self.races[race - 1].race_results[driver].season_points;
+                }
+            }
+        }
+    }
+
+    pub fn order_driver_standings(&mut self) -> [Driver; 22] {
+        //TODO something here!
+        let ordered_driver_standings = self.races[21].race_results;
+        ordered_driver_standings
+    }
 }
 
 #[cfg(test)]
 mod season_should {
     use rand::random;
+    use rstest::rstest;
 
     use crate::models::{driver::Driver, driver_name::DriverName, team::Team, team_name::TeamName};
 
@@ -44,6 +59,46 @@ mod season_should {
                 assert_eq!(0, season.races[race].race_results[driver].season_points);
             }
         }
+    }
+
+    #[rstest]
+    #[case(10, 0, 0)]
+    #[case(20, 1, 0)]
+    #[case(30, 2, 0)]
+    #[case(10, 0, 1)]
+    #[case(10, 0, 2)]
+    #[case(10, 0, 3)]
+    #[case(40, 3, 3)]
+    fn be_able_to_calculate_season_points(
+        #[case] expected_points: u16,
+        #[case] race: usize,
+        #[case] driver: usize,
+    ) {
+        let mut season = Season::new(season_test_fixture().races);
+
+        season.calculate_season_points();
+
+        assert_eq!(
+            expected_points,
+            season.races[race].race_results[driver].season_points
+        );
+    }
+
+    #[test]
+    #[ignore = "Not implemented"]
+    fn be_able_to_order_driver_standings() {
+        let mut season = Season::new(season_test_fixture().races);
+        season.races[21].race_results[6].season_points = 600;
+        season.races[21].race_results[9].season_points = 400;
+        season.races[21].race_results[1].season_points = 300;
+        season.races[21].race_results[0].season_points = 200;
+
+        let ordered_driver_standing = season.order_driver_standings();
+
+        assert_eq!(600, ordered_driver_standing[0].season_points);
+        assert_eq!(400, ordered_driver_standing[1].season_points);
+        assert_eq!(300, ordered_driver_standing[2].season_points);
+        assert_eq!(200, ordered_driver_standing[3].season_points);
     }
 
     fn season_test_fixture() -> Season {
