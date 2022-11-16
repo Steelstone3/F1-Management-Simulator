@@ -10,7 +10,7 @@ pub fn setup() -> [Driver; 22] {
     create_grid()
 }
 
-pub fn run_race(driver_grid: [Driver; 22]) {
+pub fn run_race(driver_grid: [Driver; 22]) -> Race {
     let mut race = Race {
         name: random(),
         race_results: driver_grid,
@@ -44,10 +44,35 @@ pub fn run_race(driver_grid: [Driver; 22]) {
     race.assign_points();
 
     display_the_race_result(race);
+
+    race
 }
 
-pub fn run_season(driver_grid: [Driver; 22]) {
-    for _ in 0..22 {
-        run_race(driver_grid);
-    }
+pub fn run_season(driver_grid: [Driver; 22]) -> [Race; 22] {
+    [
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+        run_race(driver_grid),
+    ]
 }
+
+pub fn display_the_season_standings(races: [Race; 22]) {}
