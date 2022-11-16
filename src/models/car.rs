@@ -37,6 +37,18 @@ impl Car {
     }
 }
 
+impl Default for Car {
+    fn default() -> Self {
+        Self {
+            aero: Default::default(),
+            engine: Default::default(),
+            reliability: Default::default(),
+            tire_management: Default::default(),
+            overall: Default::default(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod driver_should {
     use super::*;

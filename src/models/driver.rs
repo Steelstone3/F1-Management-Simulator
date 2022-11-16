@@ -61,6 +61,23 @@ impl Driver {
     }
 }
 
+impl Default for Driver {
+    fn default() -> Self {
+        Self {
+            name: Default::default(),
+            team: Default::default(),
+            experience: Default::default(),
+            race_craft: Default::default(),
+            awareness: Default::default(),
+            pace: Default::default(),
+            overall: Default::default(),
+            race_chance: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod driver_should {
     use super::*;
