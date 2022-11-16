@@ -77,7 +77,7 @@ pub fn run_season(driver_grid: [Driver; 22]) -> Season {
 
 pub fn display_the_season_standings(mut season: Season) {
     season.reset_season_points();
-    let unordered_drivers_season_result = season.calculate_driver_season_points();
-    let drivers_season_result = season.order_driver_standings(unordered_drivers_season_result);
+    season.calculate_driver_season_points();
+    let drivers_season_result = season.order_driver_standings();
     display_the_drivers_season(drivers_season_result);
 }
