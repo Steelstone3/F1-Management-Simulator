@@ -6,3 +6,4 @@ pub mod race;
 pub mod race_name;
 pub mod team;
 pub mod team_name;
+pub mod season;

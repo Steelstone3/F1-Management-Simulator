@@ -8,6 +8,6 @@ mod presenters;
 fn main() {
     let driver_grid = setup();
     display_the_grid(driver_grid);
-    let races = run_season(driver_grid);
-    display_the_season_standings(races);
+    let season = run_season(driver_grid);
+    display_the_season_standings(season);
 }
