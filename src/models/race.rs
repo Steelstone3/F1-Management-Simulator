@@ -199,51 +199,51 @@ mod race_should {
 
         race.assign_points();
 
-        assert_eq!(25, race.race_results[0].points);
-        assert_eq!(18, race.race_results[1].points);
-        assert_eq!(15, race.race_results[2].points);
-        assert_eq!(12, race.race_results[3].points);
-        assert_eq!(10, race.race_results[4].points);
-        assert_eq!(8, race.race_results[5].points);
-        assert_eq!(6, race.race_results[6].points);
-        assert_eq!(4, race.race_results[7].points);
-        assert_eq!(2, race.race_results[8].points);
-        assert_eq!(1, race.race_results[9].points);
-        assert_eq!(0, race.race_results[10].points);
-        assert_eq!(0, race.race_results[11].points);
-        assert_eq!(0, race.race_results[12].points);
-        assert_eq!(0, race.race_results[13].points);
-        assert_eq!(0, race.race_results[14].points);
-        assert_eq!(0, race.race_results[15].points);
-        assert_eq!(0, race.race_results[16].points);
-        assert_eq!(0, race.race_results[17].points);
-        assert_eq!(0, race.race_results[18].points);
-        assert_eq!(0, race.race_results[19].points);
-        assert_eq!(0, race.race_results[20].points);
-        assert_eq!(0, race.race_results[21].points);
+        assert_eq!(25, race.race_results[0].race_points);
+        assert_eq!(18, race.race_results[1].race_points);
+        assert_eq!(15, race.race_results[2].race_points);
+        assert_eq!(12, race.race_results[3].race_points);
+        assert_eq!(10, race.race_results[4].race_points);
+        assert_eq!(8, race.race_results[5].race_points);
+        assert_eq!(6, race.race_results[6].race_points);
+        assert_eq!(4, race.race_results[7].race_points);
+        assert_eq!(2, race.race_results[8].race_points);
+        assert_eq!(1, race.race_results[9].race_points);
+        assert_eq!(0, race.race_results[10].race_points);
+        assert_eq!(0, race.race_results[11].race_points);
+        assert_eq!(0, race.race_results[12].race_points);
+        assert_eq!(0, race.race_results[13].race_points);
+        assert_eq!(0, race.race_results[14].race_points);
+        assert_eq!(0, race.race_results[15].race_points);
+        assert_eq!(0, race.race_results[16].race_points);
+        assert_eq!(0, race.race_results[17].race_points);
+        assert_eq!(0, race.race_results[18].race_points);
+        assert_eq!(0, race.race_results[19].race_points);
+        assert_eq!(0, race.race_results[20].race_points);
+        assert_eq!(0, race.race_results[21].race_points);
         // TODO need to sort out different drivers being part of the same team instance
-        assert_eq!(25, race.race_results[0].team.points);
-        assert_eq!(18, race.race_results[1].team.points);
-        assert_eq!(15, race.race_results[2].team.points);
-        assert_eq!(12, race.race_results[3].team.points);
-        assert_eq!(10, race.race_results[4].team.points);
-        assert_eq!(8, race.race_results[5].team.points);
-        assert_eq!(6, race.race_results[6].team.points);
-        assert_eq!(4, race.race_results[7].team.points);
-        assert_eq!(2, race.race_results[8].team.points);
-        assert_eq!(1, race.race_results[9].team.points);
-        assert_eq!(0, race.race_results[10].team.points);
-        assert_eq!(0, race.race_results[11].team.points);
-        assert_eq!(0, race.race_results[12].team.points);
-        assert_eq!(0, race.race_results[13].team.points);
-        assert_eq!(0, race.race_results[14].team.points);
-        assert_eq!(0, race.race_results[15].team.points);
-        assert_eq!(0, race.race_results[16].team.points);
-        assert_eq!(0, race.race_results[17].team.points);
-        assert_eq!(0, race.race_results[18].team.points);
-        assert_eq!(0, race.race_results[19].team.points);
-        assert_eq!(0, race.race_results[20].team.points);
-        assert_eq!(0, race.race_results[21].team.points);
+        assert_eq!(25, race.race_results[0].team.race_points);
+        assert_eq!(18, race.race_results[1].team.race_points);
+        assert_eq!(15, race.race_results[2].team.race_points);
+        assert_eq!(12, race.race_results[3].team.race_points);
+        assert_eq!(10, race.race_results[4].team.race_points);
+        assert_eq!(8, race.race_results[5].team.race_points);
+        assert_eq!(6, race.race_results[6].team.race_points);
+        assert_eq!(4, race.race_results[7].team.race_points);
+        assert_eq!(2, race.race_results[8].team.race_points);
+        assert_eq!(1, race.race_results[9].team.race_points);
+        assert_eq!(0, race.race_results[10].team.race_points);
+        assert_eq!(0, race.race_results[11].team.race_points);
+        assert_eq!(0, race.race_results[12].team.race_points);
+        assert_eq!(0, race.race_results[13].team.race_points);
+        assert_eq!(0, race.race_results[14].team.race_points);
+        assert_eq!(0, race.race_results[15].team.race_points);
+        assert_eq!(0, race.race_results[16].team.race_points);
+        assert_eq!(0, race.race_results[17].team.race_points);
+        assert_eq!(0, race.race_results[18].team.race_points);
+        assert_eq!(0, race.race_results[19].team.race_points);
+        assert_eq!(0, race.race_results[20].team.race_points);
+        assert_eq!(0, race.race_results[21].team.race_points);
     }
 
     fn overall_driver_test_fixture(driver_overall: u32, car_overall: u32) -> Driver {
@@ -256,7 +256,8 @@ mod race_should {
             pace: Default::default(),
             overall: driver_overall,
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         }
     }
 
@@ -270,7 +271,8 @@ mod race_should {
                 tire_management: Default::default(),
                 overall: car_overall,
             },
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         }
     }
 
@@ -284,7 +286,8 @@ mod race_should {
             pace: Default::default(),
             overall: Default::default(),
             race_chance: race_chances,
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         }
     }
 }

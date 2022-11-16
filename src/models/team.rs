@@ -5,7 +5,8 @@ use rand_derive2::RandGen;
 pub struct Team {
     pub name: TeamName,
     pub car: Car,
-    pub points: u16,
+    pub race_points: u16,
+    pub season_points: u16,
 }
 
 impl Team {
@@ -13,7 +14,8 @@ impl Team {
         Self {
             name: team_name,
             car: Car::new(seeds),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         }
     }
 }
@@ -33,7 +35,8 @@ mod team_should {
                 tire_management: 8,
                 overall: 28,
             },
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
 
         let team = Team::new(TeamName::Haas, [2, 1, 5, 2]);

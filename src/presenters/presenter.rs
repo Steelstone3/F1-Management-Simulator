@@ -16,7 +16,7 @@ pub fn display_the_race_result(race: Race) {
             index + 1,
             race.race_results[index].name,
             race.race_results[index].team.name,
-            race.race_results[index].points
+            race.race_results[index].race_points
         );
     }
 }

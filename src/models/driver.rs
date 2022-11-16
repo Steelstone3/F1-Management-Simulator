@@ -15,7 +15,8 @@ pub struct Driver {
     pub pace: u8,
     pub overall: u32,
     pub race_chance: f32,
-    pub points: u16,
+    pub race_points: u16,
+    pub season_points: u16,
 }
 
 impl Driver {
@@ -29,7 +30,8 @@ impl Driver {
             pace: get_seeded_random_max_range(seeds[3], MAX_RANGE),
             overall: Default::default(),
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
 
         driver.calculate_overall();
@@ -44,9 +46,9 @@ impl Driver {
         self.race_chance = (self.overall + self.team.car.overall) as f32 * race_factor;
     }
 
-    pub fn add_points(&mut self, points: u16) {
-        self.points = points;
-        self.team.points = points;
+    pub fn add_points(&mut self, race_points: u16) {
+        self.race_points = race_points;
+        self.team.race_points = race_points;
     }
 
     fn calculate_overall(&mut self) {
@@ -78,7 +80,8 @@ mod driver_should {
             pace: 8,
             overall: 28,
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
 
         let driver = Driver::new(DriverName::CharlesLeclerc, team, [2, 1, 5, 2]);
@@ -105,7 +108,8 @@ mod driver_should {
             pace: Default::default(),
             overall: Default::default(),
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
         driver.overall = driver_overall;
         driver.team.car.overall = car_overall;
@@ -127,14 +131,15 @@ mod driver_should {
             pace: Default::default(),
             overall: Default::default(),
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
 
         driver.add_points(points);
         driver.add_points(points);
 
-        assert_eq!(points, driver.points);
-        assert_eq!(points, driver.team.points);
+        assert_eq!(points, driver.race_points);
+        assert_eq!(points, driver.team.race_points);
     }
 
     #[rstest]
@@ -157,7 +162,8 @@ mod driver_should {
             pace,
             overall: Default::default(),
             race_chance: Default::default(),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         };
 
         driver.calculate_overall();
@@ -169,7 +175,8 @@ mod driver_should {
         Team {
             name: TeamName::Haas,
             car: Car::new([1, 2, 3, 4]),
-            points: Default::default(),
+            race_points: Default::default(),
+            season_points: Default::default(),
         }
     }
 }
