@@ -1,4 +1,4 @@
-module github.com/Steelstone3/Golang-Template
+module github.com/Steelstone3/F1-Management-Simulator
 
 go 1.20
 
