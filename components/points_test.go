@@ -39,19 +39,3 @@ func (pointsTestSuite *TestSuite) TestCalculatePoints() {
 func TestRunTestSuite(t *testing.T) {
 	suite.Run(t, new(TestSuite))
 }
-
-// func TestCalculatePoints(t *testing.T) {
-// 	// Given
-// 	var position = Position {
-// 		position: 1,
-// 	}
-// 	var expectedPoints = Points{
-// 		points: 25,
-// 	}
-
-// 	// When
-// 	var points = calculatePoints(position);
-
-// 	// Then
-// 	assert.Equal(t, expectedPoints, points)
-// }
