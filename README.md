@@ -1,23 +1,29 @@
-# Star Trek Explorers
+# F1 Management Simulator
 
-Golang Star Trek game loosely based on the C++ original
+A test driven Golang application design to simulate an F1 season.
 
-## Running Star Trek Explorers
+## Running F1 Management Simulator
 
-> cd ~/Star-Trek-Explorers
+> cd ~/F1-Management-Simulator
 >
 > go build
 >
 > go run ./main.go
 
-## Tests
+Or launch project from your IDE.
 
-> cd ~/Star-Trek-Explorers
+This application has been tested to run on debain derived Linux, Windows 10 and Mac OS 10 beyond this scope your expierences may vary.
+
+## Testing F1 Management Simulator
+>
+> cd ~/F1-Management-Simulator
 >
 > go test ./...
 
-## Dependencies
+Or run the tests from your IDE of choice.
 
-Follow the steps for installing golang runtime for your given operating system.
+## F1 Management Simulator Dependencies
+
+Please go to the Rust website to install Rust for your given operating system.
 
 > <https://go.dev/dl/>
