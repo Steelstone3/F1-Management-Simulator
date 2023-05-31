@@ -1,33 +1,32 @@
 package grid
 
 type Points struct {
-	position uint
 	points   uint
 }
 
-func calculatePoints(position uint) Points {
-	switch position {
+func calculatePoints(position Position) Points {
+	switch position.position {
 	case 1:
-		return Points{position: position, points: 25}
+		return Points{points: 25}
 	case 2:
-		return Points{position: position, points: 18}
+		return Points{points: 18}
 	case 3:
-		return Points{position: position, points: 15}
+		return Points{points: 15}
 	case 4:
-		return Points{position: position, points: 12}
+		return Points{points: 12}
 	case 5:
-		return Points{position: position, points: 10}
+		return Points{points: 10}
 	case 6:
-		return Points{position: position, points: 8}
+		return Points{points: 8}
 	case 7:
-		return Points{position: position, points: 6}
+		return Points{points: 6}
 	case 8:
-		return Points{position: position, points: 4}
+		return Points{points: 4}
 	case 9:
-		return Points{position: position, points: 2}
+		return Points{points: 2}
 	case 10:
-		return Points{position: position, points: 1}
+		return Points{points: 1}
 	default:
-		return Points{position: position, points: 0}
+		return Points{points: 0}
 	}
 }
