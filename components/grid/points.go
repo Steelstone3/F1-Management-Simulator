@@ -1,7 +1,7 @@
 package grid
 
 type Points struct {
-	points   uint
+	points uint
 }
 
 func calculatePoints(position Position) Points {

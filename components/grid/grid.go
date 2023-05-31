@@ -1,5 +1,3 @@
 package grid
 
-type Grid struct {
-
-}
+type Grid struct{}

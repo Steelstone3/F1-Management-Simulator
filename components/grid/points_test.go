@@ -1,9 +1,10 @@
 package grid
 
 import (
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
-	"testing"
 )
 
 type TestSuite struct {
@@ -16,18 +17,18 @@ func (pointsTestSuite *TestSuite) TestCalculatePoints() {
 		position       Position
 		expectedPoints Points
 	}{
-		{"Case 1: First place", Position{1}, Points{points: 25}},
-		{"Case 2: Second place", Position{2}, Points{points: 18}},
-		{"Case 3: Third place", Position{3}, Points{points: 15}},
-		{"Case 4: Fourth place", Position{4}, Points{points: 12}},
-		{"Case 5: Fifth place", Position{5}, Points{points: 10}},
-		{"Case 6: Sixth place", Position{6}, Points{points: 8}},
-		{"Case 7: Seventh place", Position{7}, Points{points: 6}},
-		{"Case 8: Eighth place", Position{8}, Points{points: 4}},
-		{"Case 9: Ninth place", Position{9}, Points{points: 2}},
-		{"Case 10: Tenth place", Position{10}, Points{points: 1}},
-		{"Case 11: Eleventh place", Position{11}, Points{points: 0}},
-		{"Case 12: Twentieth place", Position{20}, Points{points: 0}},
+		{"Case 1: First place", Position{position: 1}, Points{points: 25}},
+		{"Case 2: Second place", Position{position: 2}, Points{points: 18}},
+		{"Case 3: Third place", Position{position: 3}, Points{points: 15}},
+		{"Case 4: Fourth place", Position{position: 4}, Points{points: 12}},
+		{"Case 5: Fifth place", Position{position: 5}, Points{points: 10}},
+		{"Case 6: Sixth place", Position{position: 6}, Points{points: 8}},
+		{"Case 7: Seventh place", Position{position: 7}, Points{points: 6}},
+		{"Case 8: Eighth place", Position{position: 8}, Points{points: 4}},
+		{"Case 9: Ninth place", Position{position: 9}, Points{points: 2}},
+		{"Case 10: Tenth place", Position{position: 10}, Points{points: 1}},
+		{"Case 11: Eleventh place", Position{position: 11}, Points{points: 0}},
+		{"Case 12: Twentieth place", Position{position: 20}, Points{points: 0}},
 	}
 
 	for _, tc := range testCases {
