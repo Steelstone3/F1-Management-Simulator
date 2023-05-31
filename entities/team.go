@@ -1,7 +1,7 @@
 package entities
 
 import (
-	"github.com/Steelstone3/F1-Management-Simulator/components"
+	"github.com/Steelstone3/F1-Management-Simulator/components/grid"
 	"github.com/Steelstone3/F1-Management-Simulator/components/car"
 	"github.com/Steelstone3/F1-Management-Simulator/components/driver"
 	"github.com/Steelstone3/F1-Management-Simulator/components/names"
@@ -11,7 +11,7 @@ type Team struct {
 	name       names.TeamName
 	car        car.Car
 	driver     []driver.Driver
-	racePoints []components.Points
+	racePoints []grid.Points
 }
 
 func constructTeam() Team {
