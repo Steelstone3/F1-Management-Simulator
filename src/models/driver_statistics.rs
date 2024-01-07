@@ -1,4 +1,4 @@
-use crate::controller::random_generator::{self, generate_seeded_random};
+use crate::controller::random_generator::generate_seeded_random;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct DriverStatistic {
@@ -11,7 +11,7 @@ pub struct DriverStatistic {
 }
 
 impl DriverStatistic {
-    pub fn new(seeds: [u64; 5]) -> DriverStatistic {
+    pub fn new(seeds: [u64; 5]) -> Self {
         let awareness = generate_seeded_random(seeds[0]);
         let consistency = generate_seeded_random(seeds[1]);
         let experience = generate_seeded_random(seeds[2]);
