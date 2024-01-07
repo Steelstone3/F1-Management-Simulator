@@ -1,7 +1,8 @@
 use rand_derive2::RandGen;
-use std::fmt::{Display, Formatter};
+use std::fmt::Display;
+use std::fmt::Formatter;
 
-#[derive(RandGen, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(RandGen)]
 pub enum DriverName {
     MaxVerstappen,
     SergioPerez,
@@ -23,9 +24,6 @@ pub enum DriverName {
     YukiTsunoda,
     AlexanderAlbon,
     NicholasLatifi,
-    // reserve drivers
-    NyckDeVries,
-    NicoHulkenberg,
 }
 
 impl Display for DriverName {
@@ -91,20 +89,7 @@ impl Display for DriverName {
             DriverName::NicholasLatifi => {
                 write!(formatter, "Nicholas Latifi",)
             }
-            // reserve drivers
-            DriverName::NyckDeVries => {
-                write!(formatter, "Nyck de Vries",)
-            }
-            DriverName::NicoHulkenberg => {
-                write!(formatter, "Nico Hulkenberg",)
-            }
         }
-    }
-}
-
-impl Default for DriverName {
-    fn default() -> Self {
-        DriverName::LewisHamilton
     }
 }
 
@@ -134,9 +119,6 @@ mod driver_name_should {
     #[case("Yuki Tsunoda", DriverName::YukiTsunoda.to_string())]
     #[case("Alexander Albon", DriverName::AlexanderAlbon.to_string())]
     #[case("Nicholas Latifi", DriverName::NicholasLatifi.to_string())]
-    // reserve drivers
-    #[case("Nyck de Vries", DriverName::NyckDeVries.to_string())]
-    #[case("Nico Hulkenberg", DriverName::NicoHulkenberg.to_string())]
     fn display_a_driver_name(#[case] expected_name: String, #[case] actual_name: String) {
         assert_eq!(expected_name, actual_name);
     }

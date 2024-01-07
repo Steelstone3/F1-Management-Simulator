@@ -1,9 +1,6 @@
-pub mod car;
 pub mod driver;
+pub mod driver_statistics;
 pub mod driver_name;
-pub mod points;
-pub mod race;
-pub mod race_name;
 pub mod team;
+pub mod team_statistics;
 pub mod team_name;
-pub mod season;
