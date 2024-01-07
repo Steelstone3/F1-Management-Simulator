@@ -120,6 +120,7 @@ mod driver_name_should {
     #[case("Alexander Albon", DriverName::AlexanderAlbon.to_string())]
     #[case("Nicholas Latifi", DriverName::NicholasLatifi.to_string())]
     fn display_a_driver_name(#[case] expected_name: String, #[case] actual_name: String) {
+        // Then
         assert_eq!(expected_name, actual_name);
     }
 }
