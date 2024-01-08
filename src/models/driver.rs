@@ -1,8 +1,6 @@
-use std::fmt::Display;
-
-use rand::random;
-
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
+use rand::random;
+use std::fmt::Display;
 
 pub struct Driver {
     pub name: DriverName,
