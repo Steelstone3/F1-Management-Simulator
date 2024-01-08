@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use crate::controller::random_generator::generate_seeded_random;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -31,6 +33,21 @@ impl DriverStatistic {
     }
 }
 
+impl Display for DriverStatistic {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            formatter,
+            "Awareness: {}\nConsistency: {}\nExpierence: {}\nPace: {}\nRace Craft: {}\nOverall: {}",
+            self.awareness,
+            self.consistency,
+            self.experience,
+            self.pace,
+            self.race_craft,
+            self.overall
+        )
+    }
+}
+
 #[cfg(test)]
 mod driver_statistics_should {
     use super::*;
@@ -45,5 +62,19 @@ mod driver_statistics_should {
 
         // Then
         assert_eq!(expected, driver_statistics);
+    }
+
+    #[test]
+    fn display() {
+        // Given
+        let expected =
+            "Awareness: 90\nConsistency: 64\nExpierence: 81\nPace: 66\nRace Craft: 84\nOverall: 77"
+                .to_string();
+
+        // When
+        let display = DriverStatistic::new([1, 2, 3, 4, 5]).to_string();
+
+        // Then
+        assert_eq!(expected, display);
     }
 }

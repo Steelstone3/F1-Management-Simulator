@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use rand::random;
 
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
@@ -13,6 +15,12 @@ impl Driver {
             name: random(),
             statistics: DriverStatistic::new(seeds),
         }
+    }
+}
+
+impl Display for Driver {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatter, "{}\n{}\n\n\n", self.name, self.statistics)
     }
 }
 
