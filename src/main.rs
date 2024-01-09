@@ -1,5 +1,5 @@
 use controller::random_generator::generate_seed;
-use models::driver::Driver;
+use models::drivers::driver::Driver;
 
 mod controller;
 mod models;
