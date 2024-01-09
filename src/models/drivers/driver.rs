@@ -1,7 +1,6 @@
 use crate::{controller::random_generator::generate_seed, models::points::Points};
 
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
-use rand::random;
 use std::fmt::Display;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -12,7 +11,7 @@ pub struct Driver {
 }
 
 impl Driver {
-    pub fn new() -> Self {
+    pub fn new(driver_name: DriverName) -> Self {
         let driver_seeds = [
             generate_seed(),
             generate_seed(),
@@ -22,7 +21,7 @@ impl Driver {
         ];
 
         Self {
-            name: random(),
+            name: driver_name,
             statistics: DriverStatistic::new(driver_seeds),
             points: Default::default(),
         }
