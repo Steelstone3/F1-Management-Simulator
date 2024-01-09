@@ -1,8 +1,8 @@
-use models::race_grid::RaceGrid;
+use models::season::Season;
 
 mod controller;
 mod models;
 
 fn main() {
-    let _grid = RaceGrid::default();
+    let _grid = Season::default();
 }

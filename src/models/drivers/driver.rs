@@ -1,6 +1,5 @@
-use crate::models::points::Points;
-
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
+use crate::models::points::Points;
 use std::fmt::Display;
 
 #[derive(Debug, Default, PartialEq, Eq)]

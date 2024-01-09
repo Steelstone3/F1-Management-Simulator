@@ -69,6 +69,14 @@ mod driver_statistics_should {
         team_management: 50,
         overall: 70,
     })]
+    #[case([1000,2000,3000,4000,5000], TeamStatistic{ 
+        car_development: 60,
+        car_repairs: 74,
+        car_setup: 75,
+        pitstops: 85,
+        team_management: 94,
+        overall: 77,
+    })]
     fn new_driver_statistics(#[case] seeds: [u64; 5], #[case] expected: TeamStatistic) {
         // When
         let driver_statistics = TeamStatistic::new(seeds);
