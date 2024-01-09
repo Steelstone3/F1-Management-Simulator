@@ -33,16 +33,16 @@ impl Team {
     }
 
     pub fn calculate_driver_1_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_1.statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_1.driver_statistics.overall) / 3
     }
 
     pub fn calculate_driver_2_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_2.statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_2.driver_statistics.overall) / 3
     }
 
     pub fn calculate_season_points(&self) -> u32 {
-        self.driver_1.points.calculate_season_points()
-            + self.driver_2.points.calculate_season_points()
+        self.driver_1.driver_points.calculate_season_points()
+            + self.driver_2.driver_points.calculate_season_points()
     }
 }
 
@@ -87,7 +87,7 @@ mod team_should {
                 ..Default::default()
             },
             driver_1: Driver {
-                statistics: DriverStatistic {
+                driver_statistics: DriverStatistic {
                     overall: 89,
                     ..Default::default()
                 },
@@ -117,7 +117,7 @@ mod team_should {
                 ..Default::default()
             },
             driver_2: Driver {
-                statistics: DriverStatistic {
+                driver_statistics: DriverStatistic {
                     overall: 89,
                     ..Default::default()
                 },
@@ -145,11 +145,11 @@ mod team_should {
                 ..Default::default()
             },
             driver_1: Driver {
-                points: Points::new([25, 18, 15, 15, 25, 18, 18, 25, 15, 25]),
+                driver_points: Points::new([25, 18, 15, 15, 25, 18, 18, 25, 15, 25]),
                 ..Default::default()
             },
             driver_2: Driver {
-                points: Points::new([1, 25, 18, 25, 18, 15, 6, 2, 15, 25]),
+                driver_points: Points::new([1, 25, 18, 25, 18, 15, 6, 2, 15, 25]),
                 ..Default::default()
             },
             ..Default::default()
