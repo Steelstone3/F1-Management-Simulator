@@ -1,3 +1,5 @@
+use crate::controller::random_generator::generate_seed;
+
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use rand::random;
 use std::fmt::Display;
@@ -9,10 +11,18 @@ pub struct Driver {
 }
 
 impl Driver {
-    pub fn new(seeds: [u64; 5]) -> Self {
+    pub fn new() -> Self {
+        let driver_seeds = [
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+        ];
+
         Self {
             name: random(),
-            statistics: DriverStatistic::new(seeds),
+            statistics: DriverStatistic::new(driver_seeds),
         }
     }
 }

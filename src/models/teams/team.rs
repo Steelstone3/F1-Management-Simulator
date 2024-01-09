@@ -1,5 +1,8 @@
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
-use crate::models::{car::Car, drivers::driver::Driver};
+use crate::{
+    controller::random_generator::generate_seed,
+    models::{car::Car, drivers::driver::Driver},
+};
 use rand::random;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -11,17 +14,26 @@ pub struct Team {
 }
 
 impl Team {
-    pub fn new(
-        team_seeds: [u64; 5],
-        car_seeds: [u64; 4],
-        driver_1_seeds: [u64; 5],
-        driver_2_seeds: [u64; 5],
-    ) -> Self {
+    pub fn new() -> Self {
+        let team_statistics_seeds = [
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+        ];
+        let car_seeds = [
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+            generate_seed(),
+        ];
+
         Self {
             name: random(),
-            statistics: TeamStatistic::new(team_seeds),
+            statistics: TeamStatistic::new(team_statistics_seeds),
             car: Car::new(car_seeds),
-            drivers: [Driver::new(driver_1_seeds), Driver::new(driver_2_seeds)],
+            drivers: [Driver::new(), Driver::new()],
         }
     }
 }
