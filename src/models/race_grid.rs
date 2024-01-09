@@ -109,4 +109,15 @@ impl Default for RaceGrid {
 }
 
 #[cfg(test)]
-mod grid_should {}
+mod grid_should {
+    use super::RaceGrid;
+
+    #[test]
+    fn new_grid() {
+        // Given
+        let race_grid = RaceGrid::default();
+
+        // Then
+        assert_eq!(10, race_grid.teams.len())
+    }
+}
