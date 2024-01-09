@@ -33,11 +33,13 @@ impl Team {
     }
 
     pub fn calculate_driver_1_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_1.driver_statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_1.driver_statistics.overall)
+            / 3
     }
 
     pub fn calculate_driver_2_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_2.driver_statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_2.driver_statistics.overall)
+            / 3
     }
 
     pub fn calculate_season_points(&self) -> u32 {
@@ -49,28 +51,67 @@ impl Team {
 #[cfg(test)]
 mod team_should {
     use super::*;
-    use crate::{
-        controller::random_generator::{generate_4_seeds, generate_5_seeds},
-        models::{drivers::driver_statistics::DriverStatistic, points::Points},
-    };
+    use crate::models::{drivers::driver_statistics::DriverStatistic, points::Points};
 
     #[test]
     fn new_team() {
         // Given
+        let expected_team = Team {
+            team_name: TeamName::Mercedes,
+            team_statistics: TeamStatistic {
+                car_development: 90,
+                car_repairs: 64,
+                car_setup: 81,
+                pitstops: 84,
+                team_management: 66,
+                overall: 77,
+            },
+            car: Car {
+                aero: 56,
+                engine: 89,
+                reliability: 68,
+                tire_management: 97,
+                overall: 77,
+            },
+            driver_1: Driver {
+                driver_name: DriverName::LewisHamilton,
+                driver_statistics: DriverStatistic {
+                    awareness: 87,
+                    consistency: 90,
+                    experience: 57,
+                    race_craft: 70,
+                    pace: 50,
+                    overall: 70,
+                },
+                driver_points: Points::default(),
+            },
+            driver_2: Driver {
+                driver_name: DriverName::GeorgeRussell,
+                driver_statistics: DriverStatistic {
+                    awareness: 60,
+                    consistency: 74,
+                    experience: 75,
+                    race_craft: 85,
+                    pace: 94,
+                    overall: 77,
+                },
+                driver_points: Points::default(),
+            },
+        };
+
+        // When
         let team = Team::new(
             TeamName::Mercedes,
             DriverName::LewisHamilton,
             DriverName::GeorgeRussell,
-            generate_5_seeds(),
-            generate_4_seeds(),
-            generate_5_seeds(),
-            generate_5_seeds(),
+            [1, 2, 3, 4, 5],
+            [10, 20, 30, 40],
+            [100, 200, 300, 400, 500],
+            [1000, 2000, 3000, 4000, 5000],
         );
 
         // Then
-        assert_eq!(TeamName::Mercedes, team.team_name);
-        // assert_eq!(, team.driver_1);
-        // assert_eq!(, team.driver_2);
+        assert_eq!(expected_team, team);
     }
 
     #[test]
