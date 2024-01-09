@@ -1,8 +1,8 @@
-use models::teams::team::Team;
+use models::grid::Grid;
 
 mod controller;
 mod models;
 
 fn main() {
-    let _team = Team::new();
+    let _grid = Grid::new();
 }
