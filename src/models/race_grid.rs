@@ -1,4 +1,5 @@
 use crate::controller::random_generator::{generate_4_seeds, generate_5_seeds};
+use std::fmt::Display;
 
 use super::{
     drivers::driver_name::DriverName,
@@ -6,7 +7,13 @@ use super::{
 };
 
 pub struct RaceGrid {
-    teams: [Team; 10],
+    pub teams: [Team; 10],
+}
+
+impl Display for RaceGrid {
+    fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatting, "Something")
+    }
 }
 
 impl Default for RaceGrid {
