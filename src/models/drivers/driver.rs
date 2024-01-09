@@ -2,6 +2,7 @@ use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use rand::random;
 use std::fmt::Display;
 
+#[derive(Debug, PartialEq, Eq)]
 pub struct Driver {
     pub name: DriverName,
     pub statistics: DriverStatistic,
