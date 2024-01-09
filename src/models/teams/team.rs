@@ -1,16 +1,12 @@
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
-use crate::{
-    controller::random_generator::generate_seed,
-    models::{
-        car::Car,
-        drivers::{driver::Driver, driver_name::DriverName},
-    },
+use crate::models::{
+    car::Car,
+    drivers::{driver::Driver, driver_name::DriverName},
 };
-use rand::random;
 
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct Team {
-    pub name: TeamName,
+    pub team_name: TeamName,
     pub team_statistics: TeamStatistic,
     pub car: Car,
     pub driver_1: Driver,
@@ -19,16 +15,20 @@ pub struct Team {
 
 impl Team {
     pub fn new(
-        driver_names: [DriverName; 2],
+        team_name: TeamName,
+        driver_name_1: DriverName,
+        driver_name_2: DriverName,
         team_statistics_seeds: [u64; 5],
         car_seeds: [u64; 4],
+        driver_1_seeds: [u64; 5],
+        driver_2_seeds: [u64; 5],
     ) -> Self {
         Self {
-            name: random(),
+            team_name,
             team_statistics: TeamStatistic::new(team_statistics_seeds),
             car: Car::new(car_seeds),
-            driver_1: Driver::new(driver_names[0]),
-            driver_2: Driver::new(driver_names[1]),
+            driver_1: Driver::new(driver_name_1, driver_1_seeds),
+            driver_2: Driver::new(driver_name_2, driver_2_seeds),
         }
     }
 
@@ -48,9 +48,30 @@ impl Team {
 
 #[cfg(test)]
 mod team_should {
-    use crate::models::{drivers::driver_statistics::DriverStatistic, points::Points};
-
     use super::*;
+    use crate::{
+        controller::random_generator::{generate_4_seeds, generate_5_seeds},
+        models::{drivers::driver_statistics::DriverStatistic, points::Points},
+    };
+
+    #[test]
+    fn new_team() {
+        // Given
+        let team = Team::new(
+            TeamName::Mercedes,
+            DriverName::LewisHamilton,
+            DriverName::GeorgeRussell,
+            generate_5_seeds(),
+            generate_4_seeds(),
+            generate_5_seeds(),
+            generate_5_seeds(),
+        );
+
+        // Then
+        assert_eq!(TeamName::Mercedes, team.team_name);
+        // assert_eq!(, team.driver_1);
+        // assert_eq!(, team.driver_2);
+    }
 
     #[test]
     fn calculate_driver_1_overall() {

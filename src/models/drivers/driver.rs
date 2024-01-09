@@ -11,15 +11,7 @@ pub struct Driver {
 }
 
 impl Driver {
-    pub fn new(driver_name: DriverName) -> Self {
-        let driver_seeds = [
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-        ];
-
+    pub fn new(driver_name: DriverName, driver_seeds: [u64;5]) -> Self {
         Self {
             name: driver_name,
             statistics: DriverStatistic::new(driver_seeds),
