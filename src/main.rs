@@ -1,8 +1,8 @@
-use models::grid::Grid;
+use models::race_grid::RaceGrid;
 
 mod controller;
 mod models;
 
 fn main() {
-    let _grid = Grid::new();
+    let _grid = RaceGrid::new();
 }

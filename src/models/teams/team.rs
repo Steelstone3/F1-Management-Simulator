@@ -131,17 +131,11 @@ mod team_should {
                 ..Default::default()
             },
             driver_1: Driver {
-                points: Points {
-                    race_points: [25, 18, 15, 15, 25, 18, 18, 25, 15, 25],
-                    ..Default::default()
-                },
+                points: Points::new([25, 18, 15, 15, 25, 18, 18, 25, 15, 25]),
                 ..Default::default()
             },
             driver_2: Driver {
-                points: Points {
-                    race_points: [1, 25, 18, 25, 18, 15, 6, 2, 15, 25],
-                    ..Default::default()
-                },
+                points: Points::new([1, 25, 18, 25, 18, 15, 6, 2, 15, 25]),
                 ..Default::default()
             },
             ..Default::default()
