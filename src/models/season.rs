@@ -8,7 +8,11 @@ pub struct Season {
     races: [RaceGrid; NUMBER_OF_RACES],
 }
 
-impl Season {}
+impl Season {
+    pub fn calculate_season() {
+        
+    }
+}
 
 impl Display for Season {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
