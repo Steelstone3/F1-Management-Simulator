@@ -1,23 +1,108 @@
-use super::teams::team::Team;
+use crate::controller::random_generator::{generate_4_seeds, generate_5_seeds};
+
+use super::{
+    drivers::driver_name::DriverName,
+    teams::{team::Team, team_name::TeamName},
+};
 
 pub struct RaceGrid {
     teams: [Team; 10],
 }
 
-impl RaceGrid {
-    pub fn new() -> Self {
+impl Default for RaceGrid {
+    fn default() -> Self {
         Self {
             teams: [
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
-                Team::new(),
+                Team::new(
+                    TeamName::Mercedes,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    generate_5_seeds(),
+                    generate_4_seeds(),
+                    generate_5_seeds(),
+                    generate_5_seeds(),
+                ),
             ],
         }
     }
