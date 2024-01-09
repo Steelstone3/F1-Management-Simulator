@@ -1,7 +1,7 @@
 use crate::controller::random_generator::generate_seeded_random;
 use std::fmt::Display;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, Default, PartialEq, Eq)]
 pub struct TeamStatistic {
     pub car_development: u32,
     pub car_repairs: u32,

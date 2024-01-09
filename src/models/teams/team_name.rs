@@ -61,6 +61,12 @@ impl Display for TeamName {
     }
 }
 
+impl Default for TeamName {
+    fn default() -> Self {
+        TeamName::Mercedes
+    }
+}
+
 #[cfg(test)]
 mod team_name_should {
     use super::*;

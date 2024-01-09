@@ -35,5 +35,15 @@ impl Display for Driver {
     }
 }
 
+impl Default for Driver {
+    fn default() -> Self {
+        Self {
+            name: Default::default(),
+            statistics: Default::default(),
+            points: Default::default(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod driver_should {}
