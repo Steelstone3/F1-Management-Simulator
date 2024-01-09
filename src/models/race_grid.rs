@@ -10,6 +10,12 @@ pub struct RaceGrid {
     pub teams: [Team; 10],
 }
 
+impl RaceGrid {
+    pub fn calculate_race(&self) {
+        
+    }
+}
+
 impl Display for RaceGrid {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(formatting, "Something")
