@@ -46,11 +46,16 @@ impl Team {
     pub fn calculate_driver_2_overall(&self) -> u32 {
         (self.statistics.overall + self.car.overall + self.driver_2.statistics.overall) / 3
     }
+
+    pub fn calculate_season_points(&self) -> u32 {
+        self.driver_1.points.calculate_season_points()
+            + self.driver_2.points.calculate_season_points()
+    }
 }
 
 #[cfg(test)]
 mod team_should {
-    use crate::models::drivers::driver_statistics::DriverStatistic;
+    use crate::models::{drivers::driver_statistics::DriverStatistic, points::Points};
 
     use super::*;
 
@@ -112,5 +117,40 @@ mod team_should {
 
         // Then
         assert_eq!(expected_overall, overall)
+    }
+
+    #[test]
+    fn calculate_team_season_points() {
+        // Given
+        let expected_season_points = 349;
+        let team = Team {
+            statistics: TeamStatistic {
+                ..Default::default()
+            },
+            car: Car {
+                ..Default::default()
+            },
+            driver_1: Driver {
+                points: Points {
+                    race_points: [25, 18, 15, 15, 25, 18, 18, 25, 15, 25],
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            driver_2: Driver {
+                points: Points {
+                    race_points: [1, 25, 18, 25, 18, 15, 6, 2, 15, 25],
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        // When
+        let season_points = team.calculate_season_points();
+
+        // Then
+        assert_eq!(expected_season_points, season_points)
     }
 }
