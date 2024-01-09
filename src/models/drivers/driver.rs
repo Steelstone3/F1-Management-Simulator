@@ -1,4 +1,4 @@
-use crate::controller::random_generator::generate_seed;
+use crate::{controller::random_generator::generate_seed, models::points::Points};
 
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use rand::random;
@@ -8,6 +8,7 @@ use std::fmt::Display;
 pub struct Driver {
     pub name: DriverName,
     pub statistics: DriverStatistic,
+    pub points: Points,
 }
 
 impl Driver {
@@ -23,6 +24,7 @@ impl Driver {
         Self {
             name: random(),
             statistics: DriverStatistic::new(driver_seeds),
+            points: Default::default(),
         }
     }
 }
