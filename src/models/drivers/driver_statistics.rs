@@ -1,6 +1,5 @@
-use std::fmt::Display;
-
 use crate::controller::random_generator::generate_seeded_random;
+use std::fmt::Display;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct DriverStatistic {
