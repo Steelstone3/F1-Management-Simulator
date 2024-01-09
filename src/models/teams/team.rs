@@ -1,50 +1,43 @@
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
 use crate::{
     controller::random_generator::generate_seed,
-    models::{car::Car, drivers::driver::Driver},
+    models::{
+        car::Car,
+        drivers::{driver::Driver, driver_name::DriverName},
+    },
 };
 use rand::random;
 
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct Team {
     pub name: TeamName,
-    pub statistics: TeamStatistic,
+    pub team_statistics: TeamStatistic,
     pub car: Car,
     pub driver_1: Driver,
     pub driver_2: Driver,
 }
 
 impl Team {
-    pub fn new() -> Self {
-        let team_statistics_seeds = [
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-        ];
-        let car_seeds = [
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-            generate_seed(),
-        ];
-
+    pub fn new(
+        driver_names: [DriverName; 2],
+        team_statistics_seeds: [u64; 5],
+        car_seeds: [u64; 4],
+    ) -> Self {
         Self {
             name: random(),
-            statistics: TeamStatistic::new(team_statistics_seeds),
+            team_statistics: TeamStatistic::new(team_statistics_seeds),
             car: Car::new(car_seeds),
-            driver_1: Driver::new(),
-            driver_2: Driver::new(),
+            driver_1: Driver::new(driver_names[0]),
+            driver_2: Driver::new(driver_names[1]),
         }
     }
 
     pub fn calculate_driver_1_overall(&self) -> u32 {
-        (self.statistics.overall + self.car.overall + self.driver_1.statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_1.statistics.overall) / 3
     }
 
     pub fn calculate_driver_2_overall(&self) -> u32 {
-        (self.statistics.overall + self.car.overall + self.driver_2.statistics.overall) / 3
+        (self.team_statistics.overall + self.car.overall + self.driver_2.statistics.overall) / 3
     }
 
     pub fn calculate_season_points(&self) -> u32 {
@@ -64,7 +57,7 @@ mod team_should {
         // Given
         let expected_overall = 73;
         let team = Team {
-            statistics: TeamStatistic {
+            team_statistics: TeamStatistic {
                 overall: 55,
                 ..Default::default()
             },
@@ -94,7 +87,7 @@ mod team_should {
         // Given
         let expected_overall = 80;
         let team = Team {
-            statistics: TeamStatistic {
+            team_statistics: TeamStatistic {
                 overall: 65,
                 ..Default::default()
             },
@@ -124,7 +117,7 @@ mod team_should {
         // Given
         let expected_season_points = 349;
         let team = Team {
-            statistics: TeamStatistic {
+            team_statistics: TeamStatistic {
                 ..Default::default()
             },
             car: Car {
