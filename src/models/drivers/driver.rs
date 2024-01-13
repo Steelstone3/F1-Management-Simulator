@@ -38,7 +38,7 @@ impl Display for Driver {
 mod driver_should {
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
-        points::Points,
+        points::Points, teams::{team::Team, team_statistics::TeamStatistic}, car::Car,
     };
 
     #[test]
@@ -86,5 +86,35 @@ mod driver_should {
 
         // Then
         assert_eq!(expected_driver_display, driver_display);
+    }
+
+    #[test]
+    fn calculate_driver_overall() {
+        // Given
+        let expected_overall = 80;
+        let team = Team {
+            team_statistics: TeamStatistic {
+                overall: 65,
+                ..Default::default()
+            },
+            car: Car {
+                overall: 87,
+                ..Default::default()
+            },
+            driver_2: Driver {
+                driver_statistics: DriverStatistic {
+                    overall: 89,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        // When
+        let overall = team.driver_2.calculate_driver_overall(&team);
+
+        // Then
+        assert_eq!(expected_overall, overall)
     }
 }
