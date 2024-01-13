@@ -1,6 +1,6 @@
 use super::season::NUMBER_OF_RACES_IN_A_SEASON;
 
-const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
+pub const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Points {

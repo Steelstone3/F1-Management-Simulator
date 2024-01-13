@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
 use crate::models::{
     car::Car,
@@ -42,9 +44,24 @@ impl Team {
             (team_chance + self.driver_2.driver_statistics.overall) / 3;
     }
 
+    pub fn add_points(&mut self, driver_name: DriverName) {
+        // TODO
+        // Driver finds team then
+        // Adds points to the matched driver in the team
+        // This is done for the specific race
+        todo!()
+    }
+
     pub fn calculate_season_points(&self) -> u32 {
         self.driver_1.driver_points.calculate_season_points()
             + self.driver_2.driver_points.calculate_season_points()
+    }
+}
+
+// TODO add a display that shows team name and points
+impl Display for Team {
+    fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatting, "Something")
     }
 }
 

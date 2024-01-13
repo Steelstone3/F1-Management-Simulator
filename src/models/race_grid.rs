@@ -2,28 +2,40 @@ use crate::controller::random_generator::{generate_4_seeds, generate_5_seeds};
 use std::fmt::Display;
 
 use super::{
-    drivers::driver_name::DriverName,
-    teams::{team::{Team, self}, team_name::TeamName},
+    drivers::{driver_name::DriverName, driver::Driver},
+    teams::{team::Team, team_name::TeamName}, points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
 };
 
-pub const CARS_ON_THE_RACE_GRID: usize = 10;
+pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
 
 pub struct RaceGrid {
-    pub teams: [Team; CARS_ON_THE_RACE_GRID],
+    pub teams: [Team; TEAMS_ON_THE_RACE_GRID],
 }
 
 impl RaceGrid {
     pub fn calculate_driver_race_chances(&mut self) {
-        for team in 0..CARS_ON_THE_RACE_GRID {
+        for team in 0..TEAMS_ON_THE_RACE_GRID {
             self.teams[team].calculate_drivers_overall_race_chance()
         }      
     }
 
-    pub fn assign_points(&mut self) {
+    pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
+        // TODO 
+        // Order drivers based on race chances all 20
+        // Display driver result order all 20
+        // Return race positions that allocate points all 10
         todo!()
+    }
+
+    pub fn assign_points(&mut self, drivers:[Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
+        // TODO
+        // Take each of the drivers
+        // Match the driver by name
+        // Add the matched drivers points based on race position for the correct race in the season
     }
 }
 
+// TODO update display to show the race result
 impl Display for RaceGrid {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(formatting, "Something")
@@ -139,6 +151,6 @@ mod grid_should {
         let race_grid = RaceGrid::default();
 
         // Then
-        assert_eq!(CARS_ON_THE_RACE_GRID, race_grid.teams.len())
+        assert_eq!(TEAMS_ON_THE_RACE_GRID, race_grid.teams.len())
     }
 }

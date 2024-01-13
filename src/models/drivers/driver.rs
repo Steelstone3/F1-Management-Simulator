@@ -1,7 +1,7 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
     points::Points,
-    race_grid::CARS_ON_THE_RACE_GRID,
+    race_grid::TEAMS_ON_THE_RACE_GRID,
     teams::{team::Team, team_name::TeamName},
 };
 use std::fmt::Display;
@@ -30,11 +30,14 @@ impl Driver {
         }
     }
 
-    pub fn find_team(&self, _teams: [Team; CARS_ON_THE_RACE_GRID]) -> &Team {
+    pub fn find_team(&self, _teams: [Team; TEAMS_ON_THE_RACE_GRID]) -> &Team {
+        // TODO
+        // Finds the team for points allocation
         todo!()
     }
 }
 
+// TODO change driver display to show driver name, team name and points
 impl Display for Driver {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(

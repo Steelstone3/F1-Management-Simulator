@@ -13,7 +13,8 @@ impl Season {
     pub fn calculate_season_results(&mut self) {
         for race in &mut self.races {
             race.calculate_driver_race_chances();
-            race.assign_points();
+            let scoring_drivers = race.race_result_order();
+            race.assign_points(scoring_drivers);
         }
     }
 }
