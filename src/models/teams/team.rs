@@ -27,8 +27,8 @@ impl Team {
             team_name,
             team_statistics: TeamStatistic::new(team_statistics_seeds),
             car: Car::new(car_seeds),
-            driver_1: Driver::new(driver_name_1, driver_1_seeds),
-            driver_2: Driver::new(driver_name_2, driver_2_seeds),
+            driver_1: Driver::new(driver_name_1, team_name, driver_1_seeds),
+            driver_2: Driver::new(driver_name_2, team_name, driver_2_seeds),
         }
     }
 
@@ -65,6 +65,7 @@ mod team_should {
             },
             driver_1: Driver {
                 driver_name: DriverName::LewisHamilton,
+                team_name: TeamName::Mercedes,
                 driver_statistics: DriverStatistic {
                     awareness: 87,
                     consistency: 90,
@@ -77,6 +78,7 @@ mod team_should {
             },
             driver_2: Driver {
                 driver_name: DriverName::GeorgeRussell,
+                team_name: TeamName::Mercedes,
                 driver_statistics: DriverStatistic {
                     awareness: 60,
                     consistency: 74,
@@ -103,7 +105,7 @@ mod team_should {
         // Then
         assert_eq!(expected_team, team);
     }
-   
+
     #[test]
     fn calculate_team_season_points() {
         // Given

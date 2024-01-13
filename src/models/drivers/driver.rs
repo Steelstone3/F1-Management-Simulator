@@ -1,18 +1,20 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
-use crate::models::{points::Points, teams::team::Team};
+use crate::models::{points::Points, teams::{team::Team, team_name::{TeamName, self}}};
 use std::fmt::Display;
 
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct Driver {
     pub driver_name: DriverName,
+    pub team_name: TeamName,
     pub driver_statistics: DriverStatistic,
     pub driver_points: Points,
 }
 
 impl Driver {
-    pub fn new(driver_name: DriverName, driver_statistics_seeds: [u64; 5]) -> Self {
+    pub fn new(driver_name: DriverName, team_name:TeamName, driver_statistics_seeds: [u64; 5]) -> Self {
         Self {
             driver_name,
+            team_name,
             driver_statistics: DriverStatistic::new(driver_statistics_seeds),
             driver_points: Default::default(),
         }
@@ -38,7 +40,7 @@ impl Display for Driver {
 mod driver_should {
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
-        points::Points, teams::{team::Team, team_statistics::TeamStatistic}, car::Car,
+        points::Points, teams::{team::Team, team_statistics::TeamStatistic, team_name::TeamName}, car::Car,
     };
 
     #[test]
@@ -46,6 +48,7 @@ mod driver_should {
         // Given
         let expected_driver = Driver {
             driver_name: DriverName::LewisHamilton,
+            team_name: TeamName::Mercedes,
             driver_statistics: DriverStatistic {
                 awareness: 90,
                 consistency: 64,
@@ -58,7 +61,7 @@ mod driver_should {
         };
 
         // When
-        let driver = Driver::new(DriverName::LewisHamilton, [1, 2, 3, 4, 5]);
+        let driver = Driver::new(DriverName::LewisHamilton, TeamName::Mercedes, [1, 2, 3, 4, 5]);
 
         // Then
         assert_eq!(expected_driver, driver);
@@ -70,6 +73,7 @@ mod driver_should {
         let expected_driver_display = "Lewis Hamilton\nAwareness: 90\nConsistency: 64\nExpierence: 81\nPace: 66\nRace Craft: 84\nOverall: 77\n\n\n".to_string();
         let driver = Driver {
             driver_name: DriverName::LewisHamilton,
+            team_name: TeamName::Mercedes,
             driver_statistics: DriverStatistic {
                 awareness: 90,
                 consistency: 64,
