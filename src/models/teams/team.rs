@@ -68,7 +68,10 @@ impl Display for Team {
 #[cfg(test)]
 mod team_should {
     use super::*;
-    use crate::models::{drivers::driver_statistics::DriverStatistic, points::Points};
+    use crate::models::{
+        drivers::driver_statistics::DriverStatistic,
+        points::{self, Points},
+    };
 
     #[test]
     fn new_team() {
@@ -186,11 +189,15 @@ mod team_should {
                 ..Default::default()
             },
             driver_1: Driver {
-                driver_points: Points::new([25, 18, 15, 15, 25, 18, 18, 25, 15, 25]),
+                driver_points: Points {
+                    race_points: [25, 18, 15, 15, 25, 18, 18, 25, 15, 25],
+                },
                 ..Default::default()
             },
             driver_2: Driver {
-                driver_points: Points::new([1, 25, 18, 25, 18, 15, 6, 2, 15, 25]),
+                driver_points: Points {
+                    race_points: [1, 25, 18, 25, 18, 15, 6, 2, 15, 25],
+                },
                 ..Default::default()
             },
             ..Default::default()
