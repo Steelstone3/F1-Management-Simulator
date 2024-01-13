@@ -1,13 +1,15 @@
-use super::season::NUMBER_OF_RACES;
+use super::season::NUMBER_OF_RACES_IN_A_SEASON;
+
+const RACE_POSIITIONS_THAT_ALLOCATE_POINTS:usize = 10;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Points {
-    pub race_points: [u32; NUMBER_OF_RACES],
-    points_system: [u32; 10],
+    pub race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
+    points_system: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
 }
 
 impl Points {
-    pub fn new(race_points: [u32; 10]) -> Self {
+    pub fn new(race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) -> Self {
         Self {
             race_points,
             points_system: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],
@@ -25,7 +27,7 @@ impl Points {
     }
 
     pub fn calculate_points_for_finish_position(&self, finish_position: usize) -> u32 {
-        if finish_position < 1 || finish_position > 10 {
+        if finish_position < 1 || finish_position > RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
             return 0;
         }
 
@@ -50,7 +52,7 @@ mod points_should {
     #[rstest]
     #[case([10,8,6,8,15,25,18,25,12,8])]
     #[case([25,25,25,25,25,25,25,25,25,25])]
-    fn new_race_points( #[case] race_points: [u32; 10]) {
+    fn new_race_points( #[case] race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
         // Given
         let points_system = [25,18,15,12,10,8,6,4,2,1];
 
@@ -69,7 +71,7 @@ mod points_should {
     #[case([10,8,6,8,15,25,18,25,12,8], 135)]
     #[case([25,25,25,25,25,25,25,25,25,25], 250)]
     fn calculate_the_points_achieved_over_the_season(
-        #[case] race_points: [u32; 10],
+        #[case] race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
         #[case] expected_season_points: u32,
     ) {
         // Given

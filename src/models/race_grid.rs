@@ -6,8 +6,10 @@ use super::{
     teams::{team::Team, team_name::TeamName},
 };
 
+const CARS_ON_THE_RACE_GRID:usize = 10;
+
 pub struct RaceGrid {
-    pub teams: [Team; 10],
+    pub teams: [Team; CARS_ON_THE_RACE_GRID],
 }
 
 impl RaceGrid {
@@ -123,7 +125,7 @@ impl Default for RaceGrid {
 
 #[cfg(test)]
 mod grid_should {
-    use super::RaceGrid;
+    use super::*;
 
     #[test]
     fn new_grid() {
@@ -131,6 +133,6 @@ mod grid_should {
         let race_grid = RaceGrid::default();
 
         // Then
-        assert_eq!(10, race_grid.teams.len())
+        assert_eq!(CARS_ON_THE_RACE_GRID, race_grid.teams.len())
     }
 }

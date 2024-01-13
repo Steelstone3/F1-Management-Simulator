@@ -2,10 +2,10 @@ use std::fmt::Display;
 
 use super::race_grid::RaceGrid;
 
-pub const NUMBER_OF_RACES: usize = 10;
+pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
 pub struct Season {
-    races: [RaceGrid; NUMBER_OF_RACES],
+    races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
 }
 
 impl Season {
@@ -30,7 +30,7 @@ impl Default for Season {
 
 #[cfg(test)]
 mod grid_should {
-    use crate::models::season::{Season, NUMBER_OF_RACES};
+    use crate::models::season::{Season, NUMBER_OF_RACES_IN_A_SEASON};
 
     #[test]
     fn new_grid() {
@@ -38,6 +38,6 @@ mod grid_should {
         let race_grid = Season::default();
 
         // Then
-        assert_eq!(NUMBER_OF_RACES, race_grid.races.len())
+        assert_eq!(NUMBER_OF_RACES_IN_A_SEASON, race_grid.races.len())
     }
 }
