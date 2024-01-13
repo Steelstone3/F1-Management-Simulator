@@ -2,8 +2,7 @@ use rand_derive2::RandGen;
 use std::fmt::Display;
 use std::fmt::Formatter;
 
-#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq)]
-#[derive(Default)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq, Default)]
 pub enum DriverName {
     MaxVerstappen,
     SergioPerez,
@@ -94,8 +93,6 @@ impl Display for DriverName {
         }
     }
 }
-
-
 
 #[cfg(test)]
 mod driver_name_should {

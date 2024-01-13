@@ -10,9 +10,7 @@ pub struct Season {
 }
 
 impl Season {
-    pub fn calculate_season() {
-        
-    }
+    pub fn calculate_season() {}
 }
 
 impl Display for Season {
@@ -20,8 +18,6 @@ impl Display for Season {
         write!(formatting, "Something")
     }
 }
-
-
 
 #[cfg(test)]
 mod grid_should {

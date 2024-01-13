@@ -2,10 +2,7 @@ use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
     points::Points,
     race_grid::CARS_ON_THE_RACE_GRID,
-    teams::{
-        team::Team,
-        team_name::{TeamName},
-    },
+    teams::{team::Team, team_name::TeamName},
 };
 use std::fmt::Display;
 
@@ -53,7 +50,7 @@ mod driver_should {
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
         points::Points,
-        teams::{team_name::TeamName},
+        teams::team_name::TeamName,
     };
 
     #[test]
