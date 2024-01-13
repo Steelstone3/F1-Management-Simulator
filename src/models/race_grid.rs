@@ -18,6 +18,10 @@ impl RaceGrid {
             self.teams[team].calculate_drivers_overall_race_chance()
         }      
     }
+
+    pub fn assign_points(&mut self) {
+        todo!()
+    }
 }
 
 impl Display for RaceGrid {

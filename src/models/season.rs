@@ -10,7 +10,12 @@ pub struct Season {
 }
 
 impl Season {
-    pub fn calculate_season() {}
+    pub fn calculate_season_results(&mut self) {
+        for race in &mut self.races {
+            race.calculate_driver_race_chances();
+            race.assign_points();
+        }
+    }
 }
 
 impl Display for Season {
