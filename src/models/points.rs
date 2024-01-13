@@ -27,7 +27,7 @@ impl Points {
     }
 
     pub fn calculate_points_for_finish_position(&self, finish_position: usize) -> u32 {
-        if finish_position < 1 || finish_position > RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
+        if !(1..=RACE_POSIITIONS_THAT_ALLOCATE_POINTS).contains(&finish_position) {
             return 0;
         }
 

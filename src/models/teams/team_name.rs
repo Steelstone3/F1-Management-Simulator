@@ -2,8 +2,10 @@ use rand_derive2::RandGen;
 use std::fmt::{Display, Formatter};
 
 #[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Default)]
 pub enum TeamName {
     Ferrari,
+    #[default]
     Mercedes,
     RedBull,
     Alpine,
@@ -61,11 +63,7 @@ impl Display for TeamName {
     }
 }
 
-impl Default for TeamName {
-    fn default() -> Self {
-        TeamName::Mercedes
-    }
-}
+
 
 #[cfg(test)]
 mod team_name_should {
