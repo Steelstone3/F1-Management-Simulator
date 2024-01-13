@@ -1,8 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::{Display, Formatter};
 
-#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq)]
-#[derive(Default)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq, Default)]
 pub enum TeamName {
     Ferrari,
     #[default]
@@ -62,8 +61,6 @@ impl Display for TeamName {
         }
     }
 }
-
-
 
 #[cfg(test)]
 mod team_name_should {

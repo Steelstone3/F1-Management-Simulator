@@ -1,6 +1,6 @@
 use super::season::NUMBER_OF_RACES_IN_A_SEASON;
 
-const RACE_POSIITIONS_THAT_ALLOCATE_POINTS:usize = 10;
+const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Points {
@@ -52,9 +52,9 @@ mod points_should {
     #[rstest]
     #[case([10,8,6,8,15,25,18,25,12,8])]
     #[case([25,25,25,25,25,25,25,25,25,25])]
-    fn new_race_points( #[case] race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
+    fn new_race_points(#[case] race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
         // Given
-        let points_system = [25,18,15,12,10,8,6,4,2,1];
+        let points_system = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
         // When
         let points = Points::new(race_points);
