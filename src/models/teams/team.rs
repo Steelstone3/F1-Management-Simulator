@@ -32,16 +32,6 @@ impl Team {
         }
     }
 
-    pub fn calculate_driver_1_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_1.driver_statistics.overall)
-            / 3
-    }
-
-    pub fn calculate_driver_2_overall(&self) -> u32 {
-        (self.team_statistics.overall + self.car.overall + self.driver_2.driver_statistics.overall)
-            / 3
-    }
-
     pub fn calculate_season_points(&self) -> u32 {
         self.driver_1.driver_points.calculate_season_points()
             + self.driver_2.driver_points.calculate_season_points()
@@ -115,6 +105,7 @@ mod team_should {
     }
 
     #[test]
+    #[ignore = "moving to driver struct"]
     fn calculate_driver_1_overall() {
         // Given
         let expected_overall = 73;
@@ -138,13 +129,14 @@ mod team_should {
         };
 
         // When
-        let overall = team.calculate_driver_1_overall();
+        // let overall = team.calculate_driver_1_overall();
 
         // Then
-        assert_eq!(expected_overall, overall)
+        // assert_eq!(expected_overall, overall)
     }
 
     #[test]
+    #[ignore = "moving to driver struct"]
     fn calculate_driver_2_overall() {
         // Given
         let expected_overall = 80;
@@ -168,10 +160,10 @@ mod team_should {
         };
 
         // When
-        let overall = team.calculate_driver_2_overall();
+        // let overall = team.calculate_driver_2_overall();
 
         // Then
-        assert_eq!(expected_overall, overall)
+        // assert_eq!(expected_overall, overall)
     }
 
     #[test]
