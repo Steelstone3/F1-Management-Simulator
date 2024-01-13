@@ -3,7 +3,7 @@ use std::fmt::Display;
 
 use super::{
     drivers::driver_name::DriverName,
-    teams::{team::Team, team_name::TeamName},
+    teams::{team::{Team, self}, team_name::TeamName},
 };
 
 pub const CARS_ON_THE_RACE_GRID: usize = 10;
@@ -13,8 +13,10 @@ pub struct RaceGrid {
 }
 
 impl RaceGrid {
-    pub fn calculate_race(&self) {
-        for _driver in 0..CARS_ON_THE_RACE_GRID {}
+    pub fn calculate_driver_race_chances(&mut self) {
+        for team in 0..CARS_ON_THE_RACE_GRID {
+            self.teams[team].calculate_drivers_overall_race_chance()
+        }      
     }
 }
 
