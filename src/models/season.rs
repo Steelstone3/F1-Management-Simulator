@@ -4,6 +4,7 @@ use super::race_grid::RaceGrid;
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
+#[derive(Default)]
 pub struct Season {
     races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
 }
@@ -20,13 +21,7 @@ impl Display for Season {
     }
 }
 
-impl Default for Season {
-    fn default() -> Self {
-        Self {
-            races: Default::default(),
-        }
-    }
-}
+
 
 #[cfg(test)]
 mod grid_should {

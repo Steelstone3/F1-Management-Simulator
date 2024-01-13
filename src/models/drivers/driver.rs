@@ -4,7 +4,7 @@ use crate::models::{
     race_grid::CARS_ON_THE_RACE_GRID,
     teams::{
         team::Team,
-        team_name::{self, TeamName},
+        team_name::{TeamName},
     },
 };
 use std::fmt::Display;
@@ -33,7 +33,7 @@ impl Driver {
         }
     }
 
-    pub fn find_team(&self, teams: [Team; CARS_ON_THE_RACE_GRID]) -> &Team {
+    pub fn find_team(&self, _teams: [Team; CARS_ON_THE_RACE_GRID]) -> &Team {
         todo!()
     }
 }
@@ -51,10 +51,9 @@ impl Display for Driver {
 #[cfg(test)]
 mod driver_should {
     use crate::models::{
-        car::Car,
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
         points::Points,
-        teams::{team::Team, team_name::TeamName, team_statistics::TeamStatistic},
+        teams::{team_name::TeamName},
     };
 
     #[test]

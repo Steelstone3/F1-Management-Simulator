@@ -15,7 +15,7 @@ pub struct RaceGrid {
 impl RaceGrid {
     pub fn calculate_race(&self) {
 
-        for driver in 0..CARS_ON_THE_RACE_GRID {
+        for _driver in 0..CARS_ON_THE_RACE_GRID {
             
         }
     }
