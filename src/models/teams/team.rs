@@ -32,6 +32,16 @@ impl Team {
         }
     }
 
+    pub fn calculate_drivers_overall(&mut self) {
+        let team_chance = self.team_statistics.overall + self.car.overall;
+
+        self.driver_1.overall_race_chance =
+            (team_chance + self.driver_1.driver_statistics.overall) / 3;
+
+        self.driver_2.overall_race_chance =
+            (team_chance + self.driver_2.driver_statistics.overall) / 3;
+    }
+
     pub fn calculate_season_points(&self) -> u32 {
         self.driver_1.driver_points.calculate_season_points()
             + self.driver_2.driver_points.calculate_season_points()
@@ -75,6 +85,7 @@ mod team_should {
                     overall: 70,
                 },
                 driver_points: Points::default(),
+                overall_race_chance: Default::default(),
             },
             driver_2: Driver {
                 driver_name: DriverName::GeorgeRussell,
@@ -88,6 +99,7 @@ mod team_should {
                     overall: 77,
                 },
                 driver_points: Points::default(),
+                overall_race_chance: Default::default(),
             },
         };
 
@@ -104,6 +116,45 @@ mod team_should {
 
         // Then
         assert_eq!(expected_team, team);
+    }
+
+    #[test]
+    fn calculate_drivers_overall_race_chance() {
+        // Given
+        let driver_1_expected_overall = 80;
+        let driver_2_expected_overall = 69;
+        let mut team = Team {
+            team_statistics: TeamStatistic {
+                overall: 65,
+                ..Default::default()
+            },
+            car: Car {
+                overall: 87,
+                ..Default::default()
+            },
+            driver_1: Driver {
+                driver_statistics: DriverStatistic {
+                    overall: 89,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            driver_2: Driver {
+                driver_statistics: DriverStatistic {
+                    overall: 55,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        // When
+        team.calculate_drivers_overall();
+
+        // Then
+        assert_eq!(driver_1_expected_overall, team.driver_1.overall_race_chance);
+        assert_eq!(driver_2_expected_overall, team.driver_2.overall_race_chance);
     }
 
     #[test]
