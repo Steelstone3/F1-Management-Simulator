@@ -1,7 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::{Display, Formatter};
 
-#[derive(RandGen, Debug, PartialEq, Eq)]
+#[derive(RandGen, Clone, Copy, Debug, PartialEq, Eq)]
 pub enum TeamName {
     Ferrari,
     Mercedes,
