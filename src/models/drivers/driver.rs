@@ -20,6 +20,10 @@ impl Driver {
         }
     }
 
+    pub fn find_team(&self, teams: [Team; 10]) -> &Team {
+        todo!()
+    }
+
     pub fn calculate_driver_overall(&self, team: &Team) -> u32 {
         (team.team_statistics.overall + team.car.overall + self.driver_statistics.overall)
             / 3
