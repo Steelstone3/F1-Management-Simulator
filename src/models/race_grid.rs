@@ -6,7 +6,7 @@ use super::{
     teams::{team::Team, team_name::TeamName},
 };
 
-const CARS_ON_THE_RACE_GRID:usize = 10;
+pub const CARS_ON_THE_RACE_GRID: usize = 10;
 
 pub struct RaceGrid {
     pub teams: [Team; CARS_ON_THE_RACE_GRID],
@@ -14,7 +14,10 @@ pub struct RaceGrid {
 
 impl RaceGrid {
     pub fn calculate_race(&self) {
-        
+
+        for driver in 0..CARS_ON_THE_RACE_GRID {
+            
+        }
     }
 }
 
