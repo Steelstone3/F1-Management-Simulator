@@ -1,21 +1,15 @@
 use super::season::NUMBER_OF_RACES_IN_A_SEASON;
 
 pub const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
+pub const POINTS_SYSTEM: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] =
+    [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Points {
     pub race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
-    points_system: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
 }
 
 impl Points {
-    pub fn new(race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) -> Self {
-        Self {
-            race_points,
-            points_system: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],
-        }
-    }
-
     pub fn calculate_season_points(&self) -> u32 {
         let mut season_points = 0;
 
@@ -26,12 +20,12 @@ impl Points {
         season_points
     }
 
-    pub fn calculate_points_for_finish_position(&self, finish_position: usize) -> u32 {
+    pub fn calculate_points_for_finish_position(finish_position: usize) -> u32 {
         if !(1..=RACE_POSIITIONS_THAT_ALLOCATE_POINTS).contains(&finish_position) {
             return 0;
         }
 
-        self.points_system[finish_position - 1]
+        POINTS_SYSTEM[finish_position - 1]
     }
 }
 
@@ -39,7 +33,6 @@ impl Default for Points {
     fn default() -> Self {
         Self {
             race_points: Default::default(),
-            points_system: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],
         }
     }
 }
@@ -48,21 +41,6 @@ impl Default for Points {
 mod points_should {
     use super::*;
     use rstest::rstest;
-
-    #[rstest]
-    #[case([10,8,6,8,15,25,18,25,12,8])]
-    #[case([25,25,25,25,25,25,25,25,25,25])]
-    fn new_race_points(#[case] race_points: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
-        // Given
-        let points_system = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
-
-        // When
-        let points = Points::new(race_points);
-
-        // Then
-        assert_eq!(race_points, points.race_points);
-        assert_eq!(points_system, points.points_system)
-    }
 
     #[rstest]
     #[case([0,0,0,0,0,0,0,0,0,0], 0)]
@@ -104,11 +82,8 @@ mod points_should {
         #[case] finish_position: usize,
         #[case] expected_points_score: u32,
     ) {
-        // Given
-        let points = Points::default();
-
         // When
-        let points_score = points.calculate_points_for_finish_position(finish_position);
+        let points_score = Points::calculate_points_for_finish_position(finish_position);
 
         // Then
         assert_eq!(expected_points_score, points_score);
