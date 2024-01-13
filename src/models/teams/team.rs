@@ -103,69 +103,7 @@ mod team_should {
         // Then
         assert_eq!(expected_team, team);
     }
-
-    #[test]
-    #[ignore = "moving to driver struct"]
-    fn calculate_driver_1_overall() {
-        // Given
-        let expected_overall = 73;
-        let team = Team {
-            team_statistics: TeamStatistic {
-                overall: 55,
-                ..Default::default()
-            },
-            car: Car {
-                overall: 77,
-                ..Default::default()
-            },
-            driver_1: Driver {
-                driver_statistics: DriverStatistic {
-                    overall: 89,
-                    ..Default::default()
-                },
-                ..Default::default()
-            },
-            ..Default::default()
-        };
-
-        // When
-        // let overall = team.calculate_driver_1_overall();
-
-        // Then
-        // assert_eq!(expected_overall, overall)
-    }
-
-    #[test]
-    #[ignore = "moving to driver struct"]
-    fn calculate_driver_2_overall() {
-        // Given
-        let expected_overall = 80;
-        let team = Team {
-            team_statistics: TeamStatistic {
-                overall: 65,
-                ..Default::default()
-            },
-            car: Car {
-                overall: 87,
-                ..Default::default()
-            },
-            driver_2: Driver {
-                driver_statistics: DriverStatistic {
-                    overall: 89,
-                    ..Default::default()
-                },
-                ..Default::default()
-            },
-            ..Default::default()
-        };
-
-        // When
-        // let overall = team.calculate_driver_2_overall();
-
-        // Then
-        // assert_eq!(expected_overall, overall)
-    }
-
+   
     #[test]
     fn calculate_team_season_points() {
         // Given
