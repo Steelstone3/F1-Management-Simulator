@@ -1,5 +1,5 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
-use crate::models::points::Points;
+use crate::models::{points::Points, teams::team::Team};
 use std::fmt::Display;
 
 #[derive(Debug, Default, PartialEq, Eq)]
@@ -16,6 +16,11 @@ impl Driver {
             driver_statistics: DriverStatistic::new(driver_statistics_seeds),
             driver_points: Default::default(),
         }
+    }
+
+    pub fn calculate_driver_overall(&self, team: &Team) -> u32 {
+        (team.team_statistics.overall + team.car.overall + self.driver_statistics.overall)
+            / 3
     }
 }
 
