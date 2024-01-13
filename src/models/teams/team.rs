@@ -32,7 +32,7 @@ impl Team {
         }
     }
 
-    pub fn calculate_drivers_overall(&mut self) {
+    pub fn calculate_drivers_overall_race_chance(&mut self) {
         let team_chance = self.team_statistics.overall + self.car.overall;
 
         self.driver_1.overall_race_chance =
@@ -150,7 +150,7 @@ mod team_should {
         };
 
         // When
-        team.calculate_drivers_overall();
+        team.calculate_drivers_overall_race_chance();
 
         // Then
         assert_eq!(driver_1_expected_overall, team.driver_1.overall_race_chance);
