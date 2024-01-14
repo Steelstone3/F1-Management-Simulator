@@ -20,7 +20,7 @@ impl RaceGrid {
         }
     }
 
-    pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
+    pub fn race_result_order(&self, race_number:u32) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
         let mut drivers = vec![];
 
         for team in &self.teams {
@@ -30,7 +30,7 @@ impl RaceGrid {
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
 
-        println!("\n\nRace 1\n");
+        println!("\n\nRace {}\n", race_number);
 
         for driver in &drivers {
             println!("{}", driver);
@@ -45,19 +45,12 @@ impl RaceGrid {
 
         top_ten_drivers
     }
-
+    
     pub fn assign_points(&mut self, drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
         // TODO
         // Take each of the drivers
         // Match the driver by name
         // Add the matched drivers points based on race position for the correct race in the season
-    }
-}
-
-// TODO update display to show the race result
-impl Display for RaceGrid {
-    fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(formatting, "Something")
     }
 }
 
@@ -168,11 +161,11 @@ mod grid_should {
     fn new_grid() {
         // Given
         let race_grid = RaceGrid::default();
-
+        
         // Then
         assert_eq!(TEAMS_ON_THE_RACE_GRID, race_grid.teams.len())
     }
-
+    
     #[test]
     // #[ignore = "not passing"]
     fn calculate_driver_finishing_positions() {
@@ -335,7 +328,7 @@ mod grid_should {
         ];
 
         // When
-        let race_result = race_grid.race_result_order();
+        let race_result = race_grid.race_result_order(1);
 
         // Then
         assert_eq!(expected_race_result, race_result);
