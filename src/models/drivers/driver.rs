@@ -6,6 +6,7 @@ use crate::models::{
 };
 use std::fmt::Display;
 
+#[derive(Clone, Copy)]
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct Driver {
     pub driver_name: DriverName,

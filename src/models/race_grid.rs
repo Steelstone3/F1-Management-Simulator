@@ -25,18 +25,23 @@ impl RaceGrid {
         // Order drivers based on race chances all 20
         // Display driver result order all 20
         // Return race positions that allocate points all 10
-        [
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-            Default::default(),
-        ]
+        let mut drivers = vec![];
+
+        for team in &self.teams {
+            drivers.push(team.driver_1);
+            drivers.push(team.driver_2);
+        }
+
+        drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
+
+        let top_ten_drivers = drivers
+            .into_iter()
+            .take(10)
+            .collect::<Vec<_>>()
+            .try_into()
+            .unwrap();
+
+        top_ten_drivers
     }
 
     pub fn assign_points(&mut self, drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
@@ -167,7 +172,7 @@ mod grid_should {
     }
 
     #[test]
-    #[ignore = "not passing"]
+    // #[ignore = "not passing"]
     fn calculate_driver_finishing_positions() {
         // Given
         let race_grid = RaceGrid {
