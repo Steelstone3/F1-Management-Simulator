@@ -2,8 +2,9 @@ use crate::controller::random_generator::{generate_4_seeds, generate_5_seeds};
 use std::fmt::Display;
 
 use super::{
-    drivers::{driver_name::DriverName, driver::Driver},
-    teams::{team::Team, team_name::TeamName}, points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
+    drivers::{driver::Driver, driver_name::DriverName},
+    points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
+    teams::{team::Team, team_name::TeamName},
 };
 
 pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
@@ -16,18 +17,29 @@ impl RaceGrid {
     pub fn calculate_driver_race_chances(&mut self) {
         for team in 0..TEAMS_ON_THE_RACE_GRID {
             self.teams[team].calculate_drivers_overall_race_chance()
-        }      
+        }
     }
 
     pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
-        // TODO 
+        // TODO
         // Order drivers based on race chances all 20
         // Display driver result order all 20
         // Return race positions that allocate points all 10
-        todo!()
+        [
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+            Default::default(),
+        ]
     }
 
-    pub fn assign_points(&mut self, drivers:[Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
+    pub fn assign_points(&mut self, drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
         // TODO
         // Take each of the drivers
         // Match the driver by name
@@ -152,5 +164,173 @@ mod grid_should {
 
         // Then
         assert_eq!(TEAMS_ON_THE_RACE_GRID, race_grid.teams.len())
+    }
+
+    #[test]
+    #[ignore = "not passing"]
+    fn calculate_driver_finishing_positions() {
+        // Given
+        let race_grid = RaceGrid {
+            teams: [
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 99,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 95,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 80,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 70,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 90,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 85,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 75,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 65,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 60,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 55,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+                Team {
+                    driver_1: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    driver_2: Driver {
+                        overall_race_chance: 50,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                },
+            ],
+        };
+        let expected_race_result = [
+            Driver {
+                overall_race_chance: 99,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 95,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 90,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 85,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 80,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 75,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 70,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 65,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 60,
+                ..Default::default()
+            },
+            Driver {
+                overall_race_chance: 55,
+                ..Default::default()
+            },
+        ];
+
+        // When
+        let race_result = race_grid.race_result_order();
+
+        // Then
+        assert_eq!(expected_race_result, race_result);
     }
 }
