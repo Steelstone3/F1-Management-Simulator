@@ -34,6 +34,10 @@ impl RaceGrid {
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
 
+        for driver in &drivers {
+            println!("{}", driver);
+        }
+
         let top_ten_drivers = drivers
             .into_iter()
             .take(10)
