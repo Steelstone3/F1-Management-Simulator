@@ -1,6 +1,7 @@
 use crate::controller::random_generator::generate_seeded_random;
 use std::fmt::Display;
 
+#[derive(Clone, Copy)]
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct DriverStatistic {
     pub awareness: u32,
