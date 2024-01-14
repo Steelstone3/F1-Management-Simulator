@@ -43,7 +43,7 @@ impl Display for Driver {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             formatter,
-            "Driver: {}\nTeam: {}\nDriver Points: {}\n\n\n",
+            "Driver: {}\nTeam: {}\nDriver Points: {}\n",
             self.driver_name, self.team_name, self.driver_points.calculate_season_points()
         )
     }
@@ -90,7 +90,7 @@ mod driver_should {
     #[test]
     fn display_driver() {
         // Given
-        let expected_driver_display = "Driver: Lewis Hamilton\nTeam: Mercedes\nDriver Points: 0\n\n\n".to_string();
+        let expected_driver_display = "Driver: Lewis Hamilton\nTeam: Mercedes\nDriver Points: 0\n".to_string();
         let driver = Driver {
             driver_name: DriverName::LewisHamilton,
 

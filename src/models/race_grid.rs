@@ -30,6 +30,8 @@ impl RaceGrid {
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
 
+        println!("\n\nRace 1\n");
+
         for driver in &drivers {
             println!("{}", driver);
         }
