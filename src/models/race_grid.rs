@@ -21,10 +21,6 @@ impl RaceGrid {
     }
 
     pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
-        // TODO
-        // Order drivers based on race chances all 20
-        // Display driver result order all 20
-        // Return race positions that allocate points all 10
         let mut drivers = vec![];
 
         for team in &self.teams {
