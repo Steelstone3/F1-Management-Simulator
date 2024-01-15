@@ -201,7 +201,7 @@ mod team_should {
     #[test]
     fn display_the_team() {
         // Given
-        let expected_team_display = "Team: Mercedes\nTeam Points: 427\n\nDriver: Lewis Hamilton\nPoints: 236\n\nDriver: George Russell\nPoints: 191\n\n\n";
+        let expected_team_display = "| Mercedes | 427 Points | Lewis Hamilton | 236 Points | George Russell | 191 Points |\n";
         let team = Team {
             team_name: TeamName::Mercedes,
             driver_1: Driver {
