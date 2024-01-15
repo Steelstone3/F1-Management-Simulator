@@ -1,5 +1,3 @@
-use std::path::Display;
-
 use super::race_track_name::RaceTrackName;
 
 pub struct RaceInformation {
