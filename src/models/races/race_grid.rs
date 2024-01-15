@@ -138,6 +138,16 @@ impl RaceGrid {
         }
     }
 
+    // TODO test
+    pub fn order_race_result(mut drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) -> [Driver; DRIVERS_ON_THE_RACE_GRID] {
+        drivers.sort_by(|a, b| {
+            b.driver_race_points.race_points
+                .cmp(&a.driver_race_points.race_points)
+        });
+
+        drivers
+    }
+
     pub fn display_race_results(drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) {
         for driver in &drivers {
             print!("{}", driver);
@@ -152,7 +162,7 @@ impl RaceGrid {
             drivers.push(team.driver_1);
             drivers.push(team.driver_2);
         }
-        
+
         drivers.try_into().unwrap()
     }
 }

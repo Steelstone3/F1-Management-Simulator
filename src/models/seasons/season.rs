@@ -42,9 +42,10 @@ impl Season {
             race.calculate_driver_race_chances();
             let scoring_drivers = race.race_result_order();
             race.assign_points(scoring_drivers, race_number);
+           
             let race_result = race.get_drivers_on_the_race_grid();
-
-            RaceGrid::display_race_results(race_result);
+            let ordered_race_result = RaceGrid::order_race_result(race_result);
+            RaceGrid::display_race_results(ordered_race_result);
         }
 
         let mut season_result = SeasonPoints::update_driver_season_points(self);
