@@ -10,7 +10,7 @@ use super::season_result::{self, SeasonResult};
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
 pub struct Season {
-    races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
+    pub races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
 }
 
 impl Default for Season {
@@ -49,20 +49,6 @@ impl Season {
 
             RaceGrid::display_race_results(race_result);
         }
-    }
-
-    fn get_team_from_each_race(&self, team_name: TeamName) -> [Team; NUMBER_OF_RACES_IN_A_SEASON] {
-        let mut team_at_races = vec![];
-
-        for race in &self.races {
-            for team in race.teams {
-                if team.team_name == team_name {
-                    team_at_races.push(team)
-                }
-            }
-        }
-
-        team_at_races.try_into().unwrap()
     }
 }
 
