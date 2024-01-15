@@ -130,7 +130,10 @@ mod driver_should {
     #[case(2, TeamName::Mercedes)]
     #[case(7, TeamName::AlphaTauri)]
     #[case(0, TeamName::RedBull)]
-    fn find_team_associated_with_driver(#[case]expected_team_index:usize, #[case]team_name:TeamName) {
+    fn find_team_associated_with_driver(
+        #[case] expected_team_index: usize,
+        #[case] team_name: TeamName,
+    ) {
         // Given
         let driver = Driver {
             team_name,
@@ -180,7 +183,7 @@ mod driver_should {
         ];
 
         // When
-        let team_index=driver.find_team(&teams);
+        let team_index = driver.find_team(&teams);
 
         // Then
         assert_eq!(expected_team_index, team_index);

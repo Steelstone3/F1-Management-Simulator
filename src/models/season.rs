@@ -20,7 +20,7 @@ impl Season {
             let scoring_drivers = race.race_result_order();
             race.assign_points(scoring_drivers, race_number);
             let race_result = race.get_drivers_on_the_race_grid();
-            
+
             RaceGrid::display_race_results(race_result);
             // println!("{}", race);
         }

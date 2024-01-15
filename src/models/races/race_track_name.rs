@@ -1,5 +1,5 @@
-use std::fmt::Display;
 use rand_derive2::RandGen;
+use std::fmt::Display;
 
 #[derive(RandGen)]
 pub enum RaceTrackName {

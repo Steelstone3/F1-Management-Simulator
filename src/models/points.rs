@@ -4,8 +4,8 @@ pub const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
 pub const POINTS_SYSTEM: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] =
     [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
-#[derive(Clone, Copy)]
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Default)]
 pub struct Points {
     pub race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
 }
@@ -30,13 +30,7 @@ impl Points {
     }
 }
 
-impl Default for Points {
-    fn default() -> Self {
-        Self {
-            race_points: Default::default(),
-        }
-    }
-}
+
 
 #[cfg(test)]
 mod points_should {

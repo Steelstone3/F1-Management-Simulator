@@ -4,7 +4,7 @@ use super::{team_name::TeamName, team_statistics::TeamStatistic};
 use crate::models::{
     car::Car,
     drivers::{
-        driver::{self, Driver},
+        driver::{Driver},
         driver_name::DriverName,
     },
 };
