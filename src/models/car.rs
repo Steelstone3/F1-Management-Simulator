@@ -2,7 +2,7 @@ use rand_derive2::RandGen;
 
 use crate::controller::random_generator::generate_seeded_random;
 
-#[derive(RandGen, Default, Debug, PartialEq, Eq)]
+#[derive(RandGen, Default, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Car {
     pub aero: u32,
     pub engine: u32,

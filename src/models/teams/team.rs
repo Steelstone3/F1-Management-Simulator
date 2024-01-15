@@ -6,7 +6,7 @@ use crate::models::{
     drivers::{driver::Driver, driver_name::DriverName},
 };
 
-#[derive(Debug, Default, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct Team {
     pub team_name: TeamName,
     pub team_statistics: TeamStatistic,
@@ -79,7 +79,8 @@ impl Display for Team {
 #[cfg(test)]
 mod team_should {
     use crate::models::{
-        drivers::driver_statistics::DriverStatistic, seasons::season_points::SeasonPoints, races::race_points::RacePoints,
+        drivers::driver_statistics::DriverStatistic, races::race_points::RacePoints,
+        seasons::season_points::SeasonPoints,
     };
     use rstest::rstest;
 
