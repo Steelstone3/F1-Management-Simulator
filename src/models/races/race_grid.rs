@@ -1,10 +1,8 @@
 use super::{race_information::RaceInformation, race_points::RacePoints};
-use crate::{
-    models::{
+use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName},
         teams::{team::Team, team_name::TeamName, team_seeds::TeamSeed}, seasons::season_points::{RACE_POSIITIONS_THAT_ALLOCATE_POINTS, SeasonPoints},
-    },
-};
+    };
 use rand::random;
 use std::fmt::Display;
 
