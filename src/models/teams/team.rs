@@ -41,21 +41,23 @@ impl Team {
             (team_chance + self.driver_2.driver_statistics.overall) / 3;
     }
 
-    pub fn add_points(&mut self, driver: Driver, race_number: usize) {
+    pub fn add_points(&mut self, driver: Driver) {
         if self.driver_1.driver_name == driver.driver_name {
-            self.driver_1.driver_points.race_points[race_number] =
-                driver.driver_points.race_points[race_number];
+            self.driver_1.driver_race_points.race_number = driver.driver_race_points.race_number;
+
+            self.driver_1.driver_race_points.race_points = driver.driver_race_points.race_points;
         } else if self.driver_2.driver_name == driver.driver_name {
-            self.driver_2.driver_points.race_points[race_number] =
-                driver.driver_points.race_points[race_number];
+            self.driver_2.driver_race_points.race_number = driver.driver_race_points.race_number;
+
+            self.driver_2.driver_race_points.race_points = driver.driver_race_points.race_points;
         } else {
             panic!("No driver in the team to allocate points")
         }
     }
 
     pub fn calculate_season_points(&self) -> u32 {
-        self.driver_1.driver_points.calculate_season_points()
-            + self.driver_2.driver_points.calculate_season_points()
+        self.driver_1.driver_season_points.calculate_season_points()
+            + self.driver_2.driver_season_points.calculate_season_points()
     }
 }
 
@@ -67,9 +69,9 @@ impl Display for Team {
             self.team_name,
             self.calculate_season_points(),
             self.driver_1.driver_name,
-            self.driver_1.driver_points.calculate_season_points(),
+            self.driver_1.driver_season_points.calculate_season_points(),
             self.driver_2.driver_name,
-            self.driver_2.driver_points.calculate_season_points(),
+            self.driver_2.driver_season_points.calculate_season_points(),
         )
     }
 }
@@ -77,7 +79,7 @@ impl Display for Team {
 #[cfg(test)]
 mod team_should {
     use crate::models::{
-        drivers::driver_statistics::DriverStatistic, seasons::season_points::SeasonPoints,
+        drivers::driver_statistics::DriverStatistic, seasons::season_points::SeasonPoints, races::race_points::RacePoints,
     };
     use rstest::rstest;
 
@@ -103,8 +105,8 @@ mod team_should {
         let driver = Driver {
             driver_name,
             team_name: TeamName::Mercedes,
-            driver_points: SeasonPoints {
-                race_points: [25, 18, 15, 12, 10, 8, 6, 4, 2, 0],
+            driver_season_points: SeasonPoints {
+                season_points: [25, 18, 15, 12, 10, 8, 6, 4, 2, 0],
             },
             ..Default::default()
         };
@@ -113,16 +115,16 @@ mod team_should {
             driver_1: Driver {
                 driver_name: DriverName::LewisHamilton,
                 team_name: TeamName::Mercedes,
-                driver_points: SeasonPoints {
-                    race_points: Default::default(),
+                driver_season_points: SeasonPoints {
+                    season_points: Default::default(),
                 },
                 ..Default::default()
             },
             driver_2: Driver {
                 driver_name: DriverName::GeorgeRussell,
                 team_name: TeamName::Mercedes,
-                driver_points: SeasonPoints {
-                    race_points: Default::default(),
+                driver_season_points: SeasonPoints {
+                    season_points: Default::default(),
                 },
                 ..Default::default()
             },
@@ -130,12 +132,12 @@ mod team_should {
         };
 
         // When
-        team.add_points(driver, race_number);
+        team.add_points(driver);
 
         // Then
         assert_eq!(
             expected_race_points,
-            driver.driver_points.race_points[race_number]
+            driver.driver_season_points.season_points[race_number]
         );
     }
 
@@ -170,7 +172,8 @@ mod team_should {
                     pace: 50,
                     overall: 70,
                 },
-                driver_points: SeasonPoints::default(),
+                driver_season_points: SeasonPoints::default(),
+                driver_race_points: RacePoints::default(),
                 overall_race_chance: Default::default(),
             },
             driver_2: Driver {
@@ -184,7 +187,8 @@ mod team_should {
                     pace: 94,
                     overall: 77,
                 },
-                driver_points: SeasonPoints::default(),
+                driver_season_points: SeasonPoints::default(),
+                driver_race_points: RacePoints::default(),
                 overall_race_chance: Default::default(),
             },
         };
@@ -214,15 +218,15 @@ mod team_should {
             team_name: TeamName::Mercedes,
             driver_1: Driver {
                 driver_name: DriverName::LewisHamilton,
-                driver_points: SeasonPoints {
-                    race_points: [25, 25, 25, 25, 25, 25, 18, 18, 25, 25],
+                driver_season_points: SeasonPoints {
+                    season_points: [25, 25, 25, 25, 25, 25, 18, 18, 25, 25],
                 },
                 ..Default::default()
             },
             driver_2: Driver {
                 driver_name: DriverName::GeorgeRussell,
-                driver_points: SeasonPoints {
-                    race_points: [18, 18, 18, 15, 18, 18, 25, 25, 18, 18],
+                driver_season_points: SeasonPoints {
+                    season_points: [18, 18, 18, 15, 18, 18, 25, 25, 18, 18],
                 },
                 ..Default::default()
             },
@@ -293,14 +297,14 @@ mod team_should {
                 ..Default::default()
             },
             driver_1: Driver {
-                driver_points: SeasonPoints {
-                    race_points: driver_1_race_points,
+                driver_season_points: SeasonPoints {
+                    season_points: driver_1_race_points,
                 },
                 ..Default::default()
             },
             driver_2: Driver {
-                driver_points: SeasonPoints {
-                    race_points: driver_2_race_points,
+                driver_season_points: SeasonPoints {
+                    season_points: driver_2_race_points,
                 },
                 ..Default::default()
             },
