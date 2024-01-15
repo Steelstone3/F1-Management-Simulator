@@ -62,7 +62,6 @@ impl Team {
     }
 }
 
-// TODO add a display that shows team name and points
 impl Display for Team {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
@@ -89,11 +88,20 @@ mod team_should {
     };
 
     #[rstest]
-    #[case(2, 15)]
-    fn add_points_from_driver(#[case] race_number: usize, #[case] expected_race_points: u32) {
+    #[case(DriverName::LewisHamilton, 2, 15)]
+    #[case(DriverName::LewisHamilton, 3, 12)]
+    #[case(DriverName::LewisHamilton, 0, 25)]
+    #[case(DriverName::LewisHamilton, 8, 2)]
+    #[case(DriverName::LewisHamilton, 9, 0)]
+    #[case(DriverName::GeorgeRussell, 2, 15)]
+    #[case(DriverName::GeorgeRussell, 3, 12)]
+    #[case(DriverName::GeorgeRussell, 0, 25)]
+    #[case(DriverName::GeorgeRussell, 8, 2)]
+    #[case(DriverName::GeorgeRussell, 9, 0)]
+    fn add_points_from_driver(#[case] driver_name: DriverName, #[case] race_number: usize, #[case] expected_race_points: u32) {
         // Given
         let driver = Driver {
-            driver_name: DriverName::LewisHamilton,
+            driver_name,
             team_name: TeamName::Mercedes,
             driver_points: Points {
                 race_points: [25, 18, 15, 12, 10, 8, 6, 4, 2, 0],
@@ -227,7 +235,7 @@ mod team_should {
     }
 
     #[test]
-    fn calculate_drivers_overall_race_chance() {
+    fn calculate_the_drivers_overall_race_chance() {
         // Given
         let driver_1_expected_overall = 80;
         let driver_2_expected_overall = 69;

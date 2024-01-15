@@ -1,5 +1,5 @@
+use std::fmt::Display;
 use rand::random;
-
 use super::race_information::RaceInformation;
 use crate::{
     controller::random_generator::{generate_4_seeds, generate_5_seeds},
@@ -24,7 +24,7 @@ impl RaceGrid {
 
         // TODO use inquire and make a table or something
         println!(
-            "\n\nRace {} - {}\n",
+            "\n\nRace {} | {}\n",
             self.race_information.race_number, self.race_information.race_track_name
         );
     }
@@ -54,10 +54,6 @@ impl RaceGrid {
         mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
         race_number: u32,
     ) {
-        // TODO
-        // Take each of the drivers
-        // Match the driver by name
-        // Add the matched drivers points based on race position for the correct race in the season
         let race_number = (race_number - 1) as usize;
 
         for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
@@ -68,19 +64,6 @@ impl RaceGrid {
         for driver in drivers {
             let team_index = driver.find_team(&self.teams);
             self.teams[team_index].add_points(driver, race_number);
-
-            // for team in &mut self.teams {
-            //     if driver.team_name == team.team_name {
-            //         if driver.driver_name == team.driver_1.driver_name {
-            //             team.driver_1.driver_points.race_points[race_number] =
-            //                 driver.driver_points.race_points[race_number];
-            //         }
-            //         if driver.driver_name == team.driver_2.driver_name {
-            //             team.driver_2.driver_points.race_points[race_number] =
-            //                 driver.driver_points.race_points[race_number];
-            //         }
-            //     }
-            // }
         }
     }
 
@@ -103,6 +86,19 @@ impl RaceGrid {
     }
 }
 
+impl Display for RaceGrid {
+    fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut team_results = String::new();
+
+        for team in &self.teams {
+            team_results += &team.to_string();
+        }
+
+        write!(formatting, "{}", team_results)
+    }
+}
+
+// TODO remove default from race grid and go to seeded new that is tested
 impl Default for RaceGrid {
     fn default() -> Self {
         Self {
@@ -222,7 +218,7 @@ mod grid_should {
     }
 
     #[test]
-    fn display_race_information() {
+    fn display_the_race_information() {
         // Given
         let race_number = 1;
         let mut race_grid = RaceGrid {

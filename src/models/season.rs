@@ -1,14 +1,17 @@
-use super::races::race_grid::RaceGrid;
+use std::fmt::Display;
+
+use super::{races::race_grid::RaceGrid, teams::team_name::TeamName};
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
+// TODO remove default and implement new with seeds
 #[derive(Default)]
 pub struct Season {
     races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
 }
 
 impl Season {
-    pub fn calculate_season_results(&mut self) {
+    pub fn calculate_race_results(&mut self) {
         let mut race_number = 0;
 
         for race in &mut self.races {
@@ -22,8 +25,13 @@ impl Season {
             let race_result = race.get_drivers_on_the_race_grid();
 
             RaceGrid::display_race_results(race_result);
-            // println!("{}", race);
         }
+    }
+}
+
+impl Display for Season {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatter, "Season Results\n{}", self.races[9].teams[0])
     }
 }
 
