@@ -1,7 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(RandGen, Default)]
+#[derive(RandGen, Default, Clone, Copy)]
 pub enum RaceTrackName {
     #[default]
     Silverstone,
