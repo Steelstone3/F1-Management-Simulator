@@ -4,8 +4,6 @@ use super::{team_name::TeamName, team_seeds::TeamSeed, team_statistics::TeamStat
 use crate::models::{
     car::Car,
     drivers::{driver::Driver, driver_name::DriverName},
-    races::race_grid::{DRIVERS_ON_THE_RACE_GRID, TEAMS_ON_THE_RACE_GRID},
-    seasons::season::{Season, NUMBER_OF_RACES_IN_A_SEASON},
 };
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]

@@ -1,15 +1,16 @@
 use super::{race_information::RaceInformation, race_points::RacePoints};
 use crate::models::{
-        drivers::{driver::Driver, driver_name::DriverName},
-        teams::{team::Team, team_name::TeamName, team_seeds::TeamSeed}, seasons::season_points::{RACE_POSIITIONS_THAT_ALLOCATE_POINTS, SeasonPoints},
-    };
+    drivers::{driver::Driver, driver_name::DriverName},
+    seasons::season_points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
+    teams::{team::Team, team_name::TeamName, team_seeds::TeamSeed},
+};
 use rand::random;
 use std::fmt::Display;
 
 pub const DRIVERS_ON_THE_RACE_GRID: usize = 20;
 pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
 
-#[derive(Default,Clone, Copy)]
+#[derive(Default, Clone, Copy)]
 pub struct RaceGrid {
     pub teams: [Team; TEAMS_ON_THE_RACE_GRID],
     pub race_information: RaceInformation,
@@ -123,10 +124,11 @@ impl RaceGrid {
         mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
         race_number: u32,
     ) {
-        let race_number = (race_number - 1) as usize;
+        let _race_number = (race_number - 1) as usize;
 
         for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
-            drivers[driver_position].driver_race_points.race_points = RacePoints::calculate_points_for_finish_position(driver_position);
+            drivers[driver_position].driver_race_points.race_points =
+                RacePoints::calculate_points_for_finish_position(driver_position);
         }
 
         for driver in drivers {

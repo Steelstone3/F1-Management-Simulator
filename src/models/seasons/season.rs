@@ -1,8 +1,7 @@
 use crate::models::{
     races::race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
-    teams::{team::Team, team_name::TeamName, team_seeds::TeamSeeds},
+    teams::team_seeds::TeamSeeds,
 };
-use std::fmt::Display;
 
 use super::season_result::SeasonResult;
 

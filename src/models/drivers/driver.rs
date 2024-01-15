@@ -1,7 +1,8 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
     races::{race_grid::TEAMS_ON_THE_RACE_GRID, race_points::RacePoints},
-    teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
+    seasons::season_points::SeasonPoints,
+    teams::{team::Team, team_name::TeamName},
 };
 use core::panic;
 use std::fmt::Display;
@@ -51,9 +52,7 @@ impl Display for Driver {
         write!(
             formatter,
             "Driver: {}\nTeam: {}\nDriver Points: {}\n",
-            self.driver_name,
-            self.team_name,
-            self.driver_race_points.race_points
+            self.driver_name, self.team_name, self.driver_race_points.race_points
         )
     }
 }
@@ -65,7 +64,8 @@ mod driver_should {
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
         races::{race_grid::TEAMS_ON_THE_RACE_GRID, race_points::RacePoints},
-        teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
+        seasons::season_points::SeasonPoints,
+        teams::{team::Team, team_name::TeamName},
     };
 
     #[test]
