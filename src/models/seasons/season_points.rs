@@ -1,7 +1,4 @@
-use crate::models::races::{
-    race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
-    race_points::RacePoints,
-};
+use crate::models::races::race_grid::TEAMS_ON_THE_RACE_GRID;
 
 use super::{
     season::{Season, NUMBER_OF_RACES_IN_A_SEASON},

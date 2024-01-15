@@ -1,9 +1,6 @@
 use crate::models::{
-    races::race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
-    teams::team_seeds::TeamSeeds, seasons::season_points::SeasonPoints,
+    races::race_grid::RaceGrid, seasons::season_points::SeasonPoints, teams::team_seeds::TeamSeeds,
 };
-
-use super::season_result::SeasonResult;
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
