@@ -1,6 +1,6 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
-    races::race_grid::TEAMS_ON_THE_RACE_GRID,
+    races::{race_grid::TEAMS_ON_THE_RACE_GRID, race_points::RacePoints},
     teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
 };
 use core::panic;
@@ -11,7 +11,8 @@ pub struct Driver {
     pub driver_name: DriverName,
     pub team_name: TeamName,
     pub driver_statistics: DriverStatistic,
-    pub driver_points: SeasonPoints,
+    pub driver_race_points: RacePoints,
+    pub driver_season_points: SeasonPoints,
     pub overall_race_chance: u32,
 }
 
@@ -25,7 +26,8 @@ impl Driver {
             driver_name,
             team_name,
             driver_statistics: DriverStatistic::new(driver_statistics_seeds),
-            driver_points: Default::default(),
+            driver_season_points: Default::default(),
+            driver_race_points: Default::default(),
             overall_race_chance: Default::default(),
         }
     }
@@ -51,7 +53,7 @@ impl Display for Driver {
             "Driver: {}\nTeam: {}\nDriver Points: {}\n",
             self.driver_name,
             self.team_name,
-            self.driver_points.calculate_season_points()
+            self.driver_race_points.race_points
         )
     }
 }
@@ -62,7 +64,7 @@ mod driver_should {
 
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
-        races::race_grid::TEAMS_ON_THE_RACE_GRID,
+        races::{race_grid::TEAMS_ON_THE_RACE_GRID, race_points::RacePoints},
         teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
     };
 
@@ -81,7 +83,8 @@ mod driver_should {
                 pace: 66,
                 overall: 77,
             },
-            driver_points: SeasonPoints::default(),
+            driver_season_points: SeasonPoints::default(),
+            driver_race_points: RacePoints::default(),
             overall_race_chance: Default::default(),
         };
 
@@ -113,7 +116,8 @@ mod driver_should {
                 pace: 66,
                 overall: 77,
             },
-            driver_points: SeasonPoints::default(),
+            driver_season_points: SeasonPoints::default(),
+            driver_race_points: RacePoints::default(),
             overall_race_chance: Default::default(),
         };
 

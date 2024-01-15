@@ -1,4 +1,4 @@
-use super::race_information::RaceInformation;
+use super::{race_information::RaceInformation, race_points::RacePoints};
 use crate::{
     models::{
         drivers::{driver::Driver, driver_name::DriverName},
@@ -119,6 +119,7 @@ impl RaceGrid {
     }
 
     // TODO test
+    // TODO sort this out to use race points
     pub fn assign_points(
         &mut self,
         mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
@@ -127,13 +128,13 @@ impl RaceGrid {
         let race_number = (race_number - 1) as usize;
 
         for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
-            drivers[driver_position].driver_points.race_points[race_number] =
-                SeasonPoints::calculate_points_for_finish_position(driver_position);
+            drivers[driver_position].driver_race_points.race_number = race_number;
+            drivers[driver_position].driver_race_points.race_points = RacePoints::calculate_points_for_finish_position(driver_position);
         }
 
         for driver in drivers {
             let team_index = driver.find_team(&self.teams);
-            self.teams[team_index].add_points(driver, race_number);
+            self.teams[team_index].add_points(driver);
         }
     }
 
