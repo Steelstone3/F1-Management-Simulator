@@ -47,14 +47,15 @@ impl Season {
             RaceGrid::display_race_results(race_result);
         }
 
-        let season_result = SeasonPoints::update_driver_season_points(self);
+        let mut season_result = SeasonPoints::update_driver_season_points(self);
+        season_result.order_season_results();
 
         println!("{}", season_result);
     }
 }
 
 #[cfg(test)]
-mod grid_should {
+mod season_should {
     use crate::models::seasons::season::{Season, NUMBER_OF_RACES_IN_A_SEASON};
 
     #[test]

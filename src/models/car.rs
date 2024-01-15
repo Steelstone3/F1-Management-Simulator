@@ -31,7 +31,7 @@ impl Car {
 }
 
 #[cfg(test)]
-mod driver_should {
+mod car_should {
     use super::*;
     use rstest::rstest;
 

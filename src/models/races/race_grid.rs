@@ -152,7 +152,7 @@ impl RaceGrid {
             drivers.push(team.driver_1);
             drivers.push(team.driver_2);
         }
-
+        
         drivers.try_into().unwrap()
     }
 }
