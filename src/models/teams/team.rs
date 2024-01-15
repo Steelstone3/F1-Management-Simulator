@@ -65,7 +65,16 @@ impl Team {
 // TODO add a display that shows team name and points
 impl Display for Team {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(formatting, "Something")
+        write!(
+            formatting,
+            "Team: {}\nTeam Points: {}\n\nDriver: {}\nPoints: {}\n\nDriver: {}\nPoints: {}",
+            self.team_name,
+            self.calculate_season_points(),
+            self.driver_1.driver_name,
+            self.driver_1.driver_points.calculate_season_points(),
+            self.driver_2.driver_name,
+            self.driver_2.driver_points.calculate_season_points(),
+        )
     }
 }
 
@@ -185,6 +194,36 @@ mod team_should {
 
         // Then
         assert_eq!(expected_team, team);
+    }
+
+    #[test]
+    fn display_the_team() {
+        // Given
+        let expected_team_display = "Team: Mercedes\nTeam Points: 427\n\nDriver: Lewis Hamilton\nPoints: 236\n\nDriver: George Russell\nPoints: 191";
+        let team = Team {
+            team_name: TeamName::Mercedes,
+            driver_1: Driver {
+                driver_name: DriverName::LewisHamilton,
+                driver_points: Points {
+                    race_points: [25, 25, 25, 25, 25, 25, 18, 18, 25, 25],
+                },
+                ..Default::default()
+            },
+            driver_2: Driver {
+                driver_name: DriverName::GeorgeRussell,
+                driver_points: Points {
+                    race_points: [18, 18, 18, 15, 18, 18, 25, 25, 18, 18],
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        // When
+        let team_display = team.to_string();
+
+        // Then
+        assert_eq!(expected_team_display, team_display)
     }
 
     #[test]
