@@ -30,7 +30,7 @@ impl Driver {
         }
     }
 
-    pub fn find_team(&self, _teams: [Team; TEAMS_ON_THE_RACE_GRID]) -> &Team {
+    pub fn find_team(&self, _teams: &[Team; TEAMS_ON_THE_RACE_GRID]) -> usize {
         // TODO
         // Finds the team for points allocation
         todo!()

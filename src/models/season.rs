@@ -9,11 +9,15 @@ pub struct Season {
 
 impl Season {
     pub fn calculate_season_results(&mut self) {
+        let mut race_number = 0;
+
         for race in &mut self.races {
-            race.display_race_information();
+            race_number += 1;
+
+            race.display_race_information(race_number);
             race.calculate_driver_race_chances();
             let scoring_drivers = race.race_result_order();
-            race.assign_points(scoring_drivers);
+            race.assign_points(scoring_drivers, race_number);
         }
     }
 }
