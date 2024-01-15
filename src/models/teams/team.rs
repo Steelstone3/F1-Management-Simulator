@@ -59,9 +59,9 @@ impl Team {
 
 impl Display for Team {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
+        writeln!(
             formatting,
-            "Team: {}\nTeam Points: {}\n\nDriver: {}\nPoints: {}\n\nDriver: {}\nPoints: {}\n\n\n",
+            "| {} | {} Points | {} | {} Points | {} | {} Points |",
             self.team_name,
             self.calculate_season_points(),
             self.driver_1.driver_name,

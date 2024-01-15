@@ -7,15 +7,13 @@ pub struct SeasonResult {
 
 impl Display for SeasonResult {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        println!("Season Results");
-
         let mut team_string = String::new();
 
         for team in self.results {
             team_string += &team.to_string();
         }
 
-        write!(formatter, "\n\n{}", team_string,)
+        writeln!(formatter, "\n\n\nSeason Results\n\n{}", team_string,)
     }
 }
 

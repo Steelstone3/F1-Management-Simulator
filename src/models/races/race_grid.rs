@@ -139,7 +139,7 @@ impl RaceGrid {
 
     pub fn display_race_results(drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) {
         for driver in &drivers {
-            println!("{}", driver);
+            print!("{}", driver);
         }
     }
 

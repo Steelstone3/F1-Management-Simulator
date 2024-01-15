@@ -49,9 +49,9 @@ impl Driver {
 
 impl Display for Driver {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
+        writeln!(
             formatter,
-            "Driver: {}\nTeam: {}\nDriver Points: {}\n",
+            "| {} | {} | {} Points |",
             self.driver_name, self.team_name, self.driver_race_points.race_points
         )
     }
