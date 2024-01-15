@@ -1,6 +1,6 @@
 use crate::models::{
     races::race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
-    teams::team_seeds::TeamSeeds,
+    teams::team_seeds::TeamSeeds, seasons::season_points::SeasonPoints,
 };
 
 use super::season_result::SeasonResult;
@@ -49,34 +49,9 @@ impl Season {
             RaceGrid::display_race_results(race_result);
         }
 
-        let season_result = self.update_driver_season_points(self.races[9]);
+        let season_result = SeasonPoints::update_driver_season_points(self);
 
         println!("{}", season_result);
-    }
-
-    // TODO add a result
-    fn update_driver_season_points(&mut self, race_grid: RaceGrid) -> SeasonResult {
-        let mut season_result = SeasonResult::new(race_grid.teams);
-
-        for race_number in 0..NUMBER_OF_RACES_IN_A_SEASON {
-            for team_result_index in 0..TEAMS_ON_THE_RACE_GRID {
-                for team in self.races[race_number].teams {
-                    if season_result.results[team_result_index].team_name == team.team_name {
-                        season_result.results[team_result_index]
-                            .driver_1
-                            .driver_season_points
-                            .season_points += team.driver_1.driver_race_points.race_points;
-
-                        season_result.results[team_result_index]
-                            .driver_2
-                            .driver_season_points
-                            .season_points += team.driver_2.driver_race_points.race_points;
-                    }
-                }
-            }
-        }
-
-        season_result
     }
 }
 

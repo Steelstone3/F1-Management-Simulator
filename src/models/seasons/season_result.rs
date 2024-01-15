@@ -23,4 +23,16 @@ impl SeasonResult {
     pub fn new(teams: [Team; TEAMS_ON_THE_RACE_GRID]) -> Self {
         Self { results: teams }
     }
+
+    pub fn add_season_points(&mut self, team_result_index: usize, team: Team) {
+        self.results[team_result_index]
+            .driver_1
+            .driver_season_points
+            .season_points += team.driver_1.driver_race_points.race_points;
+
+        self.results[team_result_index]
+            .driver_2
+            .driver_season_points
+            .season_points += team.driver_2.driver_race_points.race_points;
+    }
 }
