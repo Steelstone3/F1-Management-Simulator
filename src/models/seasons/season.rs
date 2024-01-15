@@ -1,14 +1,14 @@
-use std::fmt::Display;
-
 use crate::models::{
-    races::race_grid::RaceGrid,
+    races::race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
     teams::{team::Team, team_name::TeamName, team_seeds::TeamSeeds},
 };
+use std::fmt::Display;
 
-use super::season_result::{self, SeasonResult};
+use super::season_result::SeasonResult;
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
+#[derive(Clone, Copy)]
 pub struct Season {
     pub races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
 }
@@ -49,12 +49,35 @@ impl Season {
 
             RaceGrid::display_race_results(race_result);
         }
-    }
-}
 
-impl Display for Season {
-    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(formatter, "Season Results\n{}", self.races[9].teams[0])
+        let season_result = self.update_driver_season_points(self.races[9]);
+
+        println!("{}", season_result);
+    }
+
+    // TODO add a result
+    fn update_driver_season_points(&mut self, race_grid: RaceGrid) -> SeasonResult {
+        let mut season_result = SeasonResult::new(race_grid.teams);
+
+        for race_number in 0..NUMBER_OF_RACES_IN_A_SEASON {
+            for team_result_index in 0..TEAMS_ON_THE_RACE_GRID {
+                for team in self.races[race_number].teams {
+                    if season_result.results[team_result_index].team_name == team.team_name {
+                        season_result.results[team_result_index]
+                            .driver_1
+                            .driver_season_points
+                            .season_points += team.driver_1.driver_race_points.race_points;
+
+                        season_result.results[team_result_index]
+                            .driver_2
+                            .driver_season_points
+                            .season_points += team.driver_2.driver_race_points.race_points;
+                    }
+                }
+            }
+        }
+
+        season_result
     }
 }
 

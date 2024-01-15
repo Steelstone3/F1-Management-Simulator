@@ -5,7 +5,6 @@ pub const POINTS_SYSTEM: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] =
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub struct RacePoints {
-    pub race_number: usize,
     pub race_points: u32,
 }
 
