@@ -4,6 +4,7 @@ use super::{team_name::TeamName, team_seeds::TeamSeed, team_statistics::TeamStat
 use crate::models::{
     car::Car,
     drivers::{driver::Driver, driver_name::DriverName},
+    races::race_grid::DRIVERS_ON_THE_RACE_GRID,
 };
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
@@ -41,7 +42,7 @@ impl Team {
             (team_chance + self.driver_2.driver_statistics.overall) / 3;
     }
 
-    pub fn add_points(&mut self, driver: Driver) {
+    pub fn add_race_points(&mut self, driver: Driver) {
         if self.driver_1.driver_name == driver.driver_name {
             self.driver_1.driver_race_points.race_number = driver.driver_race_points.race_number;
 
@@ -52,6 +53,20 @@ impl Team {
             self.driver_2.driver_race_points.race_points = driver.driver_race_points.race_points;
         } else {
             panic!("No driver in the team to allocate points")
+        }
+    }
+
+    pub fn add_season_points(&mut self, drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) {
+        for driver in drivers {
+            if self.driver_1.driver_name == driver.driver_name {
+                self.driver_1.driver_season_points.season_points
+                    [driver.driver_race_points.race_number] = driver.driver_race_points.race_points;
+            } else if self.driver_2.driver_name == driver.driver_name {
+                self.driver_2.driver_season_points.season_points
+                    [driver.driver_race_points.race_number] = driver.driver_race_points.race_points;
+            } else {
+                panic!("No driver in the team to allocate points")
+            }
         }
     }
 
@@ -133,7 +148,7 @@ mod team_should {
         };
 
         // When
-        team.add_points(driver);
+        team.add_race_points(driver);
 
         // Then
         assert_eq!(

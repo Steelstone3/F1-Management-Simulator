@@ -132,7 +132,7 @@ impl RaceGrid {
 
         for driver in drivers {
             let team_index = driver.find_team(&self.teams);
-            self.teams[team_index].add_points(driver);
+            self.teams[team_index].add_race_points(driver);
         }
     }
 
