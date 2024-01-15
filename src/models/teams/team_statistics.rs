@@ -53,15 +53,15 @@ mod driver_statistics_should {
     use rstest::rstest;
 
     #[rstest]
-    #[case([1,2,3,4,5], TeamStatistic{ 
+    #[case([1, 2, 3, 4, 5], TeamStatistic {
         car_development: 90,
         car_repairs: 64,
         car_setup: 81,
         pitstops: 84,
         team_management: 66,
-        overall: 77, 
+        overall: 77,
     })]
-    #[case([100,200,300,400,500], TeamStatistic{ 
+    #[case([100, 200, 300, 400, 500], TeamStatistic {
         car_development: 87,
         car_repairs: 90,
         car_setup: 57,
@@ -69,7 +69,7 @@ mod driver_statistics_should {
         team_management: 50,
         overall: 70,
     })]
-    #[case([1000,2000,3000,4000,5000], TeamStatistic{ 
+    #[case([1000, 2000, 3000, 4000, 5000], TeamStatistic {
         car_development: 60,
         car_repairs: 74,
         car_setup: 75,

@@ -36,21 +36,21 @@ mod driver_should {
     use rstest::rstest;
 
     #[rstest]
-    #[case([1,2,3,4], Car{ 
+    #[case([1,2,3,4], Car {
         aero: 90,
         engine: 64,
         reliability: 81,
         tire_management: 84,
         overall: 79
     })]
-    #[case([100,200,300,400], Car{ 
+    #[case([100,200,300,400], Car {
         aero: 87,
         engine: 90,
         reliability: 57,
         tire_management: 70,
         overall: 76
     })]
-    #[case([1000, 2000, 3000, 4000], Car{ 
+    #[case([1000, 2000, 3000, 4000], Car {
         aero: 60,
         engine: 74,
         reliability: 75,

@@ -40,8 +40,6 @@ impl RaceGrid {
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
 
-        
-
         drivers
             .into_iter()
             .take(10)

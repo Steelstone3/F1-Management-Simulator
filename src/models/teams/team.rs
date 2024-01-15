@@ -3,10 +3,7 @@ use std::fmt::Display;
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
 use crate::models::{
     car::Car,
-    drivers::{
-        driver::{Driver},
-        driver_name::DriverName,
-    },
+    drivers::{driver::Driver, driver_name::DriverName},
 };
 
 #[derive(Debug, Default, PartialEq, Eq)]
@@ -230,9 +227,9 @@ mod team_should {
     }
 
     #[rstest]
-    #[case([25, 18, 15, 15, 25, 18, 18, 25, 15, 25],[1, 25, 18, 25, 18, 15, 6, 2, 15, 25],349)]
-    #[case([10,8,6,4,15,18,4,6,8,2],[1,1,1,4,6,8,12,10,12,15],151)]
-    #[case([10,10,10,10,10,10,10,10,10,10],[10,10,10,10,10,10,10,10,10,10],200)]
+    #[case([25, 18, 15, 15, 25, 18, 18, 25, 15, 25],[1, 25, 18, 25, 18, 15, 6, 2, 15, 25], 349)]
+    #[case([10, 8, 6, 4, 15, 18, 4, 6, 8, 2],[1, 1, 1, 4, 6, 8, 12, 10, 12, 15], 151)]
+    #[case([10, 10, 10, 10, 10, 10, 10, 10, 10, 10],[10, 10, 10, 10, 10, 10, 10, 10, 10, 10], 200)]
     fn calculate_team_season_points(
         #[case] driver_1_race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
         #[case] driver_2_race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
