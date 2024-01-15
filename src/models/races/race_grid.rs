@@ -40,14 +40,14 @@ impl RaceGrid {
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
 
-        let top_ten_drivers = drivers
+        
+
+        drivers
             .into_iter()
             .take(10)
             .collect::<Vec<_>>()
             .try_into()
-            .unwrap();
-
-        top_ten_drivers
+            .unwrap()
     }
 
     // TODO test
