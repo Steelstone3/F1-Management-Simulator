@@ -1,26 +1,39 @@
-use crate::controller::random_generator::{generate_4_seeds, generate_5_seeds};
-use std::fmt::Display;
+use rand::random;
 
-use super::{
-    drivers::{driver::Driver, driver_name::DriverName},
-    points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
-    teams::{team::Team, team_name::TeamName},
+use super::race_information::RaceInformation;
+use crate::{
+    controller::random_generator::{generate_4_seeds, generate_5_seeds},
+    models::{
+        drivers::{driver::Driver, driver_name::DriverName},
+        points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
+        teams::{team::Team, team_name::TeamName},
+    },
 };
 
 pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
 
 pub struct RaceGrid {
     pub teams: [Team; TEAMS_ON_THE_RACE_GRID],
+    pub race_information: RaceInformation,
 }
 
 impl RaceGrid {
+    pub fn display_race_information(&mut self) {
+        self.race_information.race_number += 1;
+
+        println!(
+            "\n\nRace {} - {}\n",
+            self.race_information.race_number, self.race_information.race_track_name
+        );
+    }
+
     pub fn calculate_driver_race_chances(&mut self) {
         for team in 0..TEAMS_ON_THE_RACE_GRID {
             self.teams[team].calculate_drivers_overall_race_chance()
         }
     }
 
-    pub fn race_result_order(&self, race_number:u32) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
+    pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
         let mut drivers = vec![];
 
         for team in &self.teams {
@@ -29,8 +42,6 @@ impl RaceGrid {
         }
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
-
-        println!("\n\nRace {}\n", race_number);
 
         for driver in &drivers {
             println!("{}", driver);
@@ -45,7 +56,7 @@ impl RaceGrid {
 
         top_ten_drivers
     }
-    
+
     pub fn assign_points(&mut self, drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
         // TODO
         // Take each of the drivers
@@ -149,23 +160,48 @@ impl Default for RaceGrid {
                     generate_5_seeds(),
                 ),
             ],
+            race_information: RaceInformation {
+                race_number: Default::default(),
+                race_track_name: random(),
+            },
         }
     }
 }
 
 #[cfg(test)]
 mod grid_should {
+    use crate::models::races::race_track_name::RaceTrackName;
+
     use super::*;
 
     #[test]
     fn new_grid() {
         // Given
         let race_grid = RaceGrid::default();
-        
+
         // Then
         assert_eq!(TEAMS_ON_THE_RACE_GRID, race_grid.teams.len())
     }
-    
+
+    #[test]
+    fn display_race_information() {
+        // Given
+        let expected_race_number = 1;
+        let mut race_grid = RaceGrid {
+            race_information: RaceInformation {
+                race_number: 0,
+                race_track_name: RaceTrackName::Silverstone,
+            },
+            ..Default::default()
+        };
+
+        // When
+        race_grid.display_race_information();
+
+        // Then
+        assert_eq!(expected_race_number, race_grid.race_information.race_number)
+    }
+
     #[test]
     // #[ignore = "not passing"]
     fn calculate_driver_finishing_positions() {
@@ -283,6 +319,7 @@ mod grid_should {
                     ..Default::default()
                 },
             ],
+            ..Default::default()
         };
         let expected_race_result = [
             Driver {
@@ -328,7 +365,7 @@ mod grid_should {
         ];
 
         // When
-        let race_result = race_grid.race_result_order(1);
+        let race_result = race_grid.race_result_order();
 
         // Then
         assert_eq!(expected_race_result, race_result);
