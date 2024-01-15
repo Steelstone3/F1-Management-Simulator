@@ -5,7 +5,7 @@ use crate::{
     controller::random_generator::{generate_4_seeds, generate_5_seeds},
     models::{
         drivers::{driver::Driver, driver_name::DriverName},
-        points::RACE_POSIITIONS_THAT_ALLOCATE_POINTS,
+        points::{RACE_POSIITIONS_THAT_ALLOCATE_POINTS, Points},
         teams::{team::Team, team_name::TeamName},
     },
 };
@@ -18,9 +18,10 @@ pub struct RaceGrid {
 }
 
 impl RaceGrid {
-    pub fn display_race_information(&mut self) {
-        self.race_information.race_number += 1;
+    pub fn display_race_information(&mut self, race_number: u32) {
+        self.race_information.race_number = race_number;
 
+        // TODO use inquire and make a table or something
         println!(
             "\n\nRace {} - {}\n",
             self.race_information.race_number, self.race_information.race_track_name
@@ -57,11 +58,31 @@ impl RaceGrid {
         top_ten_drivers
     }
 
-    pub fn assign_points(&mut self, drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS]) {
+    pub fn assign_points(&mut self, mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS], race_number: u32) {
         // TODO
         // Take each of the drivers
         // Match the driver by name
         // Add the matched drivers points based on race position for the correct race in the season
+
+        for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
+            drivers[driver_position].driver_points.race_points[(race_number - 1) as usize] = Points::calculate_points_for_finish_position(driver_position);
+        }
+
+        for driver in drivers {
+            // let team_index = driver.find_team(&self.teams);
+            // self.teams[team_index].add_points(driver.driver_name)
+
+            for team in &mut self.teams {
+                if driver.team_name == team.team_name {
+                    if driver.driver_name == team.driver_1.driver_name {
+                        team.driver_1 = driver;
+                    }
+                    if driver.driver_name == team.driver_2.driver_name {
+                        team.driver_2 = driver;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -186,20 +207,20 @@ mod grid_should {
     #[test]
     fn display_race_information() {
         // Given
-        let expected_race_number = 1;
+        let race_number = 1;
         let mut race_grid = RaceGrid {
             race_information: RaceInformation {
-                race_number: 0,
+                race_number,
                 race_track_name: RaceTrackName::Silverstone,
             },
             ..Default::default()
         };
 
         // When
-        race_grid.display_race_information();
+        race_grid.display_race_information(race_number);
 
         // Then
-        assert_eq!(expected_race_number, race_grid.race_information.race_number)
+        assert_eq!(race_number, race_grid.race_information.race_number)
     }
 
     #[test]
