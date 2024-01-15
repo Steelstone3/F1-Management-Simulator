@@ -17,9 +17,9 @@ impl SeasonResult {
         Self { teams }
     }
 
-    // pub fn aggregate_driver_points(&mut self) {
-    //     for team in &self.teams {
+    pub fn aggregate_driver_points(&mut self) {
+        for team in &self.teams {
             
-    //     }
-    // }
+        }
+    }
 }

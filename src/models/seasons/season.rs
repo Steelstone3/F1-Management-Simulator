@@ -1,6 +1,11 @@
 use std::fmt::Display;
 
-use crate::models::{races::race_grid::RaceGrid, teams::team_seeds::TeamSeeds};
+use crate::models::{
+    races::race_grid::RaceGrid,
+    teams::{team::Team, team_name::TeamName, team_seeds::TeamSeeds},
+};
+
+use super::season_result::{self, SeasonResult};
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
@@ -45,6 +50,20 @@ impl Season {
             RaceGrid::display_race_results(race_result);
         }
     }
+
+    fn get_team_from_each_race(&self, team_name: TeamName) -> [Team; NUMBER_OF_RACES_IN_A_SEASON] {
+        let mut team_at_races = vec![];
+
+        for race in &self.races {
+            for team in race.teams {
+                if team.team_name == team_name {
+                    team_at_races.push(team)
+                }
+            }
+        }
+
+        team_at_races.try_into().unwrap()
+    }
 }
 
 impl Display for Season {
@@ -55,8 +74,7 @@ impl Display for Season {
 
 #[cfg(test)]
 mod grid_should {
-    use crate::models::seasons::season::{NUMBER_OF_RACES_IN_A_SEASON, Season};
-
+    use crate::models::seasons::season::{Season, NUMBER_OF_RACES_IN_A_SEASON};
 
     #[test]
     fn new_grid() {
