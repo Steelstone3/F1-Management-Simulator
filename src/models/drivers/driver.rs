@@ -1,8 +1,7 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
     points::Points,
-    race_grid::TEAMS_ON_THE_RACE_GRID,
-    teams::{team::Team, team_name::TeamName},
+    teams::{team::Team, team_name::TeamName}, races::race_grid::TEAMS_ON_THE_RACE_GRID,
 };
 use std::fmt::Display;
 

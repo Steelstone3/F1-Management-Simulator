@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use super::race_grid::RaceGrid;
+use super::races::race_grid::RaceGrid;
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
@@ -11,13 +11,10 @@ pub struct Season {
 
 impl Season {
     pub fn calculate_season_results(&mut self) {
-        let mut race_number = 0;
-
         for race in &mut self.races {
-            race_number += 1;
-
+            race.display_race_information();
             race.calculate_driver_race_chances();
-            let scoring_drivers = race.race_result_order(race_number);
+            let scoring_drivers = race.race_result_order();
             race.assign_points(scoring_drivers);
         }
     }
