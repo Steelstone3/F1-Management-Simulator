@@ -1,5 +1,6 @@
 use super::race_track_name::RaceTrackName;
 
+#[derive(Default)]
 pub struct RaceInformation {
     pub race_number: u32,
     pub race_track_name: RaceTrackName,

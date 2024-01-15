@@ -1,4 +1,4 @@
-use models::season::Season;
+use models::seasons::season::Season;
 
 mod controller;
 mod models;

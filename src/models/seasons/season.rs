@@ -1,13 +1,31 @@
 use std::fmt::Display;
 
-use super::{races::race_grid::RaceGrid, teams::team_name::TeamName};
+use crate::models::{races::race_grid::RaceGrid, teams::team_seeds::TeamSeeds};
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
 
-// TODO remove default and implement new with seeds
-#[derive(Default)]
 pub struct Season {
     races: [RaceGrid; NUMBER_OF_RACES_IN_A_SEASON],
+}
+
+impl Default for Season {
+    fn default() -> Self {
+        let team_seeds = TeamSeeds::default().team_seeds;
+        Self {
+            races: [
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+                RaceGrid::new(team_seeds),
+            ],
+        }
+    }
 }
 
 impl Season {
@@ -37,7 +55,8 @@ impl Display for Season {
 
 #[cfg(test)]
 mod grid_should {
-    use crate::models::season::{Season, NUMBER_OF_RACES_IN_A_SEASON};
+    use crate::models::seasons::season::{NUMBER_OF_RACES_IN_A_SEASON, Season};
+
 
     #[test]
     fn new_grid() {

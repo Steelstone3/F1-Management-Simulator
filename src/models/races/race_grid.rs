@@ -1,24 +1,94 @@
-use std::fmt::Display;
-use rand::random;
 use super::race_information::RaceInformation;
 use crate::{
-    controller::random_generator::{generate_4_seeds, generate_5_seeds},
     models::{
         drivers::{driver::Driver, driver_name::DriverName},
-        points::{Points, RACE_POSIITIONS_THAT_ALLOCATE_POINTS},
-        teams::{team::Team, team_name::TeamName},
+        teams::{team::Team, team_name::TeamName, team_seeds::TeamSeed}, seasons::season_points::{RACE_POSIITIONS_THAT_ALLOCATE_POINTS, SeasonPoints},
     },
 };
+use rand::random;
+use std::fmt::Display;
 
 pub const DRIVERS_ON_THE_RACE_GRID: usize = 20;
 pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
 
+#[derive(Default)]
 pub struct RaceGrid {
     pub teams: [Team; TEAMS_ON_THE_RACE_GRID],
     pub race_information: RaceInformation,
 }
 
 impl RaceGrid {
+    pub fn new(team_seeds: [TeamSeed; TEAMS_ON_THE_RACE_GRID]) -> Self {
+        Self {
+            teams: [
+                Team::new(
+                    TeamName::RedBull,
+                    DriverName::MaxVerstappen,
+                    DriverName::SergioPerez,
+                    team_seeds[0],
+                ),
+                Team::new(
+                    TeamName::Ferrari,
+                    DriverName::CharlesLeclerc,
+                    DriverName::CarlosSainz,
+                    team_seeds[1],
+                ),
+                Team::new(
+                    TeamName::Mercedes,
+                    DriverName::LewisHamilton,
+                    DriverName::GeorgeRussell,
+                    team_seeds[2],
+                ),
+                Team::new(
+                    TeamName::Mclaren,
+                    DriverName::LandoNorris,
+                    DriverName::DanielRicciardo,
+                    team_seeds[3],
+                ),
+                Team::new(
+                    TeamName::AstonMartin,
+                    DriverName::SebastianVettel,
+                    DriverName::LanceStroll,
+                    team_seeds[4],
+                ),
+                Team::new(
+                    TeamName::Alpine,
+                    DriverName::EstebanOcon,
+                    DriverName::FernandoAlonso,
+                    team_seeds[5],
+                ),
+                Team::new(
+                    TeamName::Williams,
+                    DriverName::AlexanderAlbon,
+                    DriverName::NicholasLatifi,
+                    team_seeds[6],
+                ),
+                Team::new(
+                    TeamName::AlphaTauri,
+                    DriverName::PierreGasly,
+                    DriverName::YukiTsunoda,
+                    team_seeds[7],
+                ),
+                Team::new(
+                    TeamName::AlphaRomeo,
+                    DriverName::ValtteriBottas,
+                    DriverName::GuanyuZhou,
+                    team_seeds[8],
+                ),
+                Team::new(
+                    TeamName::Haas,
+                    DriverName::KevinMagnussen,
+                    DriverName::MickSchumacher,
+                    team_seeds[9],
+                ),
+            ],
+            race_information: RaceInformation {
+                race_number: Default::default(),
+                race_track_name: random(),
+            },
+        }
+    }
+
     pub fn display_race_information(&mut self, race_number: u32) {
         self.race_information.race_number = race_number;
 
@@ -58,7 +128,7 @@ impl RaceGrid {
 
         for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
             drivers[driver_position].driver_points.race_points[race_number] =
-                Points::calculate_points_for_finish_position(driver_position);
+                SeasonPoints::calculate_points_for_finish_position(driver_position);
         }
 
         for driver in drivers {
@@ -98,110 +168,6 @@ impl Display for RaceGrid {
     }
 }
 
-// TODO remove default from race grid and go to seeded new that is tested
-impl Default for RaceGrid {
-    fn default() -> Self {
-        Self {
-            teams: [
-                Team::new(
-                    TeamName::RedBull,
-                    DriverName::MaxVerstappen,
-                    DriverName::SergioPerez,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Ferrari,
-                    DriverName::CharlesLeclerc,
-                    DriverName::CarlosSainz,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Mercedes,
-                    DriverName::LewisHamilton,
-                    DriverName::GeorgeRussell,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Mclaren,
-                    DriverName::LandoNorris,
-                    DriverName::DanielRicciardo,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::AstonMartin,
-                    DriverName::SebastianVettel,
-                    DriverName::LanceStroll,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Alpine,
-                    DriverName::EstebanOcon,
-                    DriverName::FernandoAlonso,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Williams,
-                    DriverName::AlexanderAlbon,
-                    DriverName::NicholasLatifi,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::AlphaTauri,
-                    DriverName::PierreGasly,
-                    DriverName::YukiTsunoda,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::AlphaRomeo,
-                    DriverName::ValtteriBottas,
-                    DriverName::GuanyuZhou,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-                Team::new(
-                    TeamName::Haas,
-                    DriverName::KevinMagnussen,
-                    DriverName::MickSchumacher,
-                    generate_5_seeds(),
-                    generate_4_seeds(),
-                    generate_5_seeds(),
-                    generate_5_seeds(),
-                ),
-            ],
-            race_information: RaceInformation {
-                race_number: Default::default(),
-                race_track_name: random(),
-            },
-        }
-    }
-}
-
 #[cfg(test)]
 mod grid_should {
     use crate::models::races::race_track_name::RaceTrackName;
@@ -211,7 +177,18 @@ mod grid_should {
     #[test]
     fn new_grid() {
         // Given
-        let race_grid = RaceGrid::default();
+        let race_grid = RaceGrid::new([
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+            TeamSeed::default(),
+        ]);
 
         // Then
         assert_eq!(TEAMS_ON_THE_RACE_GRID, race_grid.teams.len())
