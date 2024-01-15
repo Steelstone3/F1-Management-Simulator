@@ -51,13 +51,6 @@ impl Team {
         }
     }
 
-    pub fn add_season_points(&mut self) {
-        self.driver_1.driver_season_points.season_points +=
-            self.driver_1.driver_race_points.race_points;
-        self.driver_2.driver_season_points.season_points +=
-            self.driver_2.driver_race_points.race_points;
-    }
-
     pub fn calculate_season_points(&self) -> u32 {
         self.driver_1.driver_season_points.season_points
             + self.driver_2.driver_season_points.season_points
@@ -208,7 +201,7 @@ mod team_should {
     #[test]
     fn display_the_team() {
         // Given
-        let expected_team_display = "Team: Mercedes\nTeam Points: 427\n\nDriver: Lewis Hamilton\nPoints: 236\n\nDriver: George Russell\nPoints: 191";
+        let expected_team_display = "Team: Mercedes\nTeam Points: 427\n\nDriver: Lewis Hamilton\nPoints: 236\n\nDriver: George Russell\nPoints: 191\n\n\n";
         let team = Team {
             team_name: TeamName::Mercedes,
             driver_1: Driver {

@@ -1,6 +1,12 @@
-use crate::models::races::race_points::RacePoints;
+use crate::models::races::{
+    race_grid::{RaceGrid, TEAMS_ON_THE_RACE_GRID},
+    race_points::RacePoints,
+};
 
-use super::season::NUMBER_OF_RACES_IN_A_SEASON;
+use super::{
+    season::{Season, NUMBER_OF_RACES_IN_A_SEASON},
+    season_result::SeasonResult,
+};
 
 pub const RACE_POSIITIONS_THAT_ALLOCATE_POINTS: usize = 10;
 
@@ -11,17 +17,20 @@ pub struct SeasonPoints {
 
 impl SeasonPoints {
     // TODO test
-    pub fn calculate_season_points(
-        &mut self,
-        race_points: [RacePoints; NUMBER_OF_RACES_IN_A_SEASON],
-    ) {
-        let mut season_points = 0;
+    pub fn update_driver_season_points(season: &Season) -> SeasonResult {
+        let mut season_result = SeasonResult::new(season.races[9].teams);
 
-        for race_point in race_points {
-            season_points += race_point.race_points
+        for race_number in 0..NUMBER_OF_RACES_IN_A_SEASON {
+            for team_result_index in 0..TEAMS_ON_THE_RACE_GRID {
+                for team in season.races[race_number].teams {
+                    if season_result.results[team_result_index].team_name == team.team_name {
+                        season_result.add_season_points(team_result_index, team);
+                    }
+                }
+            }
         }
 
-        self.season_points = season_points
+        season_result
     }
 }
 
