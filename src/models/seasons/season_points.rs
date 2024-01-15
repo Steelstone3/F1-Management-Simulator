@@ -5,11 +5,11 @@ pub const POINTS_SYSTEM: [u32; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] =
     [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
-pub struct Points {
+pub struct SeasonPoints {
     pub race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
 }
 
-impl Points {
+impl SeasonPoints {
     pub fn calculate_season_points(&self) -> u32 {
         let mut season_points = 0;
 
@@ -45,7 +45,7 @@ mod points_should {
         #[case] expected_season_points: u32,
     ) {
         // Given
-        let points = Points {
+        let points = SeasonPoints {
             race_points,
             ..Default::default()
         };
@@ -75,7 +75,7 @@ mod points_should {
         #[case] expected_points_score: u32,
     ) {
         // When
-        let points_score = Points::calculate_points_for_finish_position(finish_position);
+        let points_score = SeasonPoints::calculate_points_for_finish_position(finish_position);
 
         // Then
         assert_eq!(expected_points_score, points_score);

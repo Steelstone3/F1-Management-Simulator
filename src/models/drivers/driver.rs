@@ -1,8 +1,7 @@
 use super::{driver_name::DriverName, driver_statistics::DriverStatistic};
 use crate::models::{
-    points::Points,
     races::race_grid::TEAMS_ON_THE_RACE_GRID,
-    teams::{team::Team, team_name::TeamName},
+    teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
 };
 use core::panic;
 use std::fmt::Display;
@@ -12,7 +11,7 @@ pub struct Driver {
     pub driver_name: DriverName,
     pub team_name: TeamName,
     pub driver_statistics: DriverStatistic,
-    pub driver_points: Points,
+    pub driver_points: SeasonPoints,
     pub overall_race_chance: u32,
 }
 
@@ -63,9 +62,8 @@ mod driver_should {
 
     use crate::models::{
         drivers::{driver::Driver, driver_name::DriverName, driver_statistics::DriverStatistic},
-        points::Points,
         races::race_grid::TEAMS_ON_THE_RACE_GRID,
-        teams::{team::Team, team_name::TeamName},
+        teams::{team::Team, team_name::TeamName}, seasons::season_points::SeasonPoints,
     };
 
     #[test]
@@ -83,7 +81,7 @@ mod driver_should {
                 pace: 66,
                 overall: 77,
             },
-            driver_points: Points::default(),
+            driver_points: SeasonPoints::default(),
             overall_race_chance: Default::default(),
         };
 
@@ -115,7 +113,7 @@ mod driver_should {
                 pace: 66,
                 overall: 77,
             },
-            driver_points: Points::default(),
+            driver_points: SeasonPoints::default(),
             overall_race_chance: Default::default(),
         };
 
