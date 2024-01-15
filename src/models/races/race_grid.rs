@@ -69,20 +69,20 @@ impl RaceGrid {
 
         for driver in drivers {
             let team_index = driver.find_team(&self.teams);
-            // self.teams[team_index].add_points(driver, race_number);
+            self.teams[team_index].add_points(driver, race_number);
 
-            for team in &mut self.teams {
-                if driver.team_name == team.team_name {
-                    if driver.driver_name == team.driver_1.driver_name {
-                        team.driver_1.driver_points.race_points[race_number] =
-                            driver.driver_points.race_points[race_number];
-                    }
-                    if driver.driver_name == team.driver_2.driver_name {
-                        team.driver_2.driver_points.race_points[race_number] =
-                            driver.driver_points.race_points[race_number];
-                    }
-                }
-            }
+            // for team in &mut self.teams {
+            //     if driver.team_name == team.team_name {
+            //         if driver.driver_name == team.driver_1.driver_name {
+            //             team.driver_1.driver_points.race_points[race_number] =
+            //                 driver.driver_points.race_points[race_number];
+            //         }
+            //         if driver.driver_name == team.driver_2.driver_name {
+            //             team.driver_2.driver_points.race_points[race_number] =
+            //                 driver.driver_points.race_points[race_number];
+            //         }
+            //     }
+            // }
         }
     }
 

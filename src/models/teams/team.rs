@@ -47,18 +47,16 @@ impl Team {
             (team_chance + self.driver_2.driver_statistics.overall) / 3;
     }
 
-    // TODO Test
     pub fn add_points(&mut self, driver: Driver, race_number: usize) {
         if self.driver_1.driver_name == driver.driver_name {
             self.driver_1.driver_points.race_points[race_number] =
                 driver.driver_points.race_points[race_number];
-        }
-        if self.driver_2.driver_name == driver.driver_name {
+        } else if self.driver_2.driver_name == driver.driver_name {
             self.driver_2.driver_points.race_points[race_number] =
                 driver.driver_points.race_points[race_number];
+        } else {
+            panic!("No driver in the team to allocate points")
         }
-
-        panic!("No driver in the team to allocate points")
     }
 
     pub fn calculate_season_points(&self) -> u32 {
@@ -76,11 +74,56 @@ impl Display for Team {
 
 #[cfg(test)]
 mod team_should {
+    use rstest::rstest;
+
     use super::*;
     use crate::models::{
-        drivers::driver_statistics::DriverStatistic,
-        points::{self, Points},
+        drivers::driver_statistics::DriverStatistic, points::Points,
+        season::NUMBER_OF_RACES_IN_A_SEASON,
     };
+
+    #[rstest]
+    #[case(2, 15)]
+    fn add_points_from_driver(#[case] race_number: usize, #[case] expected_race_points: u32) {
+        // Given
+        let driver = Driver {
+            driver_name: DriverName::LewisHamilton,
+            team_name: TeamName::Mercedes,
+            driver_points: Points {
+                race_points: [25, 18, 15, 12, 10, 8, 6, 4, 2, 0],
+            },
+            ..Default::default()
+        };
+        let mut team = Team {
+            team_name: TeamName::Mercedes,
+            driver_1: Driver {
+                driver_name: DriverName::LewisHamilton,
+                team_name: TeamName::Mercedes,
+                driver_points: Points {
+                    race_points: Default::default(),
+                },
+                ..Default::default()
+            },
+            driver_2: Driver {
+                driver_name: DriverName::GeorgeRussell,
+                team_name: TeamName::Mercedes,
+                driver_points: Points {
+                    race_points: Default::default(),
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+
+        // When
+        team.add_points(driver, race_number);
+
+        // Then
+        assert_eq!(
+            expected_race_points,
+            driver.driver_points.race_points[race_number]
+        );
+    }
 
     #[test]
     fn new_team() {
@@ -186,10 +229,16 @@ mod team_should {
         assert_eq!(driver_2_expected_overall, team.driver_2.overall_race_chance);
     }
 
-    #[test]
-    fn calculate_team_season_points() {
+    #[rstest]
+    #[case([25, 18, 15, 15, 25, 18, 18, 25, 15, 25],[1, 25, 18, 25, 18, 15, 6, 2, 15, 25],349)]
+    #[case([10,8,6,4,15,18,4,6,8,2],[1,1,1,4,6,8,12,10,12,15],151)]
+    #[case([10,10,10,10,10,10,10,10,10,10],[10,10,10,10,10,10,10,10,10,10],200)]
+    fn calculate_team_season_points(
+        #[case] driver_1_race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
+        #[case] driver_2_race_points: [u32; NUMBER_OF_RACES_IN_A_SEASON],
+        #[case] expected_season_points: u32,
+    ) {
         // Given
-        let expected_season_points = 349;
         let team = Team {
             team_statistics: TeamStatistic {
                 ..Default::default()
@@ -199,13 +248,13 @@ mod team_should {
             },
             driver_1: Driver {
                 driver_points: Points {
-                    race_points: [25, 18, 15, 15, 25, 18, 18, 25, 15, 25],
+                    race_points: driver_1_race_points,
                 },
                 ..Default::default()
             },
             driver_2: Driver {
                 driver_points: Points {
-                    race_points: [1, 25, 18, 25, 18, 15, 6, 2, 15, 25],
+                    race_points: driver_2_race_points,
                 },
                 ..Default::default()
             },
