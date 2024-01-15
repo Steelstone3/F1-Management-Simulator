@@ -45,7 +45,18 @@ mod race_track_name_should {
 
     #[rstest]
     #[case("Silverstone", RaceTrackName::Silverstone.to_string())]
-   
+    #[case("Donnington", RaceTrackName::Donnington.to_string())]
+    #[case("Redbull Ring", RaceTrackName::RedBullRing.to_string())]
+    #[case("Spa Francorchamps", RaceTrackName::SpaFrancorchamps.to_string())]
+    #[case("Zandvoort", RaceTrackName::Zandvoort.to_string())]
+    #[case("Watkins Glen", RaceTrackName::WatkinsGlen.to_string())]
+    #[case("Magny Cours", RaceTrackName::MagnyCours.to_string())]
+    #[case("Paul Ricard", RaceTrackName::PaulRicard.to_string())]
+    #[case("Hockenheim", RaceTrackName::Hockenheim.to_string())]
+    #[case("Kyalami", RaceTrackName::Kyalami.to_string())]
+    #[case("Jerez", RaceTrackName::Jerez.to_string())]
+    #[case("Catalunya", RaceTrackName::Catalunya.to_string())]
+    #[case("Portimao", RaceTrackName::Portimao.to_string())]
     fn display_a_race_track_name(#[case] expected_name: String, #[case] actual_name: String) {
         // Then
         assert_eq!(expected_name, actual_name);

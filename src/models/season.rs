@@ -1,5 +1,3 @@
-use std::fmt::Display;
-
 use super::races::race_grid::RaceGrid;
 
 pub const NUMBER_OF_RACES_IN_A_SEASON: usize = 10;
