@@ -11,7 +11,10 @@ pub struct SeasonPoints {
 
 impl SeasonPoints {
     // TODO test
-    pub fn calculate_season_points(&mut self, race_points:[RacePoints; NUMBER_OF_RACES_IN_A_SEASON]) {
+    pub fn calculate_season_points(
+        &mut self,
+        race_points: [RacePoints; NUMBER_OF_RACES_IN_A_SEASON],
+    ) {
         let mut season_points = 0;
 
         for race_point in race_points {
@@ -24,8 +27,6 @@ impl SeasonPoints {
 
 #[cfg(test)]
 mod season_points_should {
-    use super::*;
-    use rstest::rstest;
 
     // #[rstest]
     // #[case([0,0,0,0,0,0,0,0,0,0], 0)]

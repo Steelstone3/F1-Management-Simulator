@@ -1,14 +1,5 @@
-use crate::models::{
-    drivers::{
-        driver::Driver,
-        driver_name::{self, DriverName},
-    },
-    races::race_grid::{DRIVERS_ON_THE_RACE_GRID, TEAMS_ON_THE_RACE_GRID},
-    teams::{team::Team, team_name::TeamName},
-};
+use crate::models::{races::race_grid::TEAMS_ON_THE_RACE_GRID, teams::team::Team};
 use std::fmt::Display;
-
-use super::season::{Season, NUMBER_OF_RACES_IN_A_SEASON};
 
 pub struct SeasonResult {
     pub results: [Team; TEAMS_ON_THE_RACE_GRID],

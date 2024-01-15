@@ -3,13 +3,10 @@ use crate::{
     models::races::race_grid::TEAMS_ON_THE_RACE_GRID,
 };
 
-#[derive(Clone, Copy)]
-#[derive(Default)]
+#[derive(Clone, Copy, Default)]
 pub struct TeamSeeds {
     pub team_seeds: [TeamSeed; TEAMS_ON_THE_RACE_GRID],
 }
-
-
 
 #[derive(Clone, Copy)]
 pub struct TeamSeed {
