@@ -1,5 +1,5 @@
 use std::fmt::Display;
-use crate::models::{races::race_grid::TEAMS_ON_THE_RACE_GRID, teams::team::Team};
+use crate::models::{races::race_grid::TEAMS_ON_THE_RACE_GRID, teams::team::Team, drivers::driver_name::{self, DriverName}};
 
 // TODO aggrigate result holder
 pub struct SeasonResult {
@@ -17,7 +17,9 @@ impl SeasonResult {
         Self { teams }
     }
 
-    pub fn aggregate_driver_points() {
-
-    }
+    // pub fn aggregate_driver_points(&mut self) {
+    //     for team in &self.teams {
+            
+    //     }
+    // }
 }
