@@ -30,6 +30,7 @@ impl Default for Season {
 }
 
 impl Season {
+    // TODO test
     pub fn calculate_race_results(&mut self) {
         let mut race_number = 0;
 

@@ -93,11 +93,12 @@ impl RaceGrid {
 
         // TODO use inquire and make a table or something
         println!(
-            "\n\nRace {} | {}\n",
+            "\n\n\nRace {} | {}\n",
             self.race_information.race_number, self.race_information.race_track_name
         );
     }
 
+    // TODO test
     pub fn calculate_driver_race_chances(&mut self) {
         for team in 0..TEAMS_ON_THE_RACE_GRID {
             self.teams[team].calculate_drivers_overall_race_chance()
@@ -156,6 +157,7 @@ impl RaceGrid {
     }
 }
 
+// TODO test
 impl Display for RaceGrid {
     fn fmt(&self, formatting: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut team_results = String::new();
