@@ -5,11 +5,12 @@ use crate::{
     controller::random_generator::{generate_4_seeds, generate_5_seeds},
     models::{
         drivers::{driver::Driver, driver_name::DriverName},
-        points::{RACE_POSIITIONS_THAT_ALLOCATE_POINTS, Points},
+        points::{Points, RACE_POSIITIONS_THAT_ALLOCATE_POINTS},
         teams::{team::Team, team_name::TeamName},
     },
 };
 
+pub const DRIVERS_ON_THE_RACE_GRID: usize = 20;
 pub const TEAMS_ON_THE_RACE_GRID: usize = 10;
 
 pub struct RaceGrid {
@@ -35,18 +36,9 @@ impl RaceGrid {
     }
 
     pub fn race_result_order(&self) -> [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS] {
-        let mut drivers = vec![];
-
-        for team in &self.teams {
-            drivers.push(team.driver_1);
-            drivers.push(team.driver_2);
-        }
+        let mut drivers = self.get_drivers_on_the_race_grid();
 
         drivers.sort_by(|a, b| b.overall_race_chance.cmp(&a.overall_race_chance));
-
-        for driver in &drivers {
-            println!("{}", driver);
-        }
 
         let top_ten_drivers = drivers
             .into_iter()
@@ -58,31 +50,58 @@ impl RaceGrid {
         top_ten_drivers
     }
 
-    pub fn assign_points(&mut self, mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS], race_number: u32) {
+    // TODO test
+    pub fn assign_points(
+        &mut self,
+        mut drivers: [Driver; RACE_POSIITIONS_THAT_ALLOCATE_POINTS],
+        race_number: u32,
+    ) {
         // TODO
         // Take each of the drivers
         // Match the driver by name
         // Add the matched drivers points based on race position for the correct race in the season
+        let race_number = (race_number - 1) as usize;
 
         for driver_position in 0..RACE_POSIITIONS_THAT_ALLOCATE_POINTS {
-            drivers[driver_position].driver_points.race_points[(race_number - 1) as usize] = Points::calculate_points_for_finish_position(driver_position);
+            drivers[driver_position].driver_points.race_points[race_number] =
+                Points::calculate_points_for_finish_position(driver_position);
         }
 
         for driver in drivers {
-            // let team_index = driver.find_team(&self.teams);
-            // self.teams[team_index].add_points(driver.driver_name)
+            let team_index = driver.find_team(&self.teams);
+            // self.teams[team_index].add_points(driver, race_number);
 
             for team in &mut self.teams {
                 if driver.team_name == team.team_name {
                     if driver.driver_name == team.driver_1.driver_name {
-                        team.driver_1 = driver;
+                        team.driver_1.driver_points.race_points[race_number] =
+                            driver.driver_points.race_points[race_number];
                     }
                     if driver.driver_name == team.driver_2.driver_name {
-                        team.driver_2 = driver;
+                        team.driver_2.driver_points.race_points[race_number] =
+                            driver.driver_points.race_points[race_number];
                     }
                 }
             }
         }
+    }
+
+    pub fn display_race_results(drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) {
+        for driver in &drivers {
+            println!("{}", driver);
+        }
+    }
+
+    // TODO test
+    pub fn get_drivers_on_the_race_grid(&self) -> [Driver; DRIVERS_ON_THE_RACE_GRID] {
+        let mut drivers = vec![];
+
+        for team in &self.teams {
+            drivers.push(team.driver_1);
+            drivers.push(team.driver_2);
+        }
+
+        drivers.try_into().unwrap()
     }
 }
 
@@ -224,7 +243,6 @@ mod grid_should {
     }
 
     #[test]
-    // #[ignore = "not passing"]
     fn calculate_driver_finishing_positions() {
         // Given
         let race_grid = RaceGrid {

@@ -3,7 +3,10 @@ use std::fmt::Display;
 use super::{team_name::TeamName, team_statistics::TeamStatistic};
 use crate::models::{
     car::Car,
-    drivers::{driver::Driver, driver_name::DriverName},
+    drivers::{
+        driver::{self, Driver},
+        driver_name::DriverName,
+    },
 };
 
 #[derive(Debug, Default, PartialEq, Eq)]
@@ -44,12 +47,18 @@ impl Team {
             (team_chance + self.driver_2.driver_statistics.overall) / 3;
     }
 
-    pub fn add_points(&mut self, driver_name: DriverName) {
-        // TODO
-        // Driver finds team then
-        // Adds points to the matched driver in the team
-        // This is done for the specific race
-        todo!()
+    // TODO Test
+    pub fn add_points(&mut self, driver: Driver, race_number: usize) {
+        if self.driver_1.driver_name == driver.driver_name {
+            self.driver_1.driver_points.race_points[race_number] =
+                driver.driver_points.race_points[race_number];
+        }
+        if self.driver_2.driver_name == driver.driver_name {
+            self.driver_2.driver_points.race_points[race_number] =
+                driver.driver_points.race_points[race_number];
+        }
+
+        panic!("No driver in the team to allocate points")
     }
 
     pub fn calculate_season_points(&self) -> u32 {
