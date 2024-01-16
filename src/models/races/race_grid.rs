@@ -139,9 +139,12 @@ impl RaceGrid {
     }
 
     // TODO test
-    pub fn order_race_result(mut drivers: [Driver; DRIVERS_ON_THE_RACE_GRID]) -> [Driver; DRIVERS_ON_THE_RACE_GRID] {
+    pub fn order_race_result(
+        mut drivers: [Driver; DRIVERS_ON_THE_RACE_GRID],
+    ) -> [Driver; DRIVERS_ON_THE_RACE_GRID] {
         drivers.sort_by(|a, b| {
-            b.driver_race_points.race_points
+            b.driver_race_points
+                .race_points
                 .cmp(&a.driver_race_points.race_points)
         });
 

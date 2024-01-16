@@ -102,8 +102,7 @@ mod driver_should {
     #[test]
     fn display_driver() {
         // Given
-        let expected_driver_display =
-            "| Lewis Hamilton | Mercedes | 0 Points |\n".to_string();
+        let expected_driver_display = "| Lewis Hamilton | Mercedes | 0 Points |\n".to_string();
         let driver = Driver {
             driver_name: DriverName::LewisHamilton,
 
