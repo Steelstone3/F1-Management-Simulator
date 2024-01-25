@@ -8,9 +8,8 @@ pub fn generate_seed() -> u64 {
 }
 
 #[allow(dead_code)]
-pub fn generate_20_seeds() -> [u64; 20] {
+pub fn generate_19_seeds() -> [u64; 19] {
     [
-        generate_seed(),
         generate_seed(),
         generate_seed(),
         generate_seed(),
@@ -38,11 +37,11 @@ mod seeds_should {
     use super::*;
 
     #[test]
-    fn generate_exactly_20_seeds() {
+    fn generate_exactly_19_seeds() {
         // When
-        let seeds = generate_20_seeds();
+        let seeds = generate_19_seeds();
 
         // Then
-        assert_eq!(20, seeds.len());
+        assert_eq!(19, seeds.len());
     }
 }
