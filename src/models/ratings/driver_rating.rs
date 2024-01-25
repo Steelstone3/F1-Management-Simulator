@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 #[derive(Clone, Copy)]
 pub struct DriverRating {
     pub awareness: u32,

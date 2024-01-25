@@ -8,6 +8,3 @@ pub struct Driver {
     pub driver_rating: DriverRating,
     pub points: Points,
 }
-
-
-
