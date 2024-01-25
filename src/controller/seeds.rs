@@ -42,7 +42,7 @@ mod seeds_should {
     }
 
     #[test]
-    fn generate_exactly_4_seeds() {
+    fn generate_exactly_5_seeds() {
         // When
         let seeds = generate_5_seeds();
 
