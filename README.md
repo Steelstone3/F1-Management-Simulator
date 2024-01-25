@@ -1,26 +1,30 @@
-# F1 Management Simulator
-A test driven Rust application design to simulate an F1 season.
+C# Project Template
+===================
 
-## Running F1 Management Simulator
+A template project for creating C# applications
 
-> cd ~/F1-Management-Simulator
+### Running Example
+
+> cd ~/C-Sharp-Project-Template/Example
+> 
+> dotnet restore
 >
-> cargo build
+> dotnet build
+> 
+> dotnet run
+
+### Tests
+
+> cd ~/C-Sharp-Project-Template/ExampleTests
+> 
+> dotnet restore
 >
-> cargo run
-
-Or launch project from your IDE.
-
-This application has been tested to run on debain derived Linux, Windows 10 and Mac OS 10 beyond this scope your expierences may vary.
-
-## Testing F1 Management Simulator
-> cd ~/F1-Management-Simulator
+> dotnet build
 >
-> cargo test
+> dotnet test
 
-Or run the tests from your IDE of choice.
+### Dependencies
 
-## F1 Management Simulator Dependencies
-Please go to the Rust website to install Rust for your given operating system.
+Follow the steps for installing dotnet runtime for your given operating system.
 
-> https://www.rust-lang.org/
+> https://dotnet.microsoft.com/en-us/download/dotnet/6.0
