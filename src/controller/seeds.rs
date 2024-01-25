@@ -8,18 +8,23 @@ pub fn generate_seed() -> u64 {
 }
 
 #[allow(dead_code)]
-pub fn generate_4_seeds() -> [u64; 4] {
+pub fn generate_20_seeds() -> [u64; 20] {
     [
         generate_seed(),
         generate_seed(),
         generate_seed(),
         generate_seed(),
-    ]
-}
-
-#[allow(dead_code)]
-pub fn generate_5_seeds() -> [u64; 5] {
-    [
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
+        generate_seed(),
         generate_seed(),
         generate_seed(),
         generate_seed(),
@@ -33,20 +38,11 @@ mod seeds_should {
     use super::*;
 
     #[test]
-    fn generate_exactly_4_seeds() {
+    fn generate_exactly_20_seeds() {
         // When
-        let seeds = generate_4_seeds();
+        let seeds = generate_20_seeds();
 
         // Then
-        assert_eq!(4, seeds.len());
-    }
-
-    #[test]
-    fn generate_exactly_5_seeds() {
-        // When
-        let seeds = generate_5_seeds();
-
-        // Then
-        assert_eq!(5, seeds.len());
+        assert_eq!(20, seeds.len());
     }
 }
