@@ -32,7 +32,7 @@ impl CarRating {
 }
 
 #[cfg(test)]
-mod car_should {
+mod car_rating_should {
     use super::*;
     use rstest::rstest;
 
