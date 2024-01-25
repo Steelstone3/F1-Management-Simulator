@@ -37,22 +37,36 @@ impl TeamRating {
 
 #[cfg(test)]
 mod team_rating_should {
+    use rstest::rstest;
     use super::*;
 
-    #[test]
-    fn create_a_new_team_rating() {
+    #[rstest]
+    #[case([1, 2, 3, 4, 5], TeamRating {
+        car_development: 90,
+        car_repairs: 64,
+        car_setup: 81,
+        pitstops: 84,
+        team_management: 66,
+        overall: 77, 
+    })]
+    #[case([100, 200, 300, 400, 500], TeamRating {
+        car_development: 87,
+        car_repairs: 90,
+        car_setup: 57,
+        pitstops: 70,
+        team_management: 50,
+        overall: 70, 
+    })]
+    #[case([1000, 2000, 3000, 4000, 5000], TeamRating {
+        car_development: 60,
+        car_repairs: 74,
+        car_setup: 75,
+        pitstops: 85,
+        team_management: 94,
+        overall: 77, 
+    })]
+    fn create_a_new_car_rating(#[case] seeds: [u64; 5], #[case] expected_team_rating: TeamRating) {
         // Given
-        let seeds = [1, 2, 3, 4, 5];
-        let expected_team_rating = TeamRating {
-            car_development: 90,
-            car_repairs: 64,
-            car_setup: 81,
-            pitstops: 84,
-            team_management: 66,
-            overall: 77,
-        };
-
-        // When
         let team_rating = TeamRating::new(seeds);
 
         // Then

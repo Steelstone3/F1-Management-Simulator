@@ -18,12 +18,12 @@ impl Team {
         team_name: TeamName,
         driver_1_name: DriverName,
         driver_2_name: DriverName,
-        seeds: [u64; 20],
+        seeds: [u64; 19],
     ) -> Self {
         let team_rating_seeds = [seeds[0], seeds[1], seeds[2], seeds[3], seeds[4]];
-        let car_rating_seeds = [seeds[5], seeds[6], seeds[7], seeds[8], seeds[9]];
-        let driver_1_rating_seeds = [seeds[10], seeds[11], seeds[12], seeds[13], seeds[14]];
-        let driver_2_rating_seeds = [seeds[15], seeds[16], seeds[17], seeds[18], seeds[19]];
+        let car_rating_seeds = [seeds[5], seeds[6], seeds[7], seeds[8]];
+        let driver_1_rating_seeds = [seeds[9], seeds[10], seeds[11], seeds[12], seeds[13]];
+        let driver_2_rating_seeds = [seeds[14], seeds[15], seeds[16], seeds[17], seeds[18]];
 
         Self {
             team_name: TeamName::Mercedes,
@@ -45,7 +45,7 @@ mod team_should {
     fn create_new_team() {
         // Given
         let seeds = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
         ];
         let expected_team = Team {
             team_name: TeamName::Mercedes,
