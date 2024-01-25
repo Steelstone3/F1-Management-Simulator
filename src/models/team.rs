@@ -41,7 +41,6 @@ mod team_should {
     use crate::models::{points::Points, ratings::driver_rating::DriverRating};
 
     #[test]
-    #[ignore = "not implemented"]
     fn create_new_team() {
         // Given
         let seeds = [
@@ -50,31 +49,31 @@ mod team_should {
         let expected_team = Team {
             team_name: TeamName::Mercedes,
             team_rating: TeamRating {
-                car_development: 1,
-                car_repairs: 1,
-                car_setup: 1,
-                pitstops: 1,
-                team_management: 1,
-                overall: 1,
+                car_development: 90,
+                car_repairs: 64,
+                car_setup: 81,
+                pitstops: 84,
+                team_management: 66,
+                overall: 77,
             },
             car_rating: CarRating {
-                aero: 1,
-                engine: 1,
-                reliability: 1,
-                tire_management: 1,
-                overall: 1,
+                aero: 66,
+                engine: 70,
+                reliability: 67,
+                tire_management: 81,
+                overall: 71,
             },
             driver_1: Driver {
                 driver_name: DriverName::LewisHamilton,
                 team_name: TeamName::Mercedes,
                 driver_rating: DriverRating {
-                    awareness: 1,
-                    consistency: 1,
-                    experience: 1,
-                    race_craft: 1,
-                    pace: 1,
-                    overall: 1,
-                    overall_race_chance: 1,
+                    awareness: 56,
+                    consistency: 61,
+                    experience: 70,
+                    race_craft: 78,
+                    pace: 91,
+                    overall: 71,
+                    overall_race_chance: 0,
                 },
                 points: Points::default(),
             },
@@ -82,13 +81,13 @@ mod team_should {
                 driver_name: DriverName::GeorgeRussell,
                 team_name: TeamName::Mercedes,
                 driver_rating: DriverRating {
-                    awareness: 1,
-                    consistency: 1,
-                    experience: 1,
-                    race_craft: 1,
-                    pace: 1,
-                    overall: 1,
-                    overall_race_chance: 1,
+                    awareness: 90,
+                    consistency: 95,
+                    experience: 82,
+                    race_craft: 65,
+                    pace: 88,
+                    overall: 84,
+                    overall_race_chance: 0,
                 },
                 points: Points::default(),
             },
