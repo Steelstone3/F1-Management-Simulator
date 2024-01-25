@@ -1,5 +1,5 @@
 pub mod driver;
-pub mod car;
+pub mod ratings;
 pub mod team;
 pub mod season;
 pub mod names;
