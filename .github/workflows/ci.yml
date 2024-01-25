@@ -27,14 +27,14 @@ jobs:
       with:
         dotnet-version: 7.*
     - name: Install app dependencies
-      working-directory: ./Example
+      working-directory: ./FormulaOneManagementSimulator
       run: dotnet restore
     - name: Build
-      working-directory: ./Example
+      working-directory: ./FormulaOneManagementSimulator
       run: dotnet build --configuration Release --no-restore
     - name: Install test dependencies
-      working-directory: ./ExampleTests
+      working-directory: ./FormulaOneManagementSimulatorTests
       run: dotnet restore
     - name: Test
-      working-directory: ./ExampleTests
+      working-directory: ./FormulaOneManagementSimulatorTests
       run: dotnet test --no-restore --verbosity normal
