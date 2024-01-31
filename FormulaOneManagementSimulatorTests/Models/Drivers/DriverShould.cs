@@ -76,7 +76,7 @@ public class DriverShould
     }
 
     [Fact]
-    public void Display()
+    public void DisplayRaceResult()
     {
         // Given
         uint raceNumber = 0;
@@ -90,7 +90,28 @@ public class DriverShould
         driver = new Driver("Lewis Hamilton", "Mercedes", driverRating.Object, points.Object);
 
         // When
-        driver.Display(presenter.Object, raceNumber);
+        driver.DisplayRace(presenter.Object, raceNumber);
+
+        // Then
+        presenter.VerifyAll();
+    }
+
+    [Fact]
+    public void DisplaySeasonResult()
+    {
+        // Given
+
+        uint seasonPoints = 50;
+        Mock<IPresenter> presenter = new();
+        presenter.Setup(p => p.Display("| Lewis Hamilton | Mercedes | 50 Points |"));
+
+        Mock<IPoints> points = new();
+        points.Setup(p => p.SeasonPoints).Returns(seasonPoints);
+
+        driver = new Driver("Lewis Hamilton", "Mercedes", driverRating.Object, points.Object);
+
+        // When
+        driver.DisplaySeason(presenter.Object);
 
         // Then
         presenter.VerifyAll();

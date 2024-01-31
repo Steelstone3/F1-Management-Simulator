@@ -144,7 +144,7 @@ public class SeasonShould
         driver.Setup(d => d.AddPoints(query.Object, 25));
 
         Mock<IDriverFactory> driverFactory = new();
-        driverFactory.Setup(df => df.Create()).Returns(new IDriver[10] { driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object });
+        driverFactory.Setup(df => df.Create()).Returns(new IDriver[20] { driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object, driver.Object });
 
         Mock<ITeamFactory> teamFactory = new();
 
@@ -167,7 +167,7 @@ public class SeasonShould
         Mock<IPresenter> presenter = new();
 
         Mock<IDriver> driver = new();
-        driver.Setup(d => d.Display(presenter.Object, 0));
+        driver.Setup(d => d.DisplayRace(presenter.Object, 0));
 
         Mock<IDriverFactory> driverFactory = new();
         driverFactory.Setup(df => df.Create()).Returns(new IDriver[] { driver.Object });
@@ -191,14 +191,20 @@ public class SeasonShould
         // Given
         Mock<IPresenter> presenter = new();
         presenter.Setup(p => p.Display("\nSeason Result\n"));
+        presenter.Setup(p => p.Display("Constructor's Championship\n"));
+        presenter.Setup(p => p.Display("\nDriver's Championship\n"));
 
         Mock<ITeam> team = new();
         team.Setup(t => t.Display(presenter.Object));
 
         Mock<ITeamFactory> teamFactory = new();
-        teamFactory.Setup(df => df.Create()).Returns(new ITeam[] { team.Object });
+        teamFactory.Setup(tf => tf.Create()).Returns(new ITeam[] { team.Object });
+
+        Mock<IDriver> driver = new();
+        driver.Setup(d => d.DisplaySeason(presenter.Object));
 
         Mock<IDriverFactory> driverFactory = new();
+        driverFactory.Setup(df => df.Create()).Returns(new IDriver[] { driver.Object });
 
         ISeason season = new Season(driverFactory.Object, teamFactory.Object);
 
@@ -208,8 +214,11 @@ public class SeasonShould
         // Then
         teamFactory.VerifyAll();
         teamFactory.VerifyNoOtherCalls();
+        driverFactory.VerifyAll();
+        driverFactory.VerifyNoOtherCalls();
         presenter.VerifyAll();
         presenter.VerifyNoOtherCalls();
         team.VerifyAll();
+        driver.VerifyAll();
     }
 }

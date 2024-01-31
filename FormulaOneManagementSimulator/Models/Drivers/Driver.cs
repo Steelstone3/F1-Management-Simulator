@@ -28,8 +28,13 @@ public class Driver : IDriver
         DriverRating.UpdateOverallRaceChance(team);
     }
 
-    public void Display(IPresenter presenter, uint raceNumber)
+    public void DisplayRace(IPresenter presenter, uint raceNumber)
     {
         presenter.Display($"| {Name} | {Team} | {Points.RacePoints[(int)raceNumber]} Points |");
+    }
+
+    public void DisplaySeason(IPresenter presenter)
+    {
+        presenter.Display($"| {Name} | {Team} | {Points.SeasonPoints} Points |");
     }
 }

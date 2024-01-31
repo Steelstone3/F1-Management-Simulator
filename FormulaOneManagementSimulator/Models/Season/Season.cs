@@ -54,7 +54,7 @@ public class Season : ISeason
 
     public void AssignPoints(IQuery query, IPointsSystem pointsSystem)
     {
-        for (uint finishPosition = 0; finishPosition < 10; finishPosition++)
+        for (uint finishPosition = 0; finishPosition < 20; finishPosition++)
         {
             Drivers[finishPosition].AddPoints(query, pointsSystem.PointsForFinishPosition(finishPosition + 1));
         }
@@ -64,7 +64,7 @@ public class Season : ISeason
     {
         foreach (IDriver driver in Drivers)
         {
-            driver.Display(presenter, raceNumber - 1);
+            driver.DisplayRace(presenter, raceNumber - 1);
         }
     }
 
@@ -72,9 +72,18 @@ public class Season : ISeason
     {
         presenter.Display("\nSeason Result\n");
 
+        presenter.Display("Constructor's Championship\n");
+
         foreach (ITeam team in Teams)
         {
             team.Display(presenter);
+        }
+
+        presenter.Display("\nDriver's Championship\n");
+
+        foreach (IDriver driver in Drivers)
+        {
+            driver.DisplaySeason(presenter);
         }
     }
 }
