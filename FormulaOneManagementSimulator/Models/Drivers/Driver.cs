@@ -21,11 +21,11 @@ public class Driver : IDriver
         team.AddPoints(racePoints);
     }
 
-    public void UpdateOverallRaceChance(IQuery query)
+    public void UpdateOverallRaceChance(IQuery query, IRandomGenerator randomGenerator)
     {
         ITeam team = query.FindTeam(Team);
 
-        DriverRating.UpdateOverallRaceChance(team);
+        DriverRating.UpdateOverallRaceChance(team, randomGenerator);
     }
 
     public void DisplayRace(IPresenter presenter, uint raceNumber)

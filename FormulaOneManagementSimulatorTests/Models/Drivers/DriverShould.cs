@@ -59,14 +59,16 @@ public class DriverShould
     public void CalculateOverallRaceChance()
     {
         // Given
+        Mock<IRandomGenerator> randomGenerator = new();
+
         Mock<ITeam> team = new();
-        driverRating.Setup(dr => dr.UpdateOverallRaceChance(team.Object));
+        driverRating.Setup(dr => dr.UpdateOverallRaceChance(team.Object, randomGenerator.Object));
 
         Mock<IQuery> query = new();
         query.Setup(q => q.FindTeam(driver.Team)).Returns(team.Object);
 
         // When
-        driver.UpdateOverallRaceChance(query.Object);
+        driver.UpdateOverallRaceChance(query.Object, randomGenerator.Object);
 
         // Then
         driverRating.VerifyAll();

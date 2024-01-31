@@ -14,7 +14,7 @@ namespace BubblesDivePlanner
 
             ISeasonService seasonService = new SeasonService(season, query, pointsSystem);
 
-            seasonService.Run(presenter);
+            seasonService.Run(presenter, randomGenerator);
         }
     }
 }

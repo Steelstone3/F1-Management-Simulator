@@ -11,16 +11,16 @@ public class SeasonService : ISeasonService
         this.pointsSystem = pointsSystem;
     }
 
-    public void Run(IPresenter presenter)
+    public void Run(IPresenter presenter, IRandomGenerator randomGenerator)
     {
         season.NewSeason();
         query.SetTeams(season.Teams);
 
-        // TODO make a NumberOfRaces constant
-        for (uint raceNumber = 0; raceNumber < 10; raceNumber++)
+        const int NumberOfRaces = 10;
+        for (uint raceNumber = 0; raceNumber < NumberOfRaces; raceNumber++)
         {
             season.DisplayRaceInformation(presenter, raceNumber + 1);
-            season.UpdateOverallRaceChances(query);
+            season.UpdateOverallRaceChances(query, randomGenerator);
             season.RaceResult();
             season.AssignPoints(query, pointsSystem);
             season.DisplayRaceResult(presenter, raceNumber + 1);

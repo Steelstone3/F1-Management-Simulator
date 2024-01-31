@@ -64,9 +64,10 @@ public class SeasonShould
     public void UpdateOverallRaceChances()
     {
         // Given
+        Mock<IRandomGenerator> randomGenerator = new();
         Mock<IQuery> query = new();
         Mock<IDriver> driver = new();
-        driver.Setup(d => d.UpdateOverallRaceChance(query.Object));
+        driver.Setup(d => d.UpdateOverallRaceChance(query.Object, randomGenerator.Object));
 
         Mock<IDriverFactory> driverFactory = new();
         driverFactory.Setup(df => df.Create()).Returns(new IDriver[] { driver.Object, driver.Object });
@@ -76,7 +77,7 @@ public class SeasonShould
         ISeason season = new Season(driverFactory.Object, teamFactory.Object);
 
         // When
-        season.UpdateOverallRaceChances(query.Object);
+        season.UpdateOverallRaceChances(query.Object, randomGenerator.Object);
 
         // Then
         driver.VerifyAll();
@@ -194,13 +195,17 @@ public class SeasonShould
         presenter.Setup(p => p.Display("Constructor's Championship\n"));
         presenter.Setup(p => p.Display("\nDriver's Championship\n"));
 
+        Mock<IPoints> points = new();
+
         Mock<ITeam> team = new();
+        team.Setup(t => t.Points).Returns(points.Object);
         team.Setup(t => t.Display(presenter.Object));
 
         Mock<ITeamFactory> teamFactory = new();
         teamFactory.Setup(tf => tf.Create()).Returns(new ITeam[] { team.Object });
 
         Mock<IDriver> driver = new();
+        driver.Setup(d => d.Points).Returns(points.Object);
         driver.Setup(d => d.DisplaySeason(presenter.Object));
 
         Mock<IDriverFactory> driverFactory = new();

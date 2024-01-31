@@ -35,12 +35,17 @@ public class DriverRatingShould
     }
 
     [Theory]
-    [InlineData(79, 89, 89)]
-    [InlineData(65, 50, 71)]
-    [InlineData(55, 65, 73)]
+    [InlineData(79, 89, 79)]
+    [InlineData(65, 50, 66)]
+    [InlineData(55, 65, 67)]
     public void UpdateOverallRaceChance(uint teamRatingOverall, uint carRatingOverall, uint expectedOverallRaceChance)
     {
         // Given
+        int[] seeds = new int[] {12};
+        Mock<IRandomGenerator> randomGenerator = new();
+        randomGenerator.Setup(rg => rg.GenerateSeeds(1)).Returns(seeds);
+        randomGenerator.Setup(rg => rg.Generate(seeds[0])).Returns(50);
+
         Mock<ITeamRating> teamRating = new();
         teamRating.Setup(dr => dr.Overall).Returns(teamRatingOverall);
         Mock<ICarRating> carRating = new();
@@ -50,7 +55,7 @@ public class DriverRatingShould
         team.Setup(t => t.CarRating).Returns(carRating.Object);
 
         // When
-        driverRating.UpdateOverallRaceChance(team.Object);
+        driverRating.UpdateOverallRaceChance(team.Object, randomGenerator.Object);
 
         // Then
         team.VerifyAll();

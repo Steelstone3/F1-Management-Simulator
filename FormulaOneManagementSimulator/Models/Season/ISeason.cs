@@ -4,7 +4,7 @@ public interface ISeason
     ITeam[] Teams { get; }
     void NewSeason();
     void DisplayRaceInformation(IPresenter presenter, uint raceNumber);
-    void UpdateOverallRaceChances(IQuery query);
+    void UpdateOverallRaceChances(IQuery query, IRandomGenerator randomGenerator);
     void RaceResult();
     void DisplayRaceResult(IPresenter presenter, uint raceNumber);
     void AssignPoints(IQuery query, IPointsSystem pointsSystem);

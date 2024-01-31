@@ -9,7 +9,7 @@ public class Query : IQuery
 
     public ITeam FindTeam(string teamName)
     {
-        foreach (var team in from ITeam team in teams
+        foreach (ITeam team in from ITeam team in teams
                              where teamName == team.Name
                              select team)
         {

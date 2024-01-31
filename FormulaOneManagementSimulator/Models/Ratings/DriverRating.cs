@@ -18,9 +18,9 @@ public class DriverRating : IDriverRating
     public uint Overall { get; private set; }
     public uint OverallRaceChance {get; private set;}
 
-    public void UpdateOverallRaceChance(ITeam team)
+    public void UpdateOverallRaceChance(ITeam team, IRandomGenerator randomGenerator)
     {
-        OverallRaceChance = (Overall + team.TeamRating.Overall + team.CarRating.Overall) / 3;
+        OverallRaceChance = (Overall + team.TeamRating.Overall + team.CarRating.Overall + randomGenerator.Generate(randomGenerator.GenerateSeeds(1)[0])) / 4;
     }
 
     private void CalculateOverall()

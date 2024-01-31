@@ -5,7 +5,7 @@ public interface IDriver
     IDriverRating DriverRating { get; }
     IPoints Points { get; }
     void AddPoints(IQuery query, uint racePoints);
-    void UpdateOverallRaceChance(IQuery query);
+    void UpdateOverallRaceChance(IQuery query, IRandomGenerator randomGenerator);
     void DisplayRace(IPresenter presenter, uint raceNumber);
     void DisplaySeason(IPresenter presenter);
 }

@@ -36,8 +36,8 @@ public class DriverFactory : IDriverFactory
 
     private IDriverRating DriverRatingFactory()
     {
-        var seeds = randomGenerator.GenerateSeeds(5);
-        var randomNumbers = randomGenerator.Generate(seeds);
+        int[] seeds = randomGenerator.GenerateSeeds(5);
+        uint[] randomNumbers = randomGenerator.Generate(seeds);
 
         return new DriverRating(randomNumbers);
     }

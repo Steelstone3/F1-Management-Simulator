@@ -21,8 +21,8 @@ public class Season : ISeason
 
     public void DisplayRaceInformation(IPresenter presenter, uint raceNumber)
     {
-        // TODO make a NumberOfRaces constant
-        string[] raceNames = new string[10]
+        const int NumberOfRaces = 10;
+        string[] raceNames = new string[NumberOfRaces]
         {
             "Spa-Francorchamps",
             "Silverstone",
@@ -39,11 +39,11 @@ public class Season : ISeason
         presenter.Display($"\nRace {raceNumber} {raceNames[raceNumber - 1]}\n");
     }
 
-    public void UpdateOverallRaceChances(IQuery query)
+    public void UpdateOverallRaceChances(IQuery query, IRandomGenerator randomGenerator)
     {
         foreach (IDriver driver in Drivers)
         {
-            driver.UpdateOverallRaceChance(query);
+            driver.UpdateOverallRaceChance(query, randomGenerator);
         }
     }
 
@@ -54,7 +54,7 @@ public class Season : ISeason
 
     public void AssignPoints(IQuery query, IPointsSystem pointsSystem)
     {
-        for (uint finishPosition = 0; finishPosition < 20; finishPosition++)
+        for (uint finishPosition = 0; finishPosition < Drivers.Length; finishPosition++)
         {
             Drivers[finishPosition].AddPoints(query, pointsSystem.PointsForFinishPosition(finishPosition + 1));
         }
@@ -70,6 +70,9 @@ public class Season : ISeason
 
     public void DisplaySeasonResult(IPresenter presenter)
     {
+        Drivers = Drivers.OrderByDescending(driver => driver.Points.SeasonPoints).ToArray();
+        Teams = Teams.OrderByDescending(team => team.Points.SeasonPoints).ToArray();
+
         presenter.Display("\nSeason Result\n");
 
         presenter.Display("Constructor's Championship\n");

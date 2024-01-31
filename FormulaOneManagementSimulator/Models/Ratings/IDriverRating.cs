@@ -9,5 +9,5 @@ public interface IDriverRating
     uint Overall { get; }
     uint OverallRaceChance { get; }
 
-    void UpdateOverallRaceChance(ITeam team);
+    void UpdateOverallRaceChance(ITeam team, IRandomGenerator randomGenerator);
 }
